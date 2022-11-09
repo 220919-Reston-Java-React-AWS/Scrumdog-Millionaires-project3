@@ -9,6 +9,13 @@ export const apiLogin = async (email: string, password: string): Promise<socialA
     );
     return { status: response.status, payload: response.data };
 }
+export const apiChangePassword = async (password: string): Promise<socialApiResponse> => {
+    const response = await socialClient.post<any>(
+        `${baseURL}/change-password`,
+        {password: password }
+    );
+    return { status: response.status, payload: response.data };
+}
 
 export const apiLogout = async (): Promise<socialApiResponse> => {
     const response = await socialClient.post<any>(
@@ -16,6 +23,8 @@ export const apiLogout = async (): Promise<socialApiResponse> => {
     );
     return { status: response.status, payload: response.data };
 }
+
+
 
 export const apiRegister = async (firstName: string, lastName: string, email: string, password: string): Promise<socialApiResponse> => {
     const response = await socialClient.post<any>(
