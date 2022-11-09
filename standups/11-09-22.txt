@@ -1,0 +1,21 @@
+Henry :
+Yesterday: Set up the Jenkins
+Today: start in looking into DM fetures 
+
+
+
+Miguel
+Yesterday: Set up the Jenkins
+Today: check changing the password on the backend 
+
+
+
+Opale
+Yesterday: Set up the Jenkins
+start connecting backend to the AWS DBR
+
+
+
+Jaden 
+Yesterday: Set up the Jenkins
+Today: start on the like feture on the front end and then to the backend
