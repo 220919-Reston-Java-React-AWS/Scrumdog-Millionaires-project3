@@ -4,6 +4,9 @@ import com.revature.dtos.LoginRequest;
 import com.revature.dtos.RegisterRequest;
 import com.revature.models.User;
 import com.revature.services.AuthService;
+import com.revature.services.UserService;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,10 +14,15 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
 import java.util.Optional;
 
+
+
 @RestController
 @RequestMapping("/auth")
 @CrossOrigin(origins = {"http://localhost:4200", "http://localhost:3000"}, allowCredentials = "true")
 public class AuthController {
+
+    @Autowired
+    UserService userService;
 
     private final AuthService authService;
 
@@ -52,4 +60,11 @@ public class AuthController {
 
         return ResponseEntity.status(HttpStatus.CREATED).body(authService.register(created));
     }
+
+    @RequestMapping(method = RequestMethod.PUT, value = "/change-password")
+    public User UpdatePassword(@RequestBody User updatePassword){
+        return userService.updatePassword(updatePassword);
+    }
+
+
 }
