@@ -7,6 +7,7 @@ import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import LoginIcon from '@mui/icons-material/Login';
 import LogoutIcon from '@mui/icons-material/Logout';
+import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import { apiLogout } from '../../remote/social-media-api/auth.api';
 import { useNavigate } from 'react-router-dom';
 import Tooltip from '@mui/material/Tooltip';
@@ -18,17 +19,23 @@ export default function Navbar() {
     const navigate = useNavigate();
 
     const { user, setUser } = useContext(UserContext);
-    const [loggedIn, setLoggedIn] = useState(<></>);
-    const [tipTitle, setTipTitle] = useState('');
+    const [loggedIn, setLoggedIn] = useState(<></> );
+    const [tipTitleLog, setTipTitleLog] = useState('');
+    const [userIcon, setUserIcon] = useState(<></>);
+    const [tipTitleUse, setTipTitleUse] = useState('');
     
     
     useEffect(() => {
         if(user) {
+           setUserIcon(< AccountBoxIcon />);
+           setTipTitleUse('User Profile'); 
             setLoggedIn(<LogoutIcon />);
-            setTipTitle('Logout');
+            setTipTitleLog('Logout');         
         } else {
+          setUserIcon( <></>);
+           setTipTitleUse(''); 
             setLoggedIn(<LoginIcon />);
-            setTipTitle('Login');
+            setTipTitleLog('Login');
         }
     }, [user]);
 
@@ -49,7 +56,19 @@ export default function Navbar() {
             Revature Social
           </Typography>
             <div>
-            <Tooltip disableFocusListener disableTouchListener title={tipTitle}>
+            <Tooltip disableFocusListener disableTouchListener title={tipTitleUse}>
+            <IconButton
+                size="large"
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                color="inherit"
+            >
+                {userIcon}
+            </IconButton>
+            </Tooltip>
+
+            <Tooltip disableFocusListener disableTouchListener title={tipTitleLog}>
             <IconButton
                 size="large"
                 aria-label="account of current user"
@@ -61,6 +80,7 @@ export default function Navbar() {
                 {loggedIn}
             </IconButton>
             </Tooltip>
+
             </div>
         </Toolbar>
       </AppBar>
