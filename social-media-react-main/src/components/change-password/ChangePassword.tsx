@@ -29,7 +29,7 @@ export default function ChangePassword() {
    
       if(user) {
         const data = new FormData(event.currentTarget);
-        const response = await apiChangePassword(`${data.get('password')}`);
+        const response = await apiChangePassword(`${data.get('passwordChange')}`);
         if (response.status >= 200 && response.status < 300) {
           navigate('/login');
       }else{}
@@ -66,8 +66,7 @@ export default function ChangePassword() {
               name="password"
               label="New Password"
               type="password"
-              id="password"
-              autoComplete="current-password" />
+              id="passwordChange"/>
             <Button
               type="submit"
               fullWidth

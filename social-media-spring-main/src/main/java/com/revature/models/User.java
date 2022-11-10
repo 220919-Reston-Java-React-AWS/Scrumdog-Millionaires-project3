@@ -21,8 +21,12 @@ public class User {
     private String firstName;
     private String lastName;
 
+    @Column(name= "reset_password_token")
+    private String resetPasswordToken = null;
+
     public User (String password){
         this.password = password;
     }
+    
 }
 
