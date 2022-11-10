@@ -1,0 +1,22 @@
+Henry :
+Yesterday: started on the DM feature on the backend
+Today: contruct unit test 
+
+
+
+
+Miguel
+Yesterday: set up the change password backend, created page on the front end
+Today: connect both ends and create test cases 
+
+
+
+Opale
+Yesterday: setup the user profile page, and show only post of the user 
+today: formating and figure out to implement the whole feture 
+
+
+
+Jaden 
+Yesterday: coding challenge, connected the backend to the DB, completed the like feature in the front end
+Today: create the table for like feture 
