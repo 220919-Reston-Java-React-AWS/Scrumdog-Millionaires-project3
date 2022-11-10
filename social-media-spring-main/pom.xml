@@ -12,7 +12,7 @@
 	<groupId>com.revature</groupId>
 	<artifactId>social-media</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	
 	<name>social-media</name>
 	<description>Social Media App</description>
 	<properties>
@@ -65,14 +65,7 @@
 
 		<plugins>
 
-			<plugin>
-				<artifactId>maven-war-plugin</artifactId>
-				<version>3.3.1</version>
-			</plugin>
-			<plugin>
-				<artifactId>maven-war-plugin</artifactId>
-				<version>3.3.1</version>
-			</plugin>
+			
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
