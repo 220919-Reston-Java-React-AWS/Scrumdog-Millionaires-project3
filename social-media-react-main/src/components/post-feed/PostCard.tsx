@@ -1,8 +1,9 @@
+/** @jsxImportSource @emotion/react */
 import * as React from "react";
 import { useContext } from "react";
 import styled from "styled-components";
 import Post from "../../models/Post";
-import { Box, Container, Button, Paper, Grid } from '@mui/material';
+import { Box, Container, Button, Paper, Grid, Icon, List, ListItem, ListItemText } from '@mui/material';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
@@ -24,6 +25,9 @@ import { UserContext } from '../../context/user.context';
 import InputBase from '@mui/material/InputBase';
 import Divider from '@mui/material/Divider';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
+import ThumbUpIcon from '@mui/icons-material/ThumbUp';
+import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
+import {css } from '@emotion/react'
 
 interface postProps {
     post: Post,
@@ -50,6 +54,28 @@ export const PostCard = (props: postProps) => {
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
+
+  const LikeButton: React.FC = () => {
+
+    const [liked, setLiked] = React.useState(false);
+    const Icon = liked ? ThumbUpIcon: ThumbUpOffAltIcon;
+
+
+
+  const handleUnlike = () => {
+    setLiked(false)
+  }
+
+  const handleLike = () => {
+    setLiked(true);
+  }
+
+  const onClick = liked ? handleUnlike : handleLike;
+
+    return (
+      <Icon css={css`cursor:pointer`} color="success" onClick={onClick}/>
+    )
+  }
 
   let media = <></>;
   let commentForm = <></>;
@@ -109,6 +135,25 @@ export const PostCard = (props: postProps) => {
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
+
+        <List>
+          <ListItem>
+            <ListItemText primary=" 10 likes"/>
+          </ListItem>
+          <ListItem>
+          <div>
+        <LikeButton/>
+        </div>
+      
+          </ListItem>
+        </List>       
+
+        {/* <div css={css`padding-left:0.5em`}>
+        <LikeButton/>
+        </div> */}
+
+        <Typography variant="subtitle2"><span></span></Typography>
+
           <ExpandMore
           expand={expanded}
           onClick={handleExpandClick}
@@ -116,7 +161,7 @@ export const PostCard = (props: postProps) => {
           aria-label="show more"
         >
           <InsertCommentIcon />
-        </ExpandMore>
+        </ExpandMore>        
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>

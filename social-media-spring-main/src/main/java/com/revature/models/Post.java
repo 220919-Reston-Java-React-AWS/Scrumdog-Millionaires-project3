@@ -27,8 +27,14 @@ public class Post {
     private int id;
 	private String text;
 	private String imageUrl;
+	private int likeCount;
+
 	@OneToMany(cascade = CascadeType.ALL)
 	private List<Post> comments;
+
+//	@OneToMany(cascade = CascadeType.ALL, mappedBy ="post")
+//	private List<Like> likes;
+
 	@ManyToOne
 	private User author;
 }

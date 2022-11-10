@@ -21,6 +21,9 @@ public class User {
     private String firstName;
     private String lastName;
 
+//    @OneToMany(cascade = CascadeType.ALL)
+//    private int likes;
+
     public User (String password){
         this.password = password;
     }
