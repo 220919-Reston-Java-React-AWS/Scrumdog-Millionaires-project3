@@ -43,6 +43,7 @@ export default function Navbar() {
         if(user) {
             apiLogout();
             setUser();
+            navigate('/');
         } else {
            navigate('/login'); 
         }
@@ -52,7 +53,7 @@ export default function Navbar() {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" color="transparent">
         <Toolbar>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}  onClick={() => navigate('/')}>
             Revature Social
           </Typography>
             <div>
@@ -63,6 +64,7 @@ export default function Navbar() {
                 aria-controls="menu-appbar"
                 aria-haspopup="true"
                 color="inherit"
+                onClick={() => navigate('/profile')}
             >
                 {userIcon}
             </IconButton>
