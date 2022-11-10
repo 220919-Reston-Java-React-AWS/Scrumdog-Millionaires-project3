@@ -10,5 +10,5 @@ artifacts:
     - social-media-spring-main/Dockerfile
     - social-media-spring-main/target/social-media-0.0.1-SNAPSHOT.war
     # 
-  discard-path: yes
+  discard-paths: yes
 
