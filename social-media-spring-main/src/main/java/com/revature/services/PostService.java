@@ -1,5 +1,6 @@
 package com.revature.services;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -23,4 +24,7 @@ public class PostService {
 	public Post upsert(Post post) {
 		return this.postRepository.save(post);
 	}
+
+	public int increaseLikeCount(){return this.postRepository.increaseLikeCount();}
+//	public int decreaseLikeCount(){return this.postRepository.decreaseLikeCount();}
 }

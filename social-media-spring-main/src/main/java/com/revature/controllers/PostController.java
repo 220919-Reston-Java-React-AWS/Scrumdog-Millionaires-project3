@@ -38,4 +38,10 @@ public class PostController {
     public ResponseEntity<Post> upsertPost(@RequestBody Post post) {
     	return ResponseEntity.ok(this.postService.upsert(post));
     }
+
+//    @Authorized
+    @PutMapping(value = "/like")
+    public int increaseLikeCount() {
+        return postService.increaseLikeCount();
+    }
 }
