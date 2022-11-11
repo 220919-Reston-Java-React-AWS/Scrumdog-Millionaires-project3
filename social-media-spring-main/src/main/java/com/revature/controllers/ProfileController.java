@@ -28,7 +28,6 @@ public class ProfileController {
     @Authorized
     @GetMapping("{authorid}")
     public ResponseEntity<List<Post>> getAllPostsByUser(@PathVariable("authorid") int id,  HttpSession session) {
-        System.out.println("Profile COnt");
         Optional<User> optional = userService.findById(id);
 
         if(!optional.isPresent()) {

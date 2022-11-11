@@ -64,7 +64,7 @@ export default function Navbar() {
                 aria-controls="menu-appbar"
                 aria-haspopup="true"
                 color="inherit"
-                onClick={() => navigate('/profile')}
+                onClick={() => navigate('/current-profile')}
             >
                 {userIcon}
             </IconButton>
