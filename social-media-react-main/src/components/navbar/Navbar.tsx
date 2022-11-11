@@ -8,6 +8,7 @@ import IconButton from '@mui/material/IconButton';
 import LoginIcon from '@mui/icons-material/Login';
 import LogoutIcon from '@mui/icons-material/Logout';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
+import LockResetIcon from '@mui/icons-material/LockReset';
 import { apiLogout } from '../../remote/social-media-api/auth.api';
 import { useNavigate } from 'react-router-dom';
 import Tooltip from '@mui/material/Tooltip';
@@ -23,10 +24,14 @@ export default function Navbar() {
     const [tipTitleLog, setTipTitleLog] = useState('');
     const [userIcon, setUserIcon] = useState(<></>);
     const [tipTitleUse, setTipTitleUse] = useState('');
+    const [resetPssword, setResetPsswrd] = useState(<></>);
+    const [tipTitleUse1, setTipTitleUse1] = useState('');
     
     
     useEffect(() => {
         if(user) {
+          setResetPsswrd(< LockResetIcon />);
+           setTipTitleUse1('Reset Password'); 
            setUserIcon(< AccountBoxIcon />);
            setTipTitleUse('User Profile'); 
             setLoggedIn(<LogoutIcon />);
@@ -57,6 +62,18 @@ export default function Navbar() {
             Revature Social
           </Typography>
             <div>
+            <Tooltip disableFocusListener disableTouchListener title={tipTitleUse1}>
+            <IconButton
+                size="large"
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                color="inherit"
+                onClick={() => navigate('/change-password')}
+            >
+                {resetPssword}
+            </IconButton>
+            </Tooltip>
             <Tooltip disableFocusListener disableTouchListener title={tipTitleUse}>
             <IconButton
                 size="large"
