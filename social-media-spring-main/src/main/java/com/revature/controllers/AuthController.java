@@ -56,8 +56,7 @@ public class AuthController {
                 registerRequest.getEmail(),
                 registerRequest.getPassword(),
                 registerRequest.getFirstName(),
-                registerRequest.getLastName(), 
-                null);
+                registerRequest.getLastName(), null);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(authService.register(created));
     }
