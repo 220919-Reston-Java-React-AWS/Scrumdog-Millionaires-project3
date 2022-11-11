@@ -4,14 +4,14 @@ export default class Post {
     imageUrl: string;
     comments: Post[];
     author: any;
-    // likes: number;
+    likes: number[];
 
-    constructor (id: number, text:string, imageUrl:string, comments: Post[], author:any) {
+    constructor (id: number, text:string, imageUrl:string, comments: Post[], author:any, likes:number[]) {
         this.id = id;
         this.text = text;
         this.imageUrl = imageUrl;
         this.comments = comments;
         this.author = author;
-        // this.likes = likes;
+        this.likes = likes;
     }
 }
