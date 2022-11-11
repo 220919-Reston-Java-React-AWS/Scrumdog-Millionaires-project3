@@ -51,7 +51,7 @@ export const PostCard = (props: postProps) => {
   const { user } = useContext(UserContext);
   const [expanded, setExpanded ] = React.useState(false);
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
 
   const handleExpandClick = () => {
@@ -188,7 +188,7 @@ export const PostCard = (props: postProps) => {
         <List>
           <ListItem>
             <ListItemText
-              primary={`${numberOfLikes} ${
+              primary={`${props.post.likes.length} ${
                 props.post.likes.length === 1 ? "like" : "likes"
               }`}
             />
