@@ -1,19 +1,14 @@
 package com.revature.models;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-
+import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.CreatedDate;
 
 @Data
 @Entity
@@ -27,13 +22,15 @@ public class Post {
     private int id;
 	private String text;
 	private String imageUrl;
-	private int likeCount;
+	@CreatedDate
+	private Date createdAt;
+
+	@ElementCollection(fetch = FetchType.EAGER)
+	@CollectionTable(name = "likes", joinColumns = @JoinColumn(name = "post_id"))
+	private List<String> likes = new ArrayList<>();
 
 	@OneToMany(cascade = CascadeType.ALL)
 	private List<Post> comments;
-
-//	@OneToMany(cascade = CascadeType.ALL, mappedBy ="post")
-//	private List<Like> likes;
 
 	@ManyToOne
 	private User author;

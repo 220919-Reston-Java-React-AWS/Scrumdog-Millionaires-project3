@@ -33,7 +33,7 @@ import { useNavigate } from "react-router-dom";
 
 interface postProps {
     post: Post,
-    key: number
+    key: number,
 }
 
 
@@ -52,7 +52,11 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
 export const PostCard = (props: postProps) => {
   const { user } = useContext(UserContext);
   const [expanded, setExpanded ] = React.useState(false);
+
+  const [likeStatus, setLikeStatus] = React.useState(false);
+
   const navigate = useNavigate();
+
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -80,13 +84,24 @@ export const PostCard = (props: postProps) => {
     )
   }
 
+
+  const handleLikeButton = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+
+    if(!props.post.likes.includes(user?.id ?? 1)){
+
+    } else {}
+
+
+  }
+
   let media = <></>;
   let commentForm = <></>;
 
   const handleComment = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    props.post.comments.push(new Post(0, data.get('commentText')?.toString() || '', '', [], user));
+    props.post.comments.push(new Post(0, data.get('commentText')?.toString() || '', '', [], user,[]));
     let payload = props.post;
     await apiUpsertPost(payload);
   }
@@ -142,12 +157,12 @@ export const PostCard = (props: postProps) => {
 
         <List>
           <ListItem>
-            <ListItemText primary=" 10 likes"/>
+            <ListItemText primary={`${props.post.likes.length} ${props.post.likes.length === 1 ? "like" : "likes"}`}/>
           </ListItem>
           <ListItem>
-          <div>
+          <span onClick={handleLikeButton}>
         <LikeButton/>
-        </div>
+        </span>
       
           </ListItem>
         </List>       

@@ -15,12 +15,4 @@ import java.util.Optional;
 public interface PostRepository extends JpaRepository<Post, Integer>{
     List<Post> findPostByAuthor(User user);
 
-    @Modifying
-    @Query(value = "UPDATE posts SET like_count = like_count + 1 WHERE id = 1",
-    nativeQuery = true)
-    int increaseLikeCount();
-
-//    @Query(value = "UPDATE posts SET like_count = like_count - 1 WHERE id = 1", nativeQuery = true)
-//    int decreaseLikeCount();
-
 }
