@@ -29,7 +29,6 @@ public class PostService {
 	}
 
 	public List<Post> getAllByAuthor(User user){
-		System.out.println("GetbyAuthor");
 
 			return this.postRepository.findPostByAuthor(user);
 

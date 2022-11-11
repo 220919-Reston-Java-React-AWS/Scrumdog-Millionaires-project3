@@ -1,0 +1,22 @@
+Henry :
+Yesterday: finished the DM test
+Today: adding fuction for recieving a message 
+
+
+
+Miguel
+Yesterday: create the pipeline
+Today: connect reset password from back to front end
+
+
+
+Opale
+Yesterday: worked linked the user profile page with te avatar
+Today: take it to onother profile not own
+
+
+
+
+Jaden 
+Yesterday: backend for likes
+Today: work on tables to make it worked 
