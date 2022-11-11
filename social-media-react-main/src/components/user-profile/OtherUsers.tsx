@@ -1,6 +1,6 @@
+import UserProfile from "./UserProfile";
 
-
-import { AppBar, Container, Divider, Drawer, Grid, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Toolbar } from '@mui/material';
+import { Container, Grid } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import { useContext, useEffect, useState } from 'react';
@@ -10,21 +10,26 @@ import { apiGetAllPosts } from '../../remote/social-media-api/postFeed.api';
 import { apiGetAllPostsByUser } from '../../remote/social-media-api/profileFeed.api';
 import Navbar from '../navbar/Navbar';
 import { PostCard } from '../post-feed/PostCard';
-import SettingsIcon from '@mui/icons-material/Settings';;
+import { useLocation } from "react-router-dom";
 
 
 const theme = createTheme();
-const drawerWidth = 240;
+interface postProps {
+    post: Post,
+    key: number
+}
 
 
 
-export default function UserProfile(){
+export default function OtherUser(){
 const { user, setUser } = useContext(UserContext);
 const [post, setPosts] = useState<Post[]>([])
+const {state} = useLocation();
+
 
 
 const fetchData = async () => {
-    let currentuserid = user?.id!;
+    let currentuserid = state.id;
     const result = await apiGetAllPostsByUser(currentuserid)
     setPosts(result.payload.reverse())
     console.log(user?.id)
@@ -46,14 +51,11 @@ useEffect(() => {
     return(
         <>
         <Navbar/>
-
-       
-      
         <Container maxWidth="xl" sx={{
                 backgroundColor: '#fff',
                 height: 'auto'
             }}>
-                <h2 style={{textAlign: 'center'}}> Welcome to {user?.firstName}'s profile</h2> 
+                <h2 style={{textAlign: 'center'}}> Welcome to {state.firstName}'s profile</h2> 
                           
             </Container> 
 
@@ -61,7 +63,7 @@ useEffect(() => {
                 backgroundColor: '#fff',
                 height: 'auto'
             }}>
-                <h3 style={{textAlign: 'center'}}> Name: {user?.firstName}  {user?.lastName}</h3> 
+                <h3 style={{textAlign: 'center'}}> Name: {state.firstName}  {state.lastName}</h3> 
                           
             </Container>
             <Container maxWidth="xl" sx={{

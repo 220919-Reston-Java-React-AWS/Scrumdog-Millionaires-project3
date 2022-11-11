@@ -16,7 +16,7 @@ public class UserService {
     }
 
     public Optional<User> findById(int id){
-        System.out.println("Hello");
+
         return userRepository.findById(id);
     }
 
