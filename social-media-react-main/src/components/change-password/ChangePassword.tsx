@@ -4,6 +4,7 @@ import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import Link from '@mui/material/Link';
+import Navbar from '../navbar/Navbar';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
@@ -14,27 +15,38 @@ import { useNavigate } from 'react-router-dom';
 import { apiChangePassword } from '../../remote/social-media-api/auth.api';
 import { useContext } from 'react';
 import { UserContext } from '../../context/user.context';
+import { Tooltip } from '@mui/material';
 
 
 const theme = createTheme();
 
 export default function ChangePassword() {
-  const { setUser } = useContext(UserContext);
+  const { user } = useContext(UserContext);
 
   const navigate = useNavigate();
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
     const data = new FormData(event.currentTarget);
-    const response = await apiChangePassword(`${data.get('password')}`);
-    if (response.status >= 200 && response.status < 300) {
-      setUser(response.payload);
-      navigate('/');
-    }
+    const response = await apiChangePassword(`${data.get('password')}`)
+    if (response.status >= 200 && response.status < 300) navigate('/login');
   };
 
+   
+      // if(user) {
+      //   const data = new FormData(event.currentTarget);
+      //   const response = await apiChangePassword(`${data.get('passwordChange')}`);
+      //   if (response.status >= 200 && response.status < 300) {
+      //     navigate('/login');
+      // }else{}
+      // }   
+   
+  
+
   return (
-    <ThemeProvider theme={theme}>
+    <><><Navbar /></><ThemeProvider theme={theme}>
+
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
@@ -49,20 +61,26 @@ export default function ChangePassword() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign in
+            Change you Password
           </Typography>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-           
+
+      
+          <Tooltip title="You can't update this field" followCursor>
+          <Box sx={{ bgcolor: 'text.disabled', color: 'background.paper', p: 2 }}>
+          {user?.email}
+          </Box>
+          </Tooltip>
+            
+
             <TextField
               margin="normal"
               required
               fullWidth
               name="password"
-              label="Password"
+              label="New Password"
               type="password"
-              id="password"
-              autoComplete="current-password"
-            />
+              id="password"/>
             <Button
               type="submit"
               fullWidth
@@ -79,6 +97,10 @@ export default function ChangePassword() {
           </Box>
         </Box>
       </Container>
-    </ThemeProvider>
+    </ThemeProvider></>
+    
+    
   );
+ 
+
 }

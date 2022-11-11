@@ -3,41 +3,31 @@ import * as React from "react";
 import { useContext, useEffect } from "react";
 import styled from "styled-components";
 import Post from "../../models/Post";
-import {
-  Box,
-  Container,
-  Button,
-  Paper,
-  Grid,
-  Icon,
-  List,
-  ListItem,
-  ListItemText,
-} from "@mui/material";
-import Card from "@mui/material/Card";
-import CardHeader from "@mui/material/CardHeader";
-import CardMedia from "@mui/material/CardMedia";
-import CardContent from "@mui/material/CardContent";
-import CardActions from "@mui/material/CardActions";
-import Collapse from "@mui/material/Collapse";
-import Avatar from "@mui/material/Avatar";
-import IconButton, { IconButtonProps } from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import { orange, red } from "@mui/material/colors";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import ShareIcon from "@mui/icons-material/Share";
-import InsertCommentIcon from "@mui/icons-material/InsertComment";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
-import PersonIcon from "@mui/icons-material/Person";
-import TextField from "@mui/material/TextField";
-import { apiUpsertPost } from "../../remote/social-media-api/post.api";
-import { UserContext } from "../../context/user.context";
-import InputBase from "@mui/material/InputBase";
-import Divider from "@mui/material/Divider";
-import AddCircleIcon from "@mui/icons-material/AddCircle";
-import ThumbUpIcon from "@mui/icons-material/ThumbUp";
-import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
-import { css } from "@emotion/react";
+import { Box, Container, Button, Paper, Grid, Icon, List, ListItem, ListItemText } from '@mui/material';
+import Card from '@mui/material/Card';
+import CardHeader from '@mui/material/CardHeader';
+import CardMedia from '@mui/material/CardMedia';
+import CardContent from '@mui/material/CardContent';
+import CardActions from '@mui/material/CardActions';
+import Collapse from '@mui/material/Collapse';
+import Avatar from '@mui/material/Avatar';
+import IconButton, { IconButtonProps } from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
+import { orange, red } from '@mui/material/colors';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import ShareIcon from '@mui/icons-material/Share';
+import InsertCommentIcon from '@mui/icons-material/InsertComment';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
+import PersonIcon from '@mui/icons-material/Person';
+import TextField from '@mui/material/TextField';
+import { apiUpsertPost } from '../../remote/social-media-api/post.api';
+import { UserContext } from '../../context/user.context';
+import InputBase from '@mui/material/InputBase';
+import Divider from '@mui/material/Divider';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
+import ThumbUpIcon from '@mui/icons-material/ThumbUp';
+import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
+import {css } from '@emotion/react'
 import { ILikes } from "../../models/LikesModel";
 import { Likes } from "../api/postApi";
 
@@ -59,8 +49,10 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
 
 export const PostCard = (props: postProps) => {
   const { user } = useContext(UserContext);
-  const [expanded, setExpanded] = React.useState(false);
-  const [numberOfLikes, setNumberOfLikes] = React.useState(0);
+  const [expanded, setExpanded ] = React.useState(false);
+
+  const navigate = useNavigate();
+
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -175,17 +167,18 @@ export const PostCard = (props: postProps) => {
   }
 
   return (
-    <Card sx={{ maxWidth: "100%", marginTop: "3%" }}>
-      <CardHeader
-        title={props.post.author.firstName}
-        avatar={
-          <Avatar sx={{ bgcolor: "#ed6c02" }} aria-label="recipe">
-            <PersonIcon />
+    <Card sx={{maxWidth:"100%", marginTop: "3%" }}>
+      
+    <CardHeader
+      title={props.post.author.firstName}
+      avatar={
+          <Avatar sx={{ bgcolor: '#ed6c02' }} aria-label="recipe">
+            <PersonIcon/>
           </Avatar>
         }
-      />
-
-      {media}
+        />
+       
+      { media }
       <CardContent>
         <Typography variant="body2" color="text.secondary">
           {props.post.text}
