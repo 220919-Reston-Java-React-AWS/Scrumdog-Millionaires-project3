@@ -1,6 +1,6 @@
 
 
-import { Container, Grid } from '@mui/material';
+import { AppBar, Container, Divider, Drawer, Grid, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Toolbar } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import { useContext, useEffect, useState } from 'react';
@@ -10,9 +10,11 @@ import { apiGetAllPosts } from '../../remote/social-media-api/postFeed.api';
 import { apiGetAllPostsByUser } from '../../remote/social-media-api/profileFeed.api';
 import Navbar from '../navbar/Navbar';
 import { PostCard } from '../post-feed/PostCard';
+import SettingsIcon from '@mui/icons-material/Settings';;
 
 
 const theme = createTheme();
+const drawerWidth = 240;
 
 
 
@@ -44,6 +46,9 @@ useEffect(() => {
     return(
         <>
         <Navbar/>
+
+       
+      
         <Container maxWidth="xl" sx={{
                 backgroundColor: '#fff',
                 height: 'auto'
