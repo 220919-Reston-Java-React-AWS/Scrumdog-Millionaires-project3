@@ -3,7 +3,7 @@ import * as React from "react";
 import { useContext } from "react";
 import styled from "styled-components";
 import Post from "../../models/Post";
-import { Box, Container, Button, Paper, Grid, Icon, List, ListItem, ListItemText } from '@mui/material';
+import { Box, Container, Button, Paper, Grid, Icon, List, ListItem, ListItemText, createStyles } from '@mui/material';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
@@ -54,6 +54,7 @@ export const PostCard = (props: postProps) => {
   const [expanded, setExpanded ] = React.useState(false);
 
   const [likeStatus, setLikeStatus] = React.useState(false);
+  
 
   const navigate = useNavigate();
 
@@ -106,6 +107,7 @@ export const PostCard = (props: postProps) => {
     await apiUpsertPost(payload);
   }
 
+  if(user){
   commentForm = 
   <Paper
       component="form"
@@ -123,7 +125,7 @@ export const PostCard = (props: postProps) => {
       <IconButton type="submit" sx={{ p: '10px' }} aria-label="submit">
         <AddCircleIcon color="warning" />
       </IconButton>
- </Paper>
+ </Paper>}
 
   if (props.post.imageUrl) {
     media = <CardMedia
@@ -134,6 +136,23 @@ export const PostCard = (props: postProps) => {
   />
   }
 
+
+function handleProfile(){
+if(user?.id != props.post.author.id){
+  
+     navigate('/other-user', {state:{id:props.post.author.id, firstName:props.post.author.firstName, lastName:props.post.author.lastName, email:props.post.author.email}})
+
+  }else{navigate('/current-profile' )
+  }
+}
+
+// function randomColor() {
+//   let hex = Math.floor(Math.random() *0xFFFFFF);
+//   let color = "#" + hex.toString(16);
+//   return color;
+// }
+
+
   return (
     <Card sx={{maxWidth:"100%", marginTop: "3%" }}>
       
@@ -141,7 +160,9 @@ export const PostCard = (props: postProps) => {
       title={props.post.author.firstName}
       avatar={
           <Avatar sx={{ bgcolor: '#ed6c02' }} aria-label="recipe" >
-            <PersonOutlineOutlinedIcon onClick={() => navigate('/other-user', {state:{id:props.post.author.id, firstName:props.post.author.firstName, lastName:props.post.author.lastName, email:props.post.author.email}})} />
+
+                <PersonOutlineOutlinedIcon onClick={handleProfile} />
+
           </Avatar>
         }
         

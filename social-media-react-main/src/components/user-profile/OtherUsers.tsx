@@ -50,28 +50,19 @@ useEffect(() => {
 
     return(
         <>
+         <div style={{backgroundImage:"url('https://www.kindpng.com/picc/m/4-41696_map-of-the-world-no-borders-hd-png.png')",
+        width:'100%'
+        
+        }}>
         <Navbar/>
-        <Container maxWidth="xl" sx={{
-                backgroundColor: '#fff',
-                height: 'auto'
-            }}>
+  
                 <h2 style={{textAlign: 'center'}}> Welcome to {state.firstName}'s profile</h2> 
                           
-            </Container> 
 
-            <Container maxWidth="xl" sx={{
-                backgroundColor: '#fff',
-                height: 'auto'
-            }}>
                 <h3 style={{textAlign: 'center'}}> Name: {state.firstName}  {state.lastName}</h3> 
                           
-            </Container>
-            <Container maxWidth="xl" sx={{
-                backgroundColor: '#fff',
-                height: 'auto'
-            }}>
+           
                 <h2 style={{textAlign: 'center', color: 'orange', }}> Posts</h2>            
-            </Container> 
 
             <Grid container justifyContent={"center"}>
             <Grid item sx={{width: '60%', mb: '20px', }} >
@@ -81,7 +72,8 @@ useEffect(() => {
                 }
                 </Grid> 
                 </Grid>
-
+                </div>
+        
         </>
         )
 }

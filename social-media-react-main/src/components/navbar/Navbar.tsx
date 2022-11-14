@@ -56,10 +56,10 @@ export default function Navbar() {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" color="transparent">
+      <AppBar position="static" color="transparent" >
         <Toolbar>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}  onClick={() => navigate('/')}>
-            Revature Social
+            TraveLog
           </Typography>
             <div>
             <Tooltip disableFocusListener disableTouchListener title={tipTitleUse1}>
