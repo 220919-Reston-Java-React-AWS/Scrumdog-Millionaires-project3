@@ -1,5 +1,6 @@
 package com.revature.services;
 
+import com.revature.dtos.LoginRequest;
 import com.revature.models.User;
 import com.revature.repositories.UserRepository;
 import org.springframework.stereotype.Service;
@@ -24,17 +25,25 @@ public class UserService {
 
         return userRepository.findByEmailAndPassword(email, password);
     }
-    public Optional<User> findPassword(String password){
-        return userRepository.findByPassword(password);
 
+    public User findByEmail(String email){
+        return userRepository.findByEmail(email);
     }
+    // public Optional<User> findPassword(String password){
+    //     return userRepository.findByPassword(password);
+
+    // }
 
     public User save(User user) {
         return userRepository.save(user);
     }
 
-    public User updatePassword(User updatePassword){
-        findPassword(updatePassword.getPassword());
-        return userRepository.save(updatePassword);
+    public User updatePassword(LoginRequest email){
+        User user = findByEmail(email.getEmail());
+        user.setPassword(email.getPassword());
+        return userRepository.save(user);
     }
+
 }
+
+
