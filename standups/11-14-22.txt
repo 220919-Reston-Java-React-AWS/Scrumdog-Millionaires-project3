@@ -1,0 +1,22 @@
+Henry :
+Yesterday: study for the JPmorgan M&G
+Today: got in the front end to implement DMs
+
+
+
+Miguel
+Yesterday: implement the change password feature
+Today: add and alert whenever change the password and make page look nicer
+
+
+
+Opale
+Yesterday: manage to clcik in somene else avatar redirect to that profile, remove commento to the ones are not logged in 
+Today: make profile page frontend nicer 
+
+
+
+
+Jaden 
+Yesterday: look for videos to the like fetature 
+Today: implement the like feature 
