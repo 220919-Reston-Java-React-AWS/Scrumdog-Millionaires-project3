@@ -15,6 +15,7 @@ import { useNavigate } from 'react-router-dom';
 import { apiChangePassword } from '../../remote/social-media-api/auth.api';
 import { useContext } from 'react';
 import { UserContext } from '../../context/user.context';
+import { Tooltip } from '@mui/material';
 
 
 const theme = createTheme();
@@ -26,16 +27,22 @@ export default function ChangePassword() {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-   
-      if(user) {
-        const data = new FormData(event.currentTarget);
-        const response = await apiChangePassword(`${data.get('passwordChange')}`);
-        if (response.status >= 200 && response.status < 300) {
-          navigate('/login');
-      }else{}
-      }   
-   
+
+    const data = new FormData(event.currentTarget);
+    const response = await apiChangePassword(`${data.get('password')}`)
+    if (response.status >= 200 && response.status < 300) navigate('/login');
   };
+
+   
+      // if(user) {
+      //   const data = new FormData(event.currentTarget);
+      //   const response = await apiChangePassword(`${data.get('passwordChange')}`);
+      //   if (response.status >= 200 && response.status < 300) {
+      //     navigate('/login');
+      // }else{}
+      // }   
+   
+  
 
   return (
     <><><Navbar /></><ThemeProvider theme={theme}>
@@ -58,6 +65,13 @@ export default function ChangePassword() {
           </Typography>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
 
+      
+          <Tooltip title="You can't update this field" followCursor>
+          <Box sx={{ bgcolor: 'text.disabled', color: 'background.paper', p: 2 }}>
+          {user?.email}
+          </Box>
+          </Tooltip>
+            
 
             <TextField
               margin="normal"
@@ -66,7 +80,7 @@ export default function ChangePassword() {
               name="password"
               label="New Password"
               type="password"
-              id="passwordChange"/>
+              id="password"/>
             <Button
               type="submit"
               fullWidth

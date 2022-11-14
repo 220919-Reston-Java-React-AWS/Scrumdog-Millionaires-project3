@@ -22,14 +22,15 @@ public class User {
     private String lastName;
 
 
-    @Column(name= "reset_password_token")
-    private String resetPasswordToken = null;
+    // @Column(name= "reset_password_token")
+    // private String resetPasswordToken = null;
 
 //    @OneToMany(cascade = CascadeType.ALL)
 //    private int likes;
 
 
-    public User (String password){
+    public User (int id, String password){
+        this.id = id;
         this.password = password;
     }
     
