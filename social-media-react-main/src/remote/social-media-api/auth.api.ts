@@ -21,6 +21,8 @@ export const apiLogout = async (): Promise<socialApiResponse> => {
     const response = await socialClient.post<any>(
         `${baseURL}/logout`
     );
+    localStorage.clear();
+    console.log(localStorage);
     return { status: response.status, payload: response.data };
 }
 
