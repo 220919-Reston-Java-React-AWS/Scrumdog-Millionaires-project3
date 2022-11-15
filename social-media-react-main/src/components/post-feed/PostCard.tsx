@@ -51,17 +51,16 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
 }));
 
 export const PostCard = (props: postProps) => {
-  const { user, setUser } = useContext(UserContext);
+  const { user} = useContext(UserContext);
   const [expanded, setExpanded ] = React.useState(false);
-  const [post, setPosts] = React.useState<Post[]>([])
   //@ts-ignore
   const [liked, setLiked] = React.useState(props.post.likes.includes(user?.id) ? true : false);
-  const [likes, setLikes] = React.useState(props.post.likes.length);
+  // const [likesCount, setLikesCount] = React.useState(props.post.likes.length);
+
+  const [likesIdArray, setLikesIdArray] = React.useState([...props.post.likes]);
 
 
-  const [likeStatus, setLikeStatus] = React.useState(false);
-
-
+console.log(likesIdArray);
 
 
   const navigate = useNavigate();
@@ -105,25 +104,31 @@ export const PostCard = (props: postProps) => {
     console.log("did something happen?");
     console.log(user);
     console.log(user?.id);
-    console.log(props.post.likes);
-    
     //@ts-ignore
-    if(props.post.likes.includes(user?.id)){
-      setLiked(false)
+    if(!likesIdArray.includes(user?.id)){
+      setLiked(true)
       console.log(liked);
       //@ts-ignore
       Likes.likeUnlikPost({post_id: props.post.id, user_id:user?.id});
-      // setLikes(props.post.likes.length);
-      console.log(likes);
-      console.log(props.post.likes);
+      //@ts-ignore
+      setLikesIdArray([
+        ...likesIdArray,
+        user?.id!
+      ])
+      // setLikesCount(likesCount - 1);
+      console.log(likesIdArray);
     } else {
-      setLiked(true)
+      setLiked(false)
       console.log(liked);
     //@ts-ignore
     Likes.likeUnlikPost({post_id: props.post.id, user_id:user?.id});
-    // setLikes(props.post.likes.length)
-    console.log(likes);
-    console.log(props.post.likes);
+    const index = likesIdArray.indexOf(user?.id!);
+    if( index > -1){
+      likesIdArray.splice(index,1)
+    }
+    // setLikes(likes + 1)
+    // console.log(likes);
+    console.log(likesIdArray);
     }
   }
 
@@ -234,8 +239,8 @@ if(user?.id != props.post.author.id){
         <List>
           <ListItem>
             <ListItemText
-              primary={`${likes} ${
-                props.post.likes.length === 1 ? "like" : "likes"
+              primary={`${likesIdArray.length} ${
+                likesIdArray.length === 1 ? "like" : "likes"
               }`}
             />
           </ListItem>
