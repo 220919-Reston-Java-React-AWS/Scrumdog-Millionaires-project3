@@ -16,7 +16,6 @@ export const PostFeed = () => {
     let welcomeText = 'Welcome!'
     let postForm = <></>;
 
-
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -72,9 +71,8 @@ export const PostFeed = () => {
        }
     
     return (
-        < >
+        <>
            <Navbar />
-           <div >
            <Container maxWidth="xl" sx={{
                 backgroundColor: '#fff',
                 height: 'auto'
@@ -83,16 +81,14 @@ export const PostFeed = () => {
                 { postForm }             
             </Container> 
             <Grid container justifyContent={"center"}>
-                <Grid item sx={{width: '60%', mb: '20px'}} >
+                <Grid item sx={{width: '60%', mb: '20px'}}>
                     {post.map((item) =>(
-                    <PostCard post={item} key={item.id}/>
+                    <PostCard post={item} key={item.id} posts={post} setPosts={setPosts}/>
                 ))
                 }
                 </Grid> 
             </Grid>
             { noPostsText } 
-
-            </div>
         </>
     )
 };
