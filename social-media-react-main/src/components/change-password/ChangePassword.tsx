@@ -16,7 +16,7 @@ import { apiChangePassword } from '../../remote/social-media-api/auth.api';
 import { useContext } from 'react';
 import { UserContext } from '../../context/user.context';
 import { Tooltip } from '@mui/material';
-import "../style/style.css"
+
 
 
 const theme = createTheme();
