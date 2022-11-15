@@ -27,11 +27,14 @@ public class Post {
 
 	@ElementCollection(fetch = FetchType.EAGER)
 	@CollectionTable(name = "likes", joinColumns = @JoinColumn(name = "post_id"))
-	private List<String> likes = new ArrayList<>();
+	private List<Integer> likes = new ArrayList<>();
 
 	@OneToMany(cascade = CascadeType.ALL)
 	private List<Post> comments;
 
 	@ManyToOne
 	private User author;
+
+
+
 }

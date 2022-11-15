@@ -34,9 +34,10 @@ public class PostServiceTests {
     @InjectMocks
     private PostService postService;
 
+
     @Test
     public void testPostGrab(){
-        Post newpost = new Post(1, "hello",null, 2, null, user1);
+        Post newpost = new Post(1, "hello",null, null, null, null, user1);
         List<Post> expected = new ArrayList<Post>();
         expected.add(newpost);
 
@@ -45,6 +46,7 @@ public class PostServiceTests {
 
         Assertions.assertEquals(expected, actual);
     }
+
 
 
 }

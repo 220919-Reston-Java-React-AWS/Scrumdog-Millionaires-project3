@@ -1,5 +1,6 @@
 package com.revature.services;
 
+import com.google.common.primitives.Ints;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -50,11 +51,10 @@ public class PostService {
 			responseObj.setStatus("Fail");
 			responseObj.setMessage("Connot find post id: " + likesId.getPost_id());
 			responseObj.setPayload(null);
-			return responseObj;
 		} else {
 			// if it does exist, grab post and grab its list of likes
 			Post targetPost = optPost.get();
-			List<String> likeList = targetPost.getLikes();
+			List<Integer> likeList = targetPost.getLikes();
 			// if the like list is empty, create one
 			if(likeList == null){
 				likeList = new ArrayList<>();
@@ -62,10 +62,11 @@ public class PostService {
 			//now determine if we will add or subtract a like
 			//check whether or not the post like has a user associated with it
 			//if it doesnt, add the user, if it does, remove it
-			if(!likeList.contains(Integer.toString(likesId.getUser_id()))){
-				likeList.add(Integer.toString(likesId.getUser_id()));
+//			int[] arr = likeList.stream().mapToInt(i -> i).toArray();
+			if(!likeList.contains(likesId.getUser_id())){
+				likeList.add(likesId.getUser_id());
 			} else {
-				likeList.remove(Integer.toString(likesId.getUser_id()));
+				likeList.remove(Integer.valueOf(likesId.getUser_id()));
 			}
 			//update the like list and update the repository
 			targetPost.setLikes(likeList);
@@ -74,7 +75,7 @@ public class PostService {
 			responseObj.setStatus("Success");
 			responseObj.setMessage("Update like to the target post with id: " + targetPost.getId());
 			responseObj.setPayload(targetPost);
-			return responseObj;
 		}
+		return responseObj;
 	}
 }

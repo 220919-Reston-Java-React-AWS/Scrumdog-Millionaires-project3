@@ -1,6 +1,6 @@
 
 
-import { AppBar, Container, Divider, Drawer, Grid, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Toolbar } from '@mui/material';
+import { AppBar, Container, CssBaseline, Divider, Drawer, Grid, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Paper, Toolbar } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import { useContext, useEffect, useState } from 'react';
@@ -10,10 +10,27 @@ import { apiGetAllPosts } from '../../remote/social-media-api/postFeed.api';
 import { apiGetAllPostsByUser } from '../../remote/social-media-api/profileFeed.api';
 import Navbar from '../navbar/Navbar';
 import { PostCard } from '../post-feed/PostCard';
-import SettingsIcon from '@mui/icons-material/Settings';;
+import SettingsIcon from '@mui/icons-material/Settings';
+import { css, jsx } from "@emotion/react";
 
 
-const theme = createTheme();
+const theme = createTheme(
+//     {
+//     palette: {
+//         background:{
+//             default: 'tan'
+//         }
+//     }
+// }
+);
+
+const styles = {
+    paperContainer: {
+        backgroundImage: `url(${"https://www.kindpng.com/imgv/TTRxT_map-of-the-world-no-borders-hd-png/"})`,
+        width: "100%",
+        height: '100%'
+    }
+};
 const drawerWidth = 240;
 
 
@@ -27,7 +44,7 @@ const fetchData = async () => {
     let currentuserid = user?.id!;
     const result = await apiGetAllPostsByUser(currentuserid)
     setPosts(result.payload.reverse())
-    console.log(user?.id)
+
 }
 
 useEffect(() => {
@@ -44,42 +61,35 @@ useEffect(() => {
    }
 
     return(
-        <>
-        <Navbar/>
+        <div style={{backgroundImage:"url('https://www.kindpng.com/picc/m/4-41696_map-of-the-world-no-borders-hd-png.png')",
+        width:'100%'
+        
+        }}>
+        <Navbar />
 
-       
-      
-        <Container maxWidth="xl" sx={{
-                backgroundColor: '#fff',
-                height: 'auto'
-            }}>
+        <p> This is your page</p>
+        
+     
+        
                 <h2 style={{textAlign: 'center'}}> Welcome to {user?.firstName}'s profile</h2> 
-                          
-            </Container> 
-
-            <Container maxWidth="xl" sx={{
-                backgroundColor: '#fff',
-                height: 'auto'
-            }}>
+                                    
+          
                 <h3 style={{textAlign: 'center'}}> Name: {user?.firstName}  {user?.lastName}</h3> 
-                          
-            </Container>
-            <Container maxWidth="xl" sx={{
-                backgroundColor: '#fff',
-                height: 'auto'
-            }}>
+                                   
                 <h2 style={{textAlign: 'center', color: 'orange', }}> Posts</h2>            
-            </Container> 
+
+           
 
             <Grid container justifyContent={"center"}>
             <Grid item sx={{width: '60%', mb: '20px', }} >
                     {post.map((item) =>(
-                    <PostCard post={item} key={item.id}/>
+                    <PostCard post={item} key={item.id} />
                 ))
                 }
                 </Grid> 
                 </Grid>
+                
 
-        </>
+        </div >
         )
 }

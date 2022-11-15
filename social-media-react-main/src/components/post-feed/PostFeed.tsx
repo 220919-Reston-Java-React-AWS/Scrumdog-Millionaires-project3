@@ -16,6 +16,7 @@ export const PostFeed = () => {
     let welcomeText = 'Welcome!'
     let postForm = <></>;
 
+
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -71,8 +72,9 @@ export const PostFeed = () => {
        }
     
     return (
-        <>
+        < >
            <Navbar />
+           <div >
            <Container maxWidth="xl" sx={{
                 backgroundColor: '#fff',
                 height: 'auto'
@@ -89,6 +91,8 @@ export const PostFeed = () => {
                 </Grid> 
             </Grid>
             { noPostsText } 
+
+            </div>
         </>
     )
 };
