@@ -29,8 +29,11 @@ public class Post {
 	@CollectionTable(name = "likes", joinColumns = @JoinColumn(name = "post_id"))
 	private List<Integer> likes = new ArrayList<>();
 
-	@OneToMany(cascade = CascadeType.ALL)
-	private List<Post> comments;
+//	@CollectionTable(name = "comments", joinColumns = @JoinColumn(name = "post_id"))
+//	private List<Comments> comment = new ArrayList<>();
+//
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
+	private List<Comments> comments;
 
 	@ManyToOne
 	private User author;

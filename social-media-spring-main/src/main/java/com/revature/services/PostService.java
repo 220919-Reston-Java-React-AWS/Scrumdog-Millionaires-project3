@@ -49,7 +49,7 @@ public class PostService {
 		if(optPost.isEmpty()){
 			//create a response if the post doesnt exsist
 			responseObj.setStatus("Fail");
-			responseObj.setMessage("Connot find post id: " + likesId.getPost_id());
+			responseObj.setMessage("Cannot find post id: " + likesId.getPost_id());
 			responseObj.setPayload(null);
 		} else {
 			// if it does exist, grab post and grab its list of likes
