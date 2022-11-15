@@ -1,0 +1,22 @@
+Henry :
+Yesterday: start on the front end of DM, impolement fields to type the message
+today: more frontend on the DM
+
+
+
+Miguel
+Yesterday: trying to figure out the dark mode
+Today: work on the dark mode
+
+
+
+Opale
+Yesterday: looked in the design for userprofile (a map in the background) local storage in the page not to be logged out when refresh page
+Today: finishup designing the front end of user profile
+
+
+
+
+Jaden 
+Yesterday: refactor some tables change service layer for likes
+Today: ask for help if needed for the like feature.
