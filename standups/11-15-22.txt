@@ -19,4 +19,4 @@ Today: finishup designing the front end of user profile
 
 Jaden 
 Yesterday: refactor some tables change service layer for likes
-Today: ask for help if needed for the like feature
+Today: ask for help if needed for the like feature.
