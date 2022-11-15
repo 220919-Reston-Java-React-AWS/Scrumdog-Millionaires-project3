@@ -6,6 +6,7 @@ import { PostFeed } from '../components/post-feed/PostFeed';
 import Register from '../components/register/Register';
 import OtherUsers from '../components/user-profile/OtherUsers';
 import UserProfile from '../components/user-profile/UserProfile';
+import DirectMessaging from '../components/direct-messaging/DirectMessaging'
 
 export const AppRoutes: React.FC<unknown> = () => (
   <Routes>
@@ -15,5 +16,6 @@ export const AppRoutes: React.FC<unknown> = () => (
     <Route path="/change-password" element={<ChangePassword />} />
     <Route path = "/current-profile" element={<UserProfile />} />
     <Route path = "/other-user" element={<OtherUsers />} />
+    <Route path = "/messages" element={<DirectMessaging />} />
   </Routes>
 )
