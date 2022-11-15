@@ -30,6 +30,7 @@ import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
 import {css } from '@emotion/react'
 import { ILikes } from "../../models/LikesModel";
 import { Likes } from "../api/postApi";
+import { apiGetAllPosts } from '../../remote/social-media-api/postFeed.api';
 
 interface postProps {
   post: Post;
@@ -48,8 +49,18 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
 }));
 
 export const PostCard = (props: postProps) => {
-  const { user } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
   const [expanded, setExpanded ] = React.useState(false);
+  const [post, setPosts] = React.useState<Post[]>([])
+  //@ts-ignore
+  const [liked, setLiked] = React.useState(props.post.likes.includes(user?.id) ? true : false);
+  const [likes, setLikes] = React.useState(props.post.likes.length);
+
+
+  // console.log(user);
+  // console.log(user?.id);
+  
+  
 
   // const navigate = useNavigate();
 
@@ -58,57 +69,63 @@ export const PostCard = (props: postProps) => {
     setExpanded(!expanded);
   };
 
-  const LikeButton: React.FC = () => {
-    const [liked, setLiked] = React.useState(false);
-    const Icon = liked ? ThumbUpIcon : ThumbUpOffAltIcon;
+  // const LikeButton: React.FC = () => {
+  //   const [liked, setLiked] = React.useState(false);
+  //   const Icon = liked ? ThumbUpIcon : ThumbUpOffAltIcon;
 
-    const handleUnlike = () => {
-      setLiked(false);
-    };
+  //   const handleUnlike = () => {
+  //     setLiked(false);
+  //   };
 
-    const handleLike = () => {
-      setLiked(true);
-    };
+  //   const handleLike = () => {
+  //     setLiked(true);
+  //   };
 
-    useEffect(() => {
-      if (props.post.likes.includes(user?.id!)) {
-        console.log(liked);
-        Likes.likeUnlikPost({ post_id: props.post.id, user_id: user?.id! });
-      } else {
-        console.log(liked);
-        Likes.likeUnlikPost({ post_id: props.post.id, user_id: user?.id! });
-      }
-    }, [liked]);
+  //   const onClick = liked ? handleUnlike : handleLike;
 
-    const onClick = liked ? handleUnlike : handleLike;
+  //   return (
+  //     <Icon
+  //       css={css`
+  //         cursor: pointer;
+  //       `}
+  //       color="success"
+  //       onClick={onClick}
+  //     />
+  //   );
+  // };
 
-    return (
-      <Icon
-        css={css`
-          cursor: pointer;
-        `}
-        color="success"
-        onClick={onClick}
-      />
-    );
-  };
 
-  // const handleLikeButton = (event: React.MouseEvent<HTMLButtonElement>) => {
-  //   // event.preventDefault();
 
-  //   console.log("did something happen?");
 
-  //   if(props.post.likes.includes(user?.id!)){
-  //     setLiked(false)
-  //     console.log(liked);
-  //     Likes.likeUnlikPost({post_id: props.post.id, user_id:user?.id!});
-  //   } else {
-  //     setLiked(true)
-  //     console.log(liked);
-  //   Likes.likeUnlikPost({post_id: props.post.id, user_id:user?.id!});
-  //   }
+  const handleLikeButton = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
 
-  // }
+    console.log("did something happen?");
+    console.log(user);
+    console.log(user?.id);
+    console.log(props.post.likes);
+    
+    //@ts-ignore
+    if(props.post.likes.includes(user?.id)){
+      setLiked(false)
+      console.log(liked);
+      //@ts-ignore
+      Likes.likeUnlikPost({post_id: props.post.id, user_id:user?.id});
+      // setLikes(props.post.likes.length);
+      console.log(likes);
+      console.log(props.post.likes);
+    } else {
+      setLiked(true)
+      console.log(liked);
+    //@ts-ignore
+    Likes.likeUnlikPost({post_id: props.post.id, user_id:user?.id});
+    // setLikes(props.post.likes.length)
+    console.log(likes);
+    console.log(props.post.likes);
+    }
+  }
+
+
 
   let media = <></>;
   let commentForm = <></>;
@@ -188,18 +205,15 @@ export const PostCard = (props: postProps) => {
         <List>
           <ListItem>
             <ListItemText
-              primary={`${props.post.likes.length} ${
+              primary={`${likes} ${
                 props.post.likes.length === 1 ? "like" : "likes"
               }`}
             />
           </ListItem>
           <ListItem>
-            {/* <span onClick={handleLikeButton}>
+            <span onClick={handleLikeButton}>
         {liked ? <ThumbUpIcon/> : <ThumbUpOffAltIcon />}
-        </span> */}
-            <span>
-              <LikeButton />
-            </span>
+        </span>
           </ListItem>
         </List>
 
