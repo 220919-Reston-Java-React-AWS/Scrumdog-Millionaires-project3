@@ -25,6 +25,7 @@ const theme = createTheme(
 // }
 );
 
+
 const styles = {
     paperContainer: {
         backgroundImage: `url(${"https://www.kindpng.com/imgv/TTRxT_map-of-the-world-no-borders-hd-png/"})`,
@@ -91,7 +92,7 @@ useEffect(() => {
             <Grid container justifyContent={"center"}>
             <Grid item sx={{width: '60%', mb: '20px', }} >
                     {post.map((item) =>(
-                    <PostCard post={item} key={item.id} />
+                    <PostCard post={item} key={item.id} posts={post} setPosts={setPosts} />
                 ))
                 }
                 </Grid> 
