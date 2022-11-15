@@ -18,7 +18,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/auth")
-@CrossOrigin(origins = {"http://localhost:4200", "http://localhost:3000"}, allowCredentials = "true")
+@CrossOrigin(origins =  "http://localhost:3000", allowCredentials = "true")
 public class AuthController {
 
     @Autowired
@@ -63,8 +63,10 @@ public class AuthController {
         return ResponseEntity.status(HttpStatus.CREATED).body(authService.register(created));
     }
 
+    // @CrossOrigin(origins = {"http://localhost:4200", "http://localhost:3000"}, allowCredentials = "true")
+    @CrossOrigin(origins = "http://localhost:3000")
     @RequestMapping(method = RequestMethod.PUT, value = "/change-password")
-    public User UpdatePassword(@RequestBody User updatePassword){
+    public User UpdatePassword(@RequestBody LoginRequest updatePassword){
         return userService.updatePassword(updatePassword);
     }
 

@@ -9,10 +9,11 @@ export const apiLogin = async (email: string, password: string): Promise<socialA
     );
     return { status: response.status, payload: response.data };
 }
-export const apiChangePassword = async (password: string): Promise<socialApiResponse> => {
-    const response = await socialClient.post<any>(
+export const apiChangePassword = async ( email: string, password: string): Promise<socialApiResponse> => {
+    const response = await socialClient.put<any>(
         `${baseURL}/change-password`,
-        {password: password }
+        { email: email, password: password }, { withCredentials: false }
+
     );
     return { status: response.status, payload: response.data };
 }

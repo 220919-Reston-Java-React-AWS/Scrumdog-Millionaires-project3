@@ -29,8 +29,15 @@ export default function ChangePassword() {
     event.preventDefault();
 
     const data = new FormData(event.currentTarget);
-    const response = await apiChangePassword(`${data.get('password')}`)
+    let email = "";
+    if(user?.email){
+      email = user.email;
+    }
+    const response = await apiChangePassword(email, `${data.get('password')}`)
+    console.log(data)
     if (response.status >= 200 && response.status < 300) navigate('/login');
+    
+    
   };
 
    
@@ -40,8 +47,7 @@ export default function ChangePassword() {
       //   if (response.status >= 200 && response.status < 300) {
       //     navigate('/login');
       // }else{}
-      // }   
-   
+      // }     
   
 
   return (

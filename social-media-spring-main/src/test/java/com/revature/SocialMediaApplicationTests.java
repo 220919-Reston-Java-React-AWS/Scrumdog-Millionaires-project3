@@ -11,6 +11,9 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @SpringBootTest
 class SocialMediaApplicationTests {
 
@@ -33,7 +36,7 @@ class SocialMediaApplicationTests {
 
 
 	@Test
-	public void testMessage() {
+	public void testMessageSend() {
 //		Arrange
 		DM expected = new DM(1,"Hello",user1,user2);
 		Mockito.when(dmRepository.save(expected)).thenReturn(expected);
@@ -42,6 +45,19 @@ class SocialMediaApplicationTests {
 //		Assert
 		Assertions.assertEquals(expected,actual);
 
+	}
+
+	@Test
+	public void testMessageReceive() {
+//		Arrange
+		DM newDM = new DM(2,"How are you?", user2, user1);
+		List<DM> expected = new ArrayList<DM>();
+		expected.add(newDM);
+		Mockito.when(dmRepository.findBySender(user2)).thenReturn(expected);
+//		Act
+		List<DM> actual = dmService.getAllByUser(user2);
+//		Assert
+		Assertions.assertEquals(expected,actual);
 	}
 
 }
