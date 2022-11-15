@@ -16,6 +16,7 @@ import { apiChangePassword } from '../../remote/social-media-api/auth.api';
 import { useContext } from 'react';
 import { UserContext } from '../../context/user.context';
 import { Tooltip } from '@mui/material';
+import "../style/style.css"
 
 
 const theme = createTheme();
@@ -34,21 +35,12 @@ export default function ChangePassword() {
       email = user.email;
     }
     const response = await apiChangePassword(email, `${data.get('password')}`)
-    console.log(data)
-    if (response.status >= 200 && response.status < 300) navigate('/login');
+    if (response.status >= 200 && response.status < 300) alert('your password has been change') ;
     
     
   };
 
    
-      // if(user) {
-      //   const data = new FormData(event.currentTarget);
-      //   const response = await apiChangePassword(`${data.get('passwordChange')}`);
-      //   if (response.status >= 200 && response.status < 300) {
-      //     navigate('/login');
-      // }else{}
-      // }     
-  
 
   return (
     <><><Navbar /></><ThemeProvider theme={theme}>
@@ -56,13 +48,17 @@ export default function ChangePassword() {
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
-          sx={{
+        
+          sx={{ 
+            backgroundColor: '#F3E6D5',          
             marginTop: 8,
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
+            boxShadow: '10px 10px 4px rgba(0, 0, 0, .400)'
           }}
         >
+          
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
             <LockOutlinedIcon />
           </Avatar>
