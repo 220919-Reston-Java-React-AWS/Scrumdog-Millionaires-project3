@@ -34,17 +34,19 @@ public class PostServiceTests {
     @InjectMocks
     private PostService postService;
 
-//    @Test
-//    public void testPostGrab(){
-//        Post newpost = new Post(1, "hello",null, 2, null, user1);
-//        List<Post> expected = new ArrayList<Post>();
-//        expected.add(newpost);
-//
-//        Mockito.when(postService.getAllByAuthor(user1)).thenReturn(expected);
-//        List<Post> actual = postService.getAllByAuthor(user1);
-//
-//        Assertions.assertEquals(expected, actual);
-//    }
+
+    @Test
+    public void testPostGrab(){
+        Post newpost = new Post(1, "hello",null, null, null, null, user1);
+        List<Post> expected = new ArrayList<Post>();
+        expected.add(newpost);
+
+        Mockito.when(postService.getAllByAuthor(user1)).thenReturn(expected);
+        List<Post> actual = postService.getAllByAuthor(user1);
+
+        Assertions.assertEquals(expected, actual);
+    }
+
 
 
 }

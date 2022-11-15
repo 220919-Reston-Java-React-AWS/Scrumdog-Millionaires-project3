@@ -27,9 +27,14 @@ export default function Login() {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const response = await apiLogin(`${data.get('email')}`, `${data.get('password')}`);
+    console.log(response.status);
     if (response.status >= 200 && response.status < 300) {
       setUser(response.payload);
+      localStorage.setItem('user', JSON.stringify(response.payload));
+
       navigate('/');
+    }else if (response.status >=400 && response.status <500){
+      console.log('User not found');
     }
   };
 
