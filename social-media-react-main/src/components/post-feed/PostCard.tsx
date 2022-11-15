@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import * as React from "react";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import styled from "styled-components";
 import Post from "../../models/Post";
 import { Box, Container, Button, Paper, Grid, Icon, List, ListItem, ListItemText } from '@mui/material';
@@ -12,7 +12,6 @@ import CardActions from '@mui/material/CardActions';
 import Collapse from '@mui/material/Collapse';
 import Avatar from '@mui/material/Avatar';
 import IconButton, { IconButtonProps } from '@mui/material/IconButton';
-import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import Typography from '@mui/material/Typography';
 import { orange, red } from '@mui/material/colors';
 import FavoriteIcon from '@mui/icons-material/Favorite';
@@ -29,13 +28,14 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
 import {css } from '@emotion/react'
-import { useNavigate } from "react-router-dom";
+import { ILikes } from "../../models/LikesModel";
+import { Likes } from "../api/postApi";
+import { apiGetAllPosts } from '../../remote/social-media-api/postFeed.api';
 
 interface postProps {
-    post: Post,
-    key: number,
+  post: Post;
+  key: number;
 }
-
 
 interface ExpandMoreProps extends IconButtonProps {
   expand: boolean;
@@ -45,55 +45,87 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
   const { expand, ...other } = props;
   return <IconButton {...other} />;
 })(({ theme, expand }) => ({
-  marginLeft: 'auto',
+  marginLeft: "auto",
 }));
 
-
 export const PostCard = (props: postProps) => {
-  const { user } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
   const [expanded, setExpanded ] = React.useState(false);
+  const [post, setPosts] = React.useState<Post[]>([])
+  //@ts-ignore
+  const [liked, setLiked] = React.useState(props.post.likes.includes(user?.id) ? true : false);
+  const [likes, setLikes] = React.useState(props.post.likes.length);
 
-  const [likeStatus, setLikeStatus] = React.useState(false);
 
-  const navigate = useNavigate();
+  // console.log(user);
+  // console.log(user?.id);
+  
+  
+
+  // const navigate = useNavigate();
 
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
 
-  const LikeButton: React.FC = () => {
+  // const LikeButton: React.FC = () => {
+  //   const [liked, setLiked] = React.useState(false);
+  //   const Icon = liked ? ThumbUpIcon : ThumbUpOffAltIcon;
 
-    const [liked, setLiked] = React.useState(false);
-    const Icon = liked ? ThumbUpIcon: ThumbUpOffAltIcon;
+  //   const handleUnlike = () => {
+  //     setLiked(false);
+  //   };
+
+  //   const handleLike = () => {
+  //     setLiked(true);
+  //   };
+
+  //   const onClick = liked ? handleUnlike : handleLike;
+
+  //   return (
+  //     <Icon
+  //       css={css`
+  //         cursor: pointer;
+  //       `}
+  //       color="success"
+  //       onClick={onClick}
+  //     />
+  //   );
+  // };
 
 
-
-  const handleUnlike = () => {
-    setLiked(false)
-  }
-
-  const handleLike = () => {
-    setLiked(true);
-  }
-
-  const onClick = liked ? handleUnlike : handleLike;
-
-    return (
-      <Icon css={css`cursor:pointer`} color="success" onClick={onClick}/>
-    )
-  }
 
 
   const handleLikeButton = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
 
-    if(!props.post.likes.includes(user?.id ?? 1)){
-
-    } else {}
-
-
+    console.log("did something happen?");
+    console.log(user);
+    console.log(user?.id);
+    console.log(props.post.likes);
+    
+    //@ts-ignore
+    if(props.post.likes.includes(user?.id)){
+      setLiked(false)
+      console.log(liked);
+      //@ts-ignore
+      Likes.likeUnlikPost({post_id: props.post.id, user_id:user?.id});
+      // setLikes(props.post.likes.length);
+      console.log(likes);
+      console.log(props.post.likes);
+    } else {
+      setLiked(true)
+      console.log(liked);
+    //@ts-ignore
+    Likes.likeUnlikPost({post_id: props.post.id, user_id:user?.id});
+    // setLikes(props.post.likes.length)
+    console.log(likes);
+    console.log(props.post.likes);
+    }
   }
+
+
 
   let media = <></>;
   let commentForm = <></>;
@@ -101,37 +133,54 @@ export const PostCard = (props: postProps) => {
   const handleComment = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    props.post.comments.push(new Post(0, data.get('commentText')?.toString() || '', '', [], user,[]));
+    props.post.comments.push(
+      new Post(0, data.get("commentText")?.toString() || "", "", [], user, [])
+    );
     let payload = props.post;
     await apiUpsertPost(payload);
-  }
+  };
 
-  commentForm = 
-  <Paper
+  commentForm = (
+    <Paper
       component="form"
-      sx={{ p: '4px 0', display: 'flex', alignItems: 'center', width: '100%', mb: '15px' }}
+      sx={{
+        p: "4px 0",
+        display: "flex",
+        alignItems: "center",
+        width: "100%",
+        mb: "15px",
+      }}
       elevation={1}
-      onSubmit={handleComment}>
-  <InputBase
+      onSubmit={handleComment}
+    >
+      <InputBase
         sx={{ ml: 1, flex: 1 }}
-        id='commentText'
-        name='commentText'
+        id="commentText"
+        name="commentText"
         placeholder="Make a comment..."
-        inputProps={{ 'aria-label': 'Make a comment' }}
+        inputProps={{ "aria-label": "Make a comment" }}
       />
       <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
-      <IconButton type="submit" sx={{ p: '10px' }} aria-label="submit">
+      <IconButton type="submit" sx={{ p: "10px" }} aria-label="submit">
         <AddCircleIcon color="warning" />
       </IconButton>
- </Paper>
+    </Paper>
+  );
 
   if (props.post.imageUrl) {
-    media = <CardMedia
-    component="img"
-    src = {props.post.imageUrl}
-    alt="post image"
-    sx={{maxHeight: "300px", width: "auto", marginLeft: "auto", marginRight: "auto" }}
-  />
+    media = (
+      <CardMedia
+        component="img"
+        src={props.post.imageUrl}
+        alt="post image"
+        sx={{
+          maxHeight: "300px",
+          width: "auto",
+          marginLeft: "auto",
+          marginRight: "auto",
+        }}
+      />
+    );
   }
 
   return (
@@ -140,11 +189,10 @@ export const PostCard = (props: postProps) => {
     <CardHeader
       title={props.post.author.firstName}
       avatar={
-          <Avatar sx={{ bgcolor: '#ed6c02' }} aria-label="recipe" >
-            <PersonOutlineOutlinedIcon onClick={() => navigate('/other-user', {state:{id:props.post.author.id, firstName:props.post.author.firstName, lastName:props.post.author.lastName, email:props.post.author.email}})} />
+          <Avatar sx={{ bgcolor: '#ed6c02' }} aria-label="recipe">
+            <PersonIcon/>
           </Avatar>
         }
-        
         />
        
       { media }
@@ -154,48 +202,51 @@ export const PostCard = (props: postProps) => {
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-
         <List>
           <ListItem>
-            <ListItemText primary={`${props.post.likes.length} ${props.post.likes.length === 1 ? "like" : "likes"}`}/>
+            <ListItemText
+              primary={`${likes} ${
+                props.post.likes.length === 1 ? "like" : "likes"
+              }`}
+            />
           </ListItem>
           <ListItem>
-          <span onClick={handleLikeButton}>
-        <LikeButton/>
+            <span onClick={handleLikeButton}>
+        {liked ? <ThumbUpIcon/> : <ThumbUpOffAltIcon />}
         </span>
-      
           </ListItem>
-        </List>       
+        </List>
 
         {/* <div css={css`padding-left:0.5em`}>
         <LikeButton/>
         </div> */}
 
-        <Typography variant="subtitle2"><span></span></Typography>
+        <Typography variant="subtitle2">
+          <span></span>
+        </Typography>
 
-          <ExpandMore
+        <ExpandMore
           expand={expanded}
           onClick={handleExpandClick}
           aria-expanded={expanded}
           aria-label="show more"
         >
           <InsertCommentIcon />
-        </ExpandMore>        
+        </ExpandMore>
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
-          { commentForm }
+          {commentForm}
           <Typography paragraph>comments:</Typography>
           <Grid container justifyContent={"center"}>
-                <Grid item sx={{width: '100%'}} >
-                    {props.post.comments.map((item) =>(
-                    <PostCard post={item} key={item.id}/>
-                ))
-                }
-                </Grid> 
+            <Grid item sx={{ width: "100%" }}>
+              {props.post.comments.map((item) => (
+                <PostCard post={item} key={item.id} />
+              ))}
             </Grid>
+          </Grid>
         </CardContent>
       </Collapse>
     </Card>
-      );
-}
+  );
+};
