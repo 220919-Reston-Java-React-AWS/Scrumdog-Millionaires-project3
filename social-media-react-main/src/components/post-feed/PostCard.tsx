@@ -31,6 +31,8 @@ import {css } from '@emotion/react'
 import { ILikes } from "../../models/LikesModel";
 import { Likes } from "../api/postApi";
 import { apiGetAllPosts } from '../../remote/social-media-api/postFeed.api';
+import { useNavigate } from "react-router-dom";
+import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 
 interface postProps {
   post: Post;
@@ -62,7 +64,7 @@ export const PostCard = (props: postProps) => {
 
 
 
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
 
   const handleExpandClick = () => {
@@ -169,7 +171,7 @@ export const PostCard = (props: postProps) => {
       </IconButton>
 
     </Paper>
-  );
+  };
 
 
   if (props.post.imageUrl) {
