@@ -34,21 +34,12 @@ export default function ChangePassword() {
       email = user.email;
     }
     const response = await apiChangePassword(email, `${data.get('password')}`)
-    console.log(data)
-    if (response.status >= 200 && response.status < 300) navigate('/login');
+    if (response.status >= 200 && response.status < 300) alert('your password has been change') ;
     
     
   };
 
    
-      // if(user) {
-      //   const data = new FormData(event.currentTarget);
-      //   const response = await apiChangePassword(`${data.get('passwordChange')}`);
-      //   if (response.status >= 200 && response.status < 300) {
-      //     navigate('/login');
-      // }else{}
-      // }     
-  
 
   return (
     <><><Navbar /></><ThemeProvider theme={theme}>
