@@ -16,7 +16,8 @@ import { useContext } from 'react';
 import { UserContext } from '../../context/user.context';
 import ForestIcon from '@mui/icons-material/Forest';
 import { Switch } from '@mui/material';
-import ToggleColorMode from '../../Theme';
+import DarkMode from '../darkMode/DarkMode';
+
 
 export default function Navbar() {
 
@@ -59,7 +60,7 @@ export default function Navbar() {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" color="transparent" >
+      <AppBar position="static" color="transparent" style={{ background: '#4E6294' }}>
         <Toolbar>
           <ForestIcon/>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}  onClick={() => navigate('/')}>
@@ -106,7 +107,7 @@ export default function Navbar() {
             </Tooltip>
             Dark Mode
             <Switch
-            onClick={()=>ToggleColorMode()}      
+            onClick={DarkMode}    
             name="toggleDark"
             color="default"
           />
