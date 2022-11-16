@@ -33,10 +33,15 @@ import { Likes } from "../api/postApi";
 import { apiGetAllPosts } from '../../remote/social-media-api/postFeed.api';
 import { useNavigate } from "react-router-dom";
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
+import Comments from "../../models/Comments";
 
 interface postProps {
   post: Post;
   key: number;
+}
+
+interface commentProps {
+  comment: Comments;
 }
 
 interface ExpandMoreProps extends IconButtonProps {
@@ -60,7 +65,7 @@ export const PostCard = (props: postProps) => {
   const [likesIdArray, setLikesIdArray] = React.useState([...props.post.likes]);
 
 
-console.log(likesIdArray);
+// console.log(likesIdArray);
 
 
   const navigate = useNavigate();
