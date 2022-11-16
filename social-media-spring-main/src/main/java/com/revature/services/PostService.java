@@ -29,6 +29,8 @@ public class PostService {
 		return this.postRepository.findAll();
 	}
 
+	public Optional<Post> findById(int id){ return postRepository.findById(id);}
+
 	public List<Post> getAllByAuthor(User user){
 
 			return this.postRepository.findPostByAuthor(user);
@@ -37,7 +39,7 @@ public class PostService {
 
 	public Post upsert(Post post) {
 
-		System.out.println(post);
+//		System.out.println(postRepository);
 		return this.postRepository.save(post);
 	}
 

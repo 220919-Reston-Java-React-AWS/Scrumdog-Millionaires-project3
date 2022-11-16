@@ -10,6 +10,6 @@ const baseURL = "/comments";
 // }
 
 export const apiUpsertComment = async (comment: any): Promise<socialApiResponse> => {
-    const response = await socialClient.put<any>(baseURL, comment, {withCredentials: true});
+    const response = await socialClient.post<any>(baseURL, comment, {withCredentials: true});
     return { status: response.status, payload: response.data };
 }

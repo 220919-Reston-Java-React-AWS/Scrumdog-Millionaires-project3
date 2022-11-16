@@ -147,15 +147,6 @@ export const PostCard = (props: postProps, cprops :commentProps) => {
   let commentForm = <></>;
 
 
-
-  const handleSubmit58 = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    let payload = new Post(0, data.get('postText')?.toString() || '', data.get('postImage')?.toString() || '', [], user,[]);
-    await apiUpsertPost(payload);
-    // fetchData();
-  }
-
   const handleComment = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);

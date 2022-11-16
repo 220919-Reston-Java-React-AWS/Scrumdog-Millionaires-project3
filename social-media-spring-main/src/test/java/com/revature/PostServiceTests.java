@@ -15,12 +15,17 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @ExtendWith(MockitoExtension.class)
 public class PostServiceTests {
 
     @Mock
     private User user1;
+
+
+    @Mock
+    private Post post1;
 
 //    @Mock
 //    private
@@ -46,6 +51,19 @@ public class PostServiceTests {
 
         Assertions.assertEquals(expected, actual);
     }
+
+    @Test
+    public void testPostGrabId(){
+//        Post newpost = new Post(1, "hello",null, null, null, null, user1);
+        Optional<Post> expected ;
+
+
+        Mockito.when(postService.findById(post1.getId())).thenReturn(Optional.of(post1));
+        Optional<Post> actual = postService.findById(1);
+
+        Assertions.assertEquals(post1, actual);
+    }
+
 
 
 
