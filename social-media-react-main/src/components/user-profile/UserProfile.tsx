@@ -83,7 +83,7 @@ useEffect(() => {
                 <h2 style={{textAlign: 'center'}}> Welcome {user?.firstName} </h2> 
                                     
           
-                <h3 style={{textAlign: 'center'}}> Name: {user?.firstName}  {user?.lastName}</h3> 
+                {/* <h3 style={{textAlign: 'center'}}> Name: {user?.firstName}  {user?.lastName}</h3>  */}
                                    
                 <h2 style={{textAlign: 'center', color: 'orange', }}> Posts</h2>            
 
