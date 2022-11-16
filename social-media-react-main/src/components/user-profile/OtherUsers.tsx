@@ -14,11 +14,6 @@ import { useLocation } from "react-router-dom";
 
 
 const theme = createTheme();
-interface postProps {
-    post: Post,
-    key: number
-}
-
 
 
 export default function OtherUser(){
@@ -67,7 +62,7 @@ useEffect(() => {
             <Grid container justifyContent={"center"}>
             <Grid item sx={{width: '60%', mb: '20px', }} >
                     {post.map((item) =>(
-                    <PostCard post={item} key={item.id}/>
+                    <PostCard post={item} key={item.id} posts={post} setPosts={setPosts}/>
                 ))
                 }
                 </Grid> 

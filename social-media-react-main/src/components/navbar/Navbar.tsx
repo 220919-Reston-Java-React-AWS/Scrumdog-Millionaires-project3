@@ -14,7 +14,11 @@ import { useNavigate } from 'react-router-dom';
 import Tooltip from '@mui/material/Tooltip';
 import { useContext } from 'react';
 import { UserContext } from '../../context/user.context';
+import ForestIcon from '@mui/icons-material/Forest';
+import { Switch } from '@mui/material';
+import DarkMode from '../darkMode/DarkMode';
 import MessageIcon from '@mui/icons-material/Message';
+
 
 export default function Navbar() {
 
@@ -61,8 +65,9 @@ export default function Navbar() {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" color="transparent" >
+      <AppBar position="static" color="transparent" style={{ background: '#4E6294' }}>
         <Toolbar>
+          <ForestIcon/>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}  onClick={() => navigate('/')}>
             TraveLog
           </Typography>
@@ -81,6 +86,7 @@ export default function Navbar() {
             </Tooltip>
 
             <Tooltip disableFocusListener disableTouchListener title={tipTitleUse1}>
+                          
             <IconButton
                 size="large"
                 aria-label="account of current user"
@@ -117,6 +123,12 @@ export default function Navbar() {
                 {loggedIn}
             </IconButton>
             </Tooltip>
+            Dark Mode
+            <Switch
+            onClick={DarkMode}    
+            name="toggleDark"
+            color="default"
+          />
 
             </div>
         </Toolbar>
