@@ -19,3 +19,7 @@ const requests = {
 export const Likes = {
 	likeUnlikPost: (likes: ILikes): Promise<ILikes> => requests.post('/likepost', likes)
 };
+
+export const DeletePost = {
+	deletePost: (id:number) : Promise<void> => requests.delete(`/${id}`)
+}

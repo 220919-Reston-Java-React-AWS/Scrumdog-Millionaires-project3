@@ -3,7 +3,7 @@
 import { AppBar, Container, CssBaseline, Divider, Drawer, Grid, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Paper, Toolbar } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
-import { useContext, useEffect, useState } from 'react';
+import { useCallback, useContext, useEffect, useState } from 'react';
 import { UserContext } from '../../context/user.context';
 import Post from '../../models/Post';
 import { apiGetAllPosts } from '../../remote/social-media-api/postFeed.api';
@@ -12,6 +12,7 @@ import Navbar from '../navbar/Navbar';
 import { PostCard } from '../post-feed/PostCard';
 import SettingsIcon from '@mui/icons-material/Settings';
 import { css, jsx } from "@emotion/react";
+import { render } from 'react-dom';
 
 
 const theme = createTheme(
@@ -23,6 +24,7 @@ const theme = createTheme(
 //     }
 // }
 );
+
 
 const styles = {
     paperContainer: {
@@ -44,14 +46,20 @@ const fetchData = async () => {
     let currentuserid = user?.id!;
     const result = await apiGetAllPostsByUser(currentuserid)
     setPosts(result.payload.reverse())
-
 }
 
+
+
+const loadDataOnlyOnce = useCallback(() =>{
+    console.log(`Hello there ${user?.id}`)
+}, [user])
+
 useEffect(() => {
-    fetchData()
-   }, []);
+    fetchData();
+   }, [loadDataOnlyOnce]);
 
    let noPostsText = <></>;
+
 
    if(post.length === 0) {
         noPostsText = 
@@ -60,18 +68,21 @@ useEffect(() => {
         </h2>;
    }
 
-    return(
-        <div style={{backgroundImage:"url('https://www.kindpng.com/picc/m/4-41696_map-of-the-world-no-borders-hd-png.png')",
-        width:'100%'
-        
-        }}>
-        <Navbar />
 
-        <p> This is your page</p>
+
+    return(
         
+        <div 
+        // style={{backgroundImage:"url('https://www.kindpng.com/picc/m/4-41696_map-of-the-world-no-borders-hd-png.png')",
+        // width:'100%'
+        
+        // }}
+        >
+        <Navbar />
+      
      
         
-                <h2 style={{textAlign: 'center'}}> Welcome to {user?.firstName}'s profile</h2> 
+                <h2 style={{textAlign: 'center'}}> Welcome {user?.firstName} </h2> 
                                     
           
                 <h3 style={{textAlign: 'center'}}> Name: {user?.firstName}  {user?.lastName}</h3> 
@@ -83,7 +94,7 @@ useEffect(() => {
             <Grid container justifyContent={"center"}>
             <Grid item sx={{width: '60%', mb: '20px', }} >
                     {post.map((item) =>(
-                    <PostCard post={item} key={item.id} />
+                    <PostCard post={item} key={item.id} posts={post} setPosts={setPosts} />
                 ))
                 }
                 </Grid> 
@@ -91,5 +102,9 @@ useEffect(() => {
                 
 
         </div >
+            
+            
         )
+    
+            
 }

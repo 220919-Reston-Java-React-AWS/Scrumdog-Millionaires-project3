@@ -16,7 +16,6 @@ export const PostFeed = () => {
     let welcomeText = 'Welcome!'
     let postForm = <></>;
 
-
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -65,34 +64,29 @@ export const PostFeed = () => {
        let noPostsText = <></>;
 
        if(post.length === 0) {
-            noPostsText = 
-            <h2 style={{textAlign: 'center', marginTop: '3%', color: 'gray'}}>
+            noPostsText =
+                        
+            <h2 style={{textAlign: 'center', marginTop: '3%', color: 'black'}}>
                 There are no posts, share your thoughts!
             </h2>;
        }
     
     return (
-        < >
+        <>
            <Navbar />
-           <div >
-           <Container maxWidth="xl" sx={{
-                backgroundColor: '#fff',
-                height: 'auto'
-            }}>
+         
                 <h2 style={{textAlign: 'center'}}>{ welcomeText }</h2>
                 { postForm }             
-            </Container> 
+           
             <Grid container justifyContent={"center"}>
-                <Grid item sx={{width: '60%', mb: '20px'}} >
+                <Grid item sx={{width: '60%', mb: '20px'}}>
                     {post.map((item) =>(
-                    <PostCard post={item} key={item.id}/>
+                    <PostCard post={item} key={item.id} posts={post} setPosts={setPosts}/>
                 ))
                 }
                 </Grid> 
             </Grid>
             { noPostsText } 
-
-            </div>
         </>
     )
 };
