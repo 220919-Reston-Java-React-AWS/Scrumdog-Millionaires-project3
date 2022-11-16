@@ -44,10 +44,12 @@ export default function Login() {
         <CssBaseline />
         <Box
           sx={{
+            backgroundColor: '#F3E6D5',  
             marginTop: 8,
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
+            boxShadow: '10px 10px 4px rgba(0, 0, 0, .400)'
           }}
         >
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>

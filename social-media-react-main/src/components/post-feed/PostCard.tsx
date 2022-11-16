@@ -153,11 +153,14 @@ export const PostCard = (props: postProps) => {
       <Paper
         component="form"
         sx={{
+          
           p: "4px 0",
           display: "flex",
           alignItems: "center",
           width: "100%",
           mb: "15px",
+          backgroundColor: '#F3E6D5',
+          boxShadow: '10px 10px 4px rgba(0, 0, 0, .400)'
         }}
         elevation={1}
         onSubmit={handleComment}

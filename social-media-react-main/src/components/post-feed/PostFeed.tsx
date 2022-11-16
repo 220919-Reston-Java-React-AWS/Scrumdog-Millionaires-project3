@@ -64,8 +64,9 @@ export const PostFeed = () => {
        let noPostsText = <></>;
 
        if(post.length === 0) {
-            noPostsText = 
-            <h2 style={{textAlign: 'center', marginTop: '3%', color: 'gray'}}>
+            noPostsText =
+                        
+            <h2 style={{textAlign: 'center', marginTop: '3%', color: 'black'}}>
                 There are no posts, share your thoughts!
             </h2>;
        }
@@ -73,13 +74,10 @@ export const PostFeed = () => {
     return (
         <>
            <Navbar />
-           <Container maxWidth="xl" sx={{
-                backgroundColor: '#fff',
-                height: 'auto'
-            }}>
+         
                 <h2 style={{textAlign: 'center'}}>{ welcomeText }</h2>
                 { postForm }             
-            </Container> 
+           
             <Grid container justifyContent={"center"}>
                 <Grid item sx={{width: '60%', mb: '20px'}}>
                     {post.map((item) =>(
