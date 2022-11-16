@@ -14,6 +14,7 @@ import { useNavigate } from 'react-router-dom';
 import Tooltip from '@mui/material/Tooltip';
 import { useContext } from 'react';
 import { UserContext } from '../../context/user.context';
+import MessageIcon from '@mui/icons-material/Message';
 
 export default function Navbar() {
 
@@ -26,10 +27,14 @@ export default function Navbar() {
     const [tipTitleUse, setTipTitleUse] = useState('');
     const [resetPssword, setResetPsswrd] = useState(<></>);
     const [tipTitleUse1, setTipTitleUse1] = useState('');
+    const [directMsg, setDirectMsg] = useState(<></>);
+    const [tipTitleUse2, setTipTitleUse2] = useState('');
     
     
     useEffect(() => {
         if(user) {
+          setDirectMsg(< MessageIcon />);
+          setTipTitleUse2('Direct Messages');
           setResetPsswrd(< LockResetIcon />);
            setTipTitleUse1('Reset Password'); 
            setUserIcon(< AccountBoxIcon />);
@@ -62,6 +67,19 @@ export default function Navbar() {
             TraveLog
           </Typography>
             <div>
+            <Tooltip disableFocusListener disableTouchListener title={tipTitleUse2}>
+            <IconButton
+                size="large"
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                color="inherit"
+                onClick={() => navigate('/messages')}
+            >
+                {directMsg}
+            </IconButton>
+            </Tooltip>
+
             <Tooltip disableFocusListener disableTouchListener title={tipTitleUse1}>
             <IconButton
                 size="large"
