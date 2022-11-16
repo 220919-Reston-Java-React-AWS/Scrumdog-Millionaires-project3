@@ -6,6 +6,7 @@ import com.revature.repositories.CommentsRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.util.List;
 
@@ -22,6 +23,8 @@ public class CommentsService {
     }
 
     public Comments upsert(Comments comment) {
+        System.out.println(comment);
         return this.commentsRepository.save(comment);
+//        return new Comments() ;
     }
 }

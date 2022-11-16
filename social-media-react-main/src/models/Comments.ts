@@ -2,12 +2,13 @@ export default class Comments{
     id: number;
     text: string;
     author: any;
-    likes: number[];
+    post: any;
 
-    constructor (id: number, text:string,  author:any, likes:number[]) {
+    constructor (id: number, text:string,  author:any, post:any) {
         this.id = id;
         this.text = text;
         this.author = author;
-        this.likes = likes;
+        this.post = post;
+        
     }
 }

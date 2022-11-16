@@ -34,6 +34,7 @@ import { apiGetAllPosts } from '../../remote/social-media-api/postFeed.api';
 import { useNavigate } from "react-router-dom";
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import Comments from "../../models/Comments";
+import { apiUpsertComment } from "../../remote/social-media-api/comment.api";
 
 interface postProps {
   post: Post;
@@ -42,6 +43,7 @@ interface postProps {
 
 interface commentProps {
   comment: Comments;
+  key: number;
 }
 
 interface ExpandMoreProps extends IconButtonProps {
@@ -55,7 +57,7 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
   marginLeft: "auto",
 }));
 
-export const PostCard = (props: postProps) => {
+export const PostCard = (props: postProps, cprops :commentProps) => {
   const { user} = useContext(UserContext);
   const [expanded, setExpanded ] = React.useState(false);
   //@ts-ignore
@@ -63,6 +65,8 @@ export const PostCard = (props: postProps) => {
   // const [likesCount, setLikesCount] = React.useState(props.post.likes.length);
 
   const [likesIdArray, setLikesIdArray] = React.useState([...props.post.likes]);
+
+  const [comment, setComments] =React.useState<Comments[]>([])
 
 
 // console.log(likesIdArray);
@@ -142,14 +146,24 @@ export const PostCard = (props: postProps) => {
   let media = <></>;
   let commentForm = <></>;
 
+
+
+  const handleSubmit58 = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    let payload = new Post(0, data.get('postText')?.toString() || '', data.get('postImage')?.toString() || '', [], user,[]);
+    await apiUpsertPost(payload);
+    // fetchData();
+  }
+
   const handleComment = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    props.post.comments.push(
-      new Post(0, data.get("commentText")?.toString() || "", "", [], user, [])
+    let payloadcom = (
+      new Comments(0, data.get("commentText")?.toString() || "",  user, props.post)
     );
-    let payload = props.post;
-    await apiUpsertPost(payload);
+    console.log(payloadcom);
+    await apiUpsertComment(payloadcom);
   };
 
 
@@ -176,8 +190,8 @@ export const PostCard = (props: postProps) => {
         inputProps={{ "aria-label": "Make a comment" }}
       />
       <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
-      <IconButton type="submit" sx={{ p: "10px" }} aria-label="submit">
-        <AddCircleIcon color="warning" />
+      <IconButton type="submit" sx={{ p: "10px" }} aria-label="submit" >
+        <AddCircleIcon color="warning"  />
       </IconButton>
 
     </Paper>

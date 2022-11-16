@@ -23,10 +23,12 @@ public class Comments {
 //    private int user_id;
 
     @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User author;
+
+    @ManyToOne
     @JoinColumn(name = "post_id")
     private Post post;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User author;
+
 }

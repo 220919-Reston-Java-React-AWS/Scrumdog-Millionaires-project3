@@ -18,7 +18,7 @@ public class CommentsController {
     }
 
 
-    @Authorized
+//    @Authorized
     @PutMapping
     public ResponseEntity<Comments> upsertComment(@RequestBody Comments comment){
         return ResponseEntity.ok(this.commentsService.upsert(comment));
