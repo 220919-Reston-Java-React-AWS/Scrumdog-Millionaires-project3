@@ -72,10 +72,12 @@ useEffect(() => {
 
     return(
         
-        <div style={{backgroundImage:"url('https://www.kindpng.com/picc/m/4-41696_map-of-the-world-no-borders-hd-png.png')",
-        width:'100%'
+        <div 
+        // style={{backgroundImage:"url('https://www.kindpng.com/picc/m/4-41696_map-of-the-world-no-borders-hd-png.png')",
+        // width:'100%'
         
-        }}>
+        // }}
+        >
         <Navbar />
       
      
