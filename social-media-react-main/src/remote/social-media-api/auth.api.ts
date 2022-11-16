@@ -1,3 +1,5 @@
+import { NamedTupleMember } from "typescript";
+import { DirectMessageModel } from "../../models/DirectMessageModel";
 import socialClient, { socialApiResponse } from "./socialClient";
 
 const baseURL = "/auth"
@@ -34,5 +36,23 @@ export const apiRegister = async (firstName: string, lastName: string, email: st
         `${baseURL}/register`,
         { firstName: firstName, lastName: lastName, email: email, password: password }
     );
+    return { status: response.status, payload: response.data };
+}
+
+export const apiSendMsg = async (dm: DirectMessageModel, receiver_id: number, text: string): Promise<socialApiResponse> => {
+    const response = await socialClient.post<any>(
+        `/message/send/${receiver_id}`,
+        {dm: dm, text: text}
+    );
+    console.log(text);
+    // response.data.text = dm.text;
+    return { status: response.status, payload: response.data};
+}
+
+export const apiGetMgsByUser = async (sender_id: number): Promise<socialApiResponse> => {
+    const response = await socialClient.get<any>(
+        `message/receive/${sender_id}`
+    );
+
     return { status: response.status, payload: response.data };
 }
