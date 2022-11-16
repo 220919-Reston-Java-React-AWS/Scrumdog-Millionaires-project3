@@ -36,6 +36,8 @@ public class PostService {
 		}
 
 	public Post upsert(Post post) {
+
+		System.out.println(post);
 		return this.postRepository.save(post);
 	}
 
@@ -47,7 +49,7 @@ public class PostService {
 		Optional<Post> optPost = postRepository.findById(likesId.getPost_id());
 		//create conditional based on whether it does
 		if(optPost.isEmpty()){
-			//create a response if the post doesnt exsist
+			//create a response if the post doesn't exist
 			responseObj.setStatus("Fail");
 			responseObj.setMessage("Cannot find post id: " + likesId.getPost_id());
 			responseObj.setPayload(null);
