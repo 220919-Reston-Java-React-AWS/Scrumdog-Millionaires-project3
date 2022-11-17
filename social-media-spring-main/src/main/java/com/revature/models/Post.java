@@ -5,6 +5,8 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -32,6 +34,7 @@ public class Post {
 //	@CollectionTable(name = "comments", joinColumns = @JoinColumn(name = "post_id"))
 //	private List<Comments> comment = new ArrayList<>();
 //
+    @JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
 	private List<Comments> comments;
 

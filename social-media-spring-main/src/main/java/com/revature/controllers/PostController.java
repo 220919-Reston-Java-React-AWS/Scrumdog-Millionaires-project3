@@ -32,7 +32,7 @@ public class PostController {
 
     }
     
-    @Authorized
+//    @Authorized
     @GetMapping
     public ResponseEntity<List<Post>> getAllPosts() {
     	return ResponseEntity.ok(this.postService.getAll());

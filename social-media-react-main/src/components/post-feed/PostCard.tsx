@@ -34,10 +34,12 @@ import { apiGetAllPosts } from '../../remote/social-media-api/postFeed.api';
 import { useNavigate } from "react-router-dom";
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import Comments from "../../models/Comments";
-import { apiUpsertComment } from "../../remote/social-media-api/comment.api";
+import { apiGetAllCommentsByPost, apiUpsertComment } from "../../remote/social-media-api/comment.api";
+import CommentCard from "./CommentCard";
 
 interface postProps {
   post: Post;
+  // comment: Comments;
   key: number;
 }
 
@@ -57,7 +59,7 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
   marginLeft: "auto",
 }));
 
-export const PostCard = (props: postProps, cprops :commentProps) => {
+export const PostCard = (props: postProps, cprops: commentProps) => {
   const { user} = useContext(UserContext);
   const [expanded, setExpanded ] = React.useState(false);
   //@ts-ignore
@@ -143,6 +145,7 @@ export const PostCard = (props: postProps, cprops :commentProps) => {
 
 
 
+
   let media = <></>;
   let commentForm = <></>;
 
@@ -156,6 +159,22 @@ export const PostCard = (props: postProps, cprops :commentProps) => {
     console.log(payloadcom);
     await apiUpsertComment(payloadcom);
   };
+
+  const fetchComments = async () => {
+    const result = await apiGetAllCommentsByPost(props.post.id);
+    setComments(result.payload);
+    console.log(props.post.comments);
+    props.post.comments = result.payload;
+    // cprops.comment = result.payload;
+    console.log(comment);
+    
+}
+
+useEffect(() => {
+  fetchComments();
+
+ }, []);
+
 
 
   if(user){
@@ -284,9 +303,13 @@ if(user?.id != props.post.author.id){
           <Typography paragraph>comments:</Typography>
           <Grid container justifyContent={"center"}>
             <Grid item sx={{ width: "100%" }}>
-              {props.post.comments.map((item) => (
-                <PostCard post={item} key={item.id} />
-              ))}
+              {/* {comment.map((item) => (
+                <PostCard comment={item} key={item.id}  />
+              ))} */}
+
+             {/* {props.post.comments.map((item) => (
+              <CommentCard comment = {item} key = {item.id}/> ))} */}
+              
             </Grid>
           </Grid>
         </CardContent>

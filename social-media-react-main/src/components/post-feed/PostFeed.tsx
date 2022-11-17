@@ -85,7 +85,7 @@ export const PostFeed = () => {
             <Grid container justifyContent={"center"}>
                 <Grid item sx={{width: '60%', mb: '20px'}} >
                     {post.map((item) =>(
-                    <PostCard post={item} key={item.id}/>
+                    <PostCard post={item} key={item.id} />
                 ))
                 }
                 </Grid> 

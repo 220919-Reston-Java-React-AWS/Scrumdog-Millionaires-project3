@@ -1,13 +1,15 @@
 package com.revature.models;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
 
 import javax.persistence.*;
 
-@Data
+//@Data
+@Getter
+@Setter
+@EqualsAndHashCode
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
@@ -22,13 +24,23 @@ public class Comments {
 //    private int post_id;
 //    private int user_id;
 
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User author;
 
+//    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "post_id")
     private Post post;
 
 
+    @Override
+    public String toString() {
+        return "Comments{" +
+                "id=" + id +
+                ", text='" + text + '\'' +
+                ", author=" + author +
+                '}';
+    }
 }
