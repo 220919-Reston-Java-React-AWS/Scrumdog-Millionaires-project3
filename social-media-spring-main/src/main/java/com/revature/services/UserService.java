@@ -38,9 +38,9 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public User updatePassword(LoginRequest email){
-        User user = findByEmail(email.getEmail());
-        user.setPassword(email.getPassword());
+    public User updatePassword(LoginRequest updatingpassword){
+        User user = findByEmail(updatingpassword.getEmail());
+        user.setPassword(updatingpassword.getPassword());
         return userRepository.save(user);
     }
 
