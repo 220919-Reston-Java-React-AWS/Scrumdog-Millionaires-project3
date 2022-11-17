@@ -18,6 +18,7 @@ import { DirectMessageModel } from '../../models/DirectMessageModel';
 import axios from 'axios';
 import { request } from 'http';
 import Navbar from '../navbar/Navbar';
+import { apiSendMsg } from '../../remote/social-media-api/auth.api';
 
 function DirectMessaging () {
 
@@ -25,8 +26,7 @@ function DirectMessaging () {
     const theme = createTheme();
     let msg:DirectMessageModel = {
         text: "",
-        sender: user,
-        receiver: user
+        sender: user
     }
     let receiver_id: any; 
 
@@ -39,23 +39,18 @@ function DirectMessaging () {
         msg.text = event.target.value;
     }
 
-    function sendMsg (event: React.ChangeEvent<HTMLFormElement>) {
-        console.log('Doing Something');
+    const sendDM = async ( event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        console.log(user);
-        console.log(receiver_id);
-        // msg.receiver = User.getId(receiver_id);
-        console.log(msg);
-        axios.post(`http://127.0.0.1:8080/message/send/${receiver_id}`,msg, {withCredentials : true})
-        .then(response => {
-            console.log(response.data);
-        })
+
+
+        const response = await apiSendMsg(msg, receiver_id, msg.text)
+        console.log(response);
     }
 
 
     return (
         <><><Navbar /></><ThemeProvider theme={theme}>
-            <form onSubmit={sendMsg}>
+            <form onSubmit={sendDM}>
             <Container component="main" maxWidth="xs" css = {css `display: flex; flex-direction: column; justify-content: flex-end; height: 100vh; padding-bottom: 1rem `}>
 
             <TextField

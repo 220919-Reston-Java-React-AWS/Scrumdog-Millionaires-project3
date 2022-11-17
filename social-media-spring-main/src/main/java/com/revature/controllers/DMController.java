@@ -15,7 +15,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/message")
-@CrossOrigin(origins = {"http://localhost:4200", "http://localhost:3000"}, allowCredentials = "true")
+@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
 public class DMController {
 
     private final DMService dmService;
@@ -44,6 +44,7 @@ public class DMController {
         }
         else {
             dm.setReceiver(receiver.get());
+            System.out.println(dm.toString());
             return ResponseEntity.ok(this.dmService.send(dm));
         }
     }
