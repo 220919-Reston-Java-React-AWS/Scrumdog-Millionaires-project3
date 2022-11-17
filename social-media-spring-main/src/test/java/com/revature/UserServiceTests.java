@@ -1,5 +1,9 @@
 package com.revature;
 
+import static org.mockito.Mockito.when;
+
+import java.util.Optional;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -13,9 +17,13 @@ import com.revature.services.UserService;
 
 public class UserServiceTests {
 
-   	@Mock
-	private UserRepository userRepository;
+	@Mock
+	private User user;
 
+   	@Mock
+	private UserRepository mockUserRepository;
+
+	
 	@InjectMocks
 	private UserService userService;
 
@@ -25,17 +33,25 @@ public class UserServiceTests {
 	void contextLoads() {
 	}
 
+	// @Test
+	// public void testUpdatePassword() {
+	// 	User testUser = new User();
+	// 	when(mockUserRepository.findByEmailAndPassword("test@test.com", "oldpassword")).thenReturn(testUser);
+	// 	String newPassword = "newPassword";
+
+		
+	// }
 
     @Test
 	public void testUpdatePassword() {
 
-		UserRepository test = userRepository;
+		
 //		Arrange
 		User user = new User(1, "test12@gmail.com","OldPassword","Test12","User12");
 		String expectedPassword = "NewPassword";
 		LoginRequest newpass = new LoginRequest(user.getEmail(),  expectedPassword);
 		//run this in oldUser
-		Mockito.when(userRepository.save(user)).thenReturn(new User(1, "test12@gmail.com",expectedPassword,"Test12","User12"));
+		Mockito.when(mockUserRepository.save(user)).thenReturn(new User(1, "test12@gmail.com",expectedPassword,"Test12","User12"));
 
 		// Act
 
