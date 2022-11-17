@@ -50,7 +50,7 @@ export default function ChangePassword() {
         <Box
         
           sx={{ 
-            backgroundColor: '#F3E6D5',          
+            // backgroundColor: '#F3E6D5',          
             marginTop: 8,
             display: 'flex',
             flexDirection: 'column',
