@@ -13,6 +13,6 @@ export const apiGetAllPostsByUser = async (authorid: number): Promise<socialApiR
     const response = await socialClient.get<any>(
         `${baseURL}/${authorid}`
     );
-    console.log(response.data)
+    // console.log(response.data)
     return { status: response.status, payload: response.data };
 }

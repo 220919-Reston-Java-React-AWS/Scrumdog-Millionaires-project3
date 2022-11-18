@@ -15,6 +15,8 @@ export const PostFeed = () => {
     const { user } = useContext(UserContext);
     let welcomeText = 'Welcome!'
     let postForm = <></>;
+    const [value, setValue] = React.useState("");
+    const [ivalue, setIValue] = React.useState("");
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -22,6 +24,8 @@ export const PostFeed = () => {
     let payload = new Post(0, data.get('postText')?.toString() || '', data.get('postImage')?.toString() || '', [], user,[]);
     await apiUpsertPost(payload);
     fetchData();
+    setValue("");
+    setIValue("");
   }
 
     if (user) {
@@ -32,6 +36,11 @@ export const PostFeed = () => {
             name='postText'
             label="Thoughts You Would Like to Share?"
             fullWidth
+            onChange ={(e) => {
+                setValue(e.target.value)
+              }}
+              defaultValue = {value}
+              value = {value}
           />
           <TextField
               id="postImage"
@@ -39,6 +48,11 @@ export const PostFeed = () => {
               label="Add an Image or Diagram?"
               fullWidth
               variant="standard"
+              onChange ={(e) => {
+                setIValue(e.target.value)
+              }}
+              defaultValue = {ivalue}
+              value = {ivalue}
           />
           <Button 
               type="submit"
@@ -81,7 +95,9 @@ export const PostFeed = () => {
             <Grid container justifyContent={"center"}>
                 <Grid item sx={{width: '60%', mb: '20px'}}>
                     {post.map((item) =>(
-                    <PostCard post={item} key={item.id} posts={post} setPosts={setPosts}/>
+
+                    <PostCard post={item} key={item.id} />
+
                 ))
                 }
                 </Grid> 
