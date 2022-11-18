@@ -17,7 +17,12 @@ import { UserContext } from '../../context/user.context';
 import ForestIcon from '@mui/icons-material/Forest';
 import { Switch } from '@mui/material';
 import DarkMode from '../darkMode/DarkMode';
+
+import BedtimeOffIcon from '@mui/icons-material/BedtimeOff';
+import BedtimeIcon from '@mui/icons-material/Bedtime';
+
 import MessageIcon from '@mui/icons-material/Message';
+
 
 
 export default function Navbar() {
@@ -65,7 +70,7 @@ export default function Navbar() {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" color="transparent" style={{ background: '#4E6294' }}>
+      <AppBar id="nav" className='nav' position="static" >
         <Toolbar>
           <ForestIcon/>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}  onClick={() => navigate('/')}>
@@ -123,12 +128,10 @@ export default function Navbar() {
                 {loggedIn}
             </IconButton>
             </Tooltip>
-            Dark Mode
-            <Switch
-            onClick={DarkMode}    
-            name="toggleDark"
-            color="default"
-          />
+            <div>
+            <DarkMode />
+            </div>
+          
 
             </div>
         </Toolbar>

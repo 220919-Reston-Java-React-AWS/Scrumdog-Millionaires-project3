@@ -66,7 +66,7 @@ export const PostFeed = () => {
        if(post.length === 0) {
             noPostsText =
                         
-            <h2 style={{textAlign: 'center', marginTop: '3%', color: 'black'}}>
+            <h2 style={{textAlign: 'center', marginTop: '3%'}}>
                 There are no posts, share your thoughts!
             </h2>;
        }
