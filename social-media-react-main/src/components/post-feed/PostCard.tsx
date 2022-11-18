@@ -159,7 +159,7 @@ export const PostCard = (props: postProps) => {
           alignItems: "center",
           width: "100%",
           mb: "15px",
-          backgroundColor: '#F3E6D5',
+          backgroundColor: '#4A4A4A99',
           boxShadow: '10px 10px 4px rgba(0, 0, 0, .400)'
         }}
         elevation={1}
@@ -224,7 +224,8 @@ export const PostCard = (props: postProps) => {
 
 
   return (
-    <Card sx={{ maxWidth: "100%", marginTop: "3%" }}>
+    <Box sx={{ backgroundColor: '#4A4A4A99',       
+    boxShadow: '10px 10px 4px rgba(0, 0, 0, .400)', maxWidth: "100%", marginTop: "3%" }}>
       <CardHeader
         title={props.post.author.firstName}
         avatar={
@@ -236,8 +237,14 @@ export const PostCard = (props: postProps) => {
 
       {media}
       <CardContent>
-        <Typography variant="body2" color="text.secondary">
+        <Typography variant="body2">
+
+
+
           {props.post.text}
+          
+          
+        
         </Typography>
       </CardContent>
       <CardActions
@@ -317,6 +324,6 @@ export const PostCard = (props: postProps) => {
           </Grid>
         </CardContent>
       </Collapse>
-    </Card>
+    </Box>
   );
 };

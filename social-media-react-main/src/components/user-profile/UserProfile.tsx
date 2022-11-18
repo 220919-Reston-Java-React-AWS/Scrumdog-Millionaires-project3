@@ -1,6 +1,6 @@
 
 
-import { AppBar, Container, CssBaseline, Divider, Drawer, Grid, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Paper, Toolbar } from '@mui/material';
+import { AppBar, Box, Container, CssBaseline, Divider, Drawer, Grid, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Paper, Toolbar } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import { useCallback, useContext, useEffect, useState } from 'react';
@@ -79,17 +79,28 @@ useEffect(() => {
         // }}
         >
         <Navbar />
-      
-     
+            <Container component="main" maxWidth="xs">
         
-                <h2 style={{textAlign: 'center'}}> Welcome {user?.firstName} </h2> 
+                <Box
+                
+            sx={{           
+                marginTop: 8,
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                backgroundColor: '#4A4A4A99',       
+                boxShadow: '10px 10px 4px rgba(0, 0, 0, .400)'
+            }}>
+            
+                    <h2 style={{textAlign: 'center'}}> Welcome {user?.firstName} </h2> 
+                                        
+            
+                    <h3 style={{textAlign: 'center'}}> Name: {user?.firstName}  {user?.lastName}</h3> 
                                     
-          
-                <h3 style={{textAlign: 'center'}}> Name: {user?.firstName}  {user?.lastName}</h3> 
-                                   
-                <h2 style={{textAlign: 'center', color: 'orange', }}> Posts</h2>            
+                    <h2 style={{textAlign: 'center', color: 'orange', }}> Posts</h2>            
 
-           
+                </Box>
+            </Container>
 
             <Grid container justifyContent={"center"}>
             <Grid item sx={{width: '60%', mb: '20px', }} >
