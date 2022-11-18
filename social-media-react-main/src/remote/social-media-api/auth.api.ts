@@ -49,9 +49,9 @@ export const apiSendMsg = async (dm: DirectMessageModel, receiver_id: number, te
     return { status: response.status, payload: response.data};
 }
 
-export const apiGetMgsByUser = async (sender_id: number): Promise<socialApiResponse> => {
+export const apiGetMgsBetweenUsers = async (sender_id: number): Promise<socialApiResponse> => {
     const response = await socialClient.get<any>(
-        `message/receive/${sender_id}`
+        `message/received/${sender_id}`
     );
 
     return { status: response.status, payload: response.data };

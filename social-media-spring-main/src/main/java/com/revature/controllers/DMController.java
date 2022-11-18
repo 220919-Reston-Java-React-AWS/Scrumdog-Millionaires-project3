@@ -23,7 +23,7 @@ public class DMController {
     private final UserService userService;
 
     @Autowired
-    private HttpSession session;
+    private final HttpSession session;
 
     public DMController(DMService dmService, UserService userService, HttpSession session){
         this.dmService = dmService;
@@ -50,17 +50,35 @@ public class DMController {
     }
 
     @Authorized
-    @GetMapping("/receive/{sender_id}")
+    @GetMapping("/received/{sender_id}")
     public ResponseEntity<List<DM>> getMessagesByUser(@PathVariable int sender_id) {
-        Optional<User> sender = userService.findById(sender_id);
-        if(sender.isEmpty()){
+        Optional<User> optionalSender = userService.findById(sender_id);
+        User receiver = (User) session.getAttribute("user");
+        if(optionalSender.isEmpty()){
             return ResponseEntity.badRequest().build();
         }
         else {
-            User user = sender.get();
-//            session.setAttribute("user", sender.get());
+            User sender = optionalSender.get();
 
-            return ResponseEntity.ok(this.dmService.getAllByUser(user));
+            System.out.println(sender);
+            System.out.println(receiver);
+
+            return ResponseEntity.ok(this.dmService.getAllBetweenUsers(sender, receiver));
         }
     }
+
+//    @Authorized
+//    @GetMapping("/received/{sender_id}")
+//    public ResponseEntity<List<DM>> getMessagesByUser(@PathVariable int sender_id) {
+//        Optional<User> sender = userService.findById(sender_id);
+//        if(sender.isEmpty()){
+//            return ResponseEntity.badRequest().build();
+//        }
+//        else {
+//            User user = sender.get();
+////            session.setAttribute("user", sender.get());
+//
+//            return ResponseEntity.ok(this.dmService.getAllBetweenUsers(user,session));
+//        }
+//    }
 }

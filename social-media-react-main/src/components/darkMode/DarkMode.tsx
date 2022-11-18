@@ -1,48 +1,60 @@
-import React from "react";
-import Switch from "@mui/material"
+import { ChangeEventHandler } from "react";
+import Brightness7Icon from '@mui/icons-material/Brightness7';
+import "./DarkMode.css";
+import { IconButton } from "@mui/material";
+import BedtimeOffIcon from '@mui/icons-material/BedtimeOff';
+import BedtimeIcon from '@mui/icons-material/Bedtime';
 
 
-const DarkMode = () =>{
+const setDark = () => {
+    localStorage.setItem("theme", "dark");
+    document.documentElement.setAttribute("data-theme", "dark");
+};
 
-    let clickedClass = "clicked";
-    const body = document.body;
-    const lightTheme = "light";
-    const darkTheme = "dark";
-    let theme: any;
+const setLight = () => {
+    localStorage.setItem("theme", "light");
+    document.documentElement.setAttribute("data-theme", "light");
+};
 
-    if (localStorage){
-        theme = localStorage.getItem("theme");
+const toggleTheme: ChangeEventHandler<HTMLInputElement> = (e) => {
+    if (e.target.checked){
+        setDark();
+    } else{
+        setLight();
     }
-    if (theme === lightTheme || theme === darkTheme){
-        body.classList.add(theme);
-    }else{
-        body.classList.add(lightTheme);
-    }
+};
 
-    const switchTheme = (e: any)=> {
-        if (theme === darkTheme){
-            body.classList.replace(darkTheme, lightTheme);
-            e.target.classList.remove(clickedClass);
-            localStorage.setItem("theme", "light");
-            theme = lightTheme;
-        }else{
-            body.classList.replace(lightTheme, darkTheme);
-            e.target.classList.remove(clickedClass);
-            localStorage.setItem("theme", "dark");
-            theme = darkTheme;
-        }
-    };
+const storedTheme = localStorage.getItem("theme");
 
-    return(
-        <button className= {theme === "dark"? clickedClass : ""}
-        id="darkMode"
-        onClick = {(e: any) => switchTheme(e)}/>       
-            
-         
+const prefersDark =
+    window.matchMedia &&
+    window.matchMedia("(prefers-color-scheme:dark)").matches;
 
-    )
+const defaultDark = 
+    storedTheme === "dark" || (storedTheme === null && prefersDark);
+
+if (defaultDark){
+    setDark();
 }
 
-export default DarkMode
 
+const DarkMode = () => {
+    return(
+    <div className="toggle-theme-wrapper">
+        <BedtimeOffIcon/>       
+        <label className="toggle-theme" htmlFor="checkbox">
+            <input type="checkbox"
+            id="checkbox"
+            onChange={toggleTheme}            
+            defaultChecked={defaultDark}/>
+            <div className="slider round"></div>
+            
+        </label>
+        <BedtimeIcon/>
    
+
+        
+    </div>
+    );
+};
+export default DarkMode;
