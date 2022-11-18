@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.revature.models.Comments;
 import com.revature.models.Likes;
+
 import com.revature.services.CommentsService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +14,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+
+import com.revature.repositories.PostRepository;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
 import com.revature.services.ResponseObjectService;
 import com.revature.annotations.Authorized;
 import com.revature.models.Post;
@@ -27,8 +33,12 @@ public class PostController {
 	private final PostService postService;
 
 
-    public PostController(PostService postService) {
+
+    private final PostRepository postRepository;
+
+    public PostController(PostService postService, PostRepository postRepository) {
         this.postService = postService;
+        this.postRepository = postRepository;
 
     }
     
@@ -51,6 +61,11 @@ public class PostController {
     @PostMapping("/likepost")
     public ResponseEntity<ResponseObjectService>likePost(@RequestBody Likes likesId){
         return new ResponseEntity<ResponseObjectService>(postService.updatePostByLike(likesId), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    void deletePost(@PathVariable int id){
+        this.postRepository.deleteById(id);
     }
 
 }
