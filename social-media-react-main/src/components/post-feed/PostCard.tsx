@@ -36,6 +36,8 @@ import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined
 import Comments from "../../models/Comments";
 import { apiGetAllCommentsByPost, apiUpsertComment } from "../../remote/social-media-api/comment.api";
 import CommentCard from "./CommentCard";
+import { setConstantValue } from "typescript";
+import SelectInput from "@mui/material/Select/SelectInput";
 
 interface postProps {
   post: Post;
@@ -45,6 +47,7 @@ interface postProps {
 
 interface commentProps {
   comment: Comments;
+  post:Post;
   key: number;
 }
 
@@ -68,7 +71,7 @@ export const PostCard = (props: postProps, cprops: commentProps) => {
 
   const [likesIdArray, setLikesIdArray] = React.useState([...props.post.likes]);
 
-  const [comment, setComments] =React.useState<Comments[]>([])
+  const [uComment, setComments] =React.useState<Comments[]>([])
 
 
 // console.log(likesIdArray);
@@ -108,7 +111,6 @@ export const PostCard = (props: postProps, cprops: commentProps) => {
 
 
 
-
   const handleLikeButton = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
 
@@ -143,9 +145,6 @@ export const PostCard = (props: postProps, cprops: commentProps) => {
     }
   }
 
-
-
-
   let media = <></>;
   let commentForm = <></>;
 
@@ -156,26 +155,34 @@ export const PostCard = (props: postProps, cprops: commentProps) => {
     let payloadcom = (
       new Comments(0, data.get("commentText")?.toString() || "",  user, props.post)
     );
-    console.log(payloadcom);
+    // console.log(payloadcom);
     await apiUpsertComment(payloadcom);
+    // event.target.reset();
+    setValue("")
+     
+    fetchComments();
+
   };
 
   const fetchComments = async () => {
     const result = await apiGetAllCommentsByPost(props.post.id);
     setComments(result.payload);
-    console.log(props.post.comments);
-    props.post.comments = result.payload;
-    // cprops.comment = result.payload;
-    console.log(comment);
+    console.log(uComment);
+    
     
 }
 
 useEffect(() => {
   fetchComments();
+ 
 
  }, []);
 
 
+const [value, setValue] = React.useState("");
+function timeout(delay: number) {
+  return new Promise( res => setTimeout(res, delay) );
+}
 
   if(user){
   commentForm = 
@@ -198,6 +205,13 @@ useEffect(() => {
         name="commentText"
         placeholder="Make a comment..."
         inputProps={{ "aria-label": "Make a comment" }}
+        onChange ={(e) => {
+          setValue(e.target.value)
+        }}
+        defaultValue = {value}
+        value = {value}
+        
+        
       />
       <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
       <IconButton type="submit" sx={{ p: "10px" }} aria-label="submit" >
@@ -226,7 +240,7 @@ useEffect(() => {
 
 
 function handleProfile(){
-if(user?.id != props.post.author.id){
+if(user?.id !== props.post.author.id){
   
      navigate('/other-user', {state:{id:props.post.author.id, firstName:props.post.author.firstName, lastName:props.post.author.lastName, email:props.post.author.email}})
 
@@ -303,12 +317,9 @@ if(user?.id != props.post.author.id){
           <Typography paragraph>comments:</Typography>
           <Grid container justifyContent={"center"}>
             <Grid item sx={{ width: "100%" }}>
-              {/* {comment.map((item) => (
-                <PostCard comment={item} key={item.id}  />
-              ))} */}
 
-             {/* {props.post.comments.map((item) => (
-              <CommentCard comment = {item} key = {item.id}/> ))} */}
+             {uComment.map((item) => (
+              <CommentCard comment = {item} key = {item.id} post = {props.post}/> ))}
               
             </Grid>
           </Grid>
@@ -317,3 +328,7 @@ if(user?.id != props.post.author.id){
     </Card>
   );
 };
+
+function setState(arg0: {}) {
+  throw new Error("Function not implemented.");
+}
