@@ -158,7 +158,7 @@ export const PostCard = (props: postProps, cprops: commentProps) => {
     // console.log(payloadcom);
     await apiUpsertComment(payloadcom);
     // event.target.reset();
-    setValue("")
+    setValue("");
      
     fetchComments();
 
@@ -167,7 +167,7 @@ export const PostCard = (props: postProps, cprops: commentProps) => {
   const fetchComments = async () => {
     const result = await apiGetAllCommentsByPost(props.post.id);
     setComments(result.payload);
-    console.log(uComment);
+    // console.log(uComment);
     
     
 }
@@ -175,7 +175,6 @@ export const PostCard = (props: postProps, cprops: commentProps) => {
 useEffect(() => {
   fetchComments();
  
-
  }, []);
 
 
@@ -248,12 +247,6 @@ if(user?.id !== props.post.author.id){
   }
 }
 
-// function randomColor() {
-//   let hex = Math.floor(Math.random() *0xFFFFFF);
-//   let color = "#" + hex.toString(16);
-//   return color;
-// }
-
 
   return (
     <Card sx={{maxWidth:"100%", marginTop: "3%" }}>
@@ -265,8 +258,6 @@ if(user?.id !== props.post.author.id){
           <Avatar sx={{ bgcolor: '#ed6c02' }} aria-label="recipe" >
 
                 <PersonOutlineOutlinedIcon onClick={handleProfile} />
-
-
 
           </Avatar>
         }
@@ -329,6 +320,4 @@ if(user?.id !== props.post.author.id){
   );
 };
 
-function setState(arg0: {}) {
-  throw new Error("Function not implemented.");
-}
+
