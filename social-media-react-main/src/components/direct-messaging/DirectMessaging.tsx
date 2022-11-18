@@ -11,17 +11,18 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { User, UserContext } from '../../context/user.context';
 import {css} from '@emotion/react';
 import { DirectMessageModel } from '../../models/DirectMessageModel';
 import axios from 'axios';
 import { request } from 'http';
 import Navbar from '../navbar/Navbar';
-import { apiSendMsg } from '../../remote/social-media-api/auth.api';
+import { apiGetMgsBetweenUsers, apiSendMsg } from '../../remote/social-media-api/auth.api';
 
 function DirectMessaging () {
 
+    const [dm, setDMs] = useState<DirectMessageModel[]>([])
     const { user, setUser } = useContext(UserContext);
     const theme = createTheme();
     let msg:DirectMessageModel = {
@@ -39,6 +40,11 @@ function DirectMessaging () {
         msg.text = event.target.value;
     }
 
+    const fetchMsg = async () => {
+        const result = await apiGetMgsBetweenUsers(receiver_id);
+        setDMs(result.payload)
+    }
+
     const sendDM = async ( event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
@@ -47,6 +53,9 @@ function DirectMessaging () {
         console.log(response);
     }
 
+    // useEffect(() => {
+    //     fetchMsg()
+    //    }, []);
 
     return (
         <><><Navbar /></><ThemeProvider theme={theme}>
