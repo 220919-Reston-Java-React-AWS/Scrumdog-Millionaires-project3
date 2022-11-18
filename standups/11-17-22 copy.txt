@@ -1,0 +1,21 @@
+Henry :
+Yesterday: fully implmenteted sending message 
+today: implementing the recieved message 
+
+
+
+Miguel
+Yesterday: work on the changes password test 
+Today: finish test and work on dark mode
+
+
+Opale
+Yesterday: figured out how to save comments in the new table
+Today:  work to get them display and add more fetures to user profle
+
+
+
+
+Jaden 
+Yesterday: edit fuction enhance on the front end
+Today: finish the implementation
