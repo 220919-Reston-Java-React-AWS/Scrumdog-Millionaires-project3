@@ -68,7 +68,7 @@ useEffect(() => {
                 <h2 style={{textAlign: 'center'}}> Welcome to {state.firstName}'s profile</h2> 
                           
 
-                <h3 style={{textAlign: 'center'}}> Name: {state.firstName}  {state.lastName}</h3> 
+                {/* <h3 style={{textAlign: 'center'}}> Name: {state.firstName}  {state.lastName}</h3>  */}
                           
            
                 <h2 style={{textAlign: 'center', color: 'orange', }}> Posts</h2>    

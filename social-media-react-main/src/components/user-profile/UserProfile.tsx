@@ -97,7 +97,10 @@ useEffect(() => {
             
                     <h3 style={{textAlign: 'center'}}> Name: {user?.firstName}  {user?.lastName}</h3> 
                                     
+         
+
                     <h2 style={{textAlign: 'center', color: 'orange', }}> Posts</h2>            
+
 
                 </Box>
             </Container>
