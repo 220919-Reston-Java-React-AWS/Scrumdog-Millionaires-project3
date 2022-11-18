@@ -64,8 +64,8 @@ interface commentProps {
   comment: Comments;
   post:Post;
   key: number;
-	posts: Post[]; //add
-	setPosts: (updatedPost: Post[]) => void; //add
+	// posts: Post[]; //add
+	// setPosts: (updatedPost: Post[]) => void; //add
 }
 
 interface ExpandMoreProps extends IconButtonProps {
@@ -233,7 +233,7 @@ if (user) {
       </IconButton>
 
     </Paper>
-  };
+  )};
 
 
 
@@ -260,21 +260,22 @@ if(user?.id !== props.post.author.id){
   
      navigate('/other-user', {state:{id:props.post.author.id, firstName:props.post.author.firstName, lastName:props.post.author.lastName, email:props.post.author.email}})
 
-  }else{navigate('/current-profile' )
+  }else{navigate('/current-profile' )}
+}
 
 
 
 
-	const handleDelete = (id: number) => {
-    DeletePost.deletePost(id)
-      .then((data) => {
-        let updatedPost = props.posts.filter((post) => post.id !== id);
-        props.setPosts(updatedPost);
-      })
-      .then((err) => {
-        setIsError(true)
-      })
-	};
+	// const handleDelete = (id: number) => {
+  //   DeletePost.deletePost(id)
+  //     .then((data) => {
+  //       let updatedPost = props.post.filter((post) => post.id !== id);
+  //       props.setPosts(updatedPost);
+  //     })
+  //     .then((err) => {
+  //       setIsError(true)
+  //     })
+	// };
 
 
 
@@ -342,7 +343,7 @@ if(user?.id !== props.post.author.id){
               css={css`
                 cursor: pointer;
               `}
-              onClick={() => handleDelete(props.post.id!)}
+              // onClick={() => handleDelete(props.post.id!)}
             >
               <IconButton>
                 <DeleteIcon />
