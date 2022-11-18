@@ -3,14 +3,22 @@
     --font-color: black !important;
     --link-color: cornflowerblue !important;
     --background-color:rgb(10, 30, 95);
+    --box-color: rgba(74, 74, 74, 0.5) !important;    
   }
 
   [data-theme="dark"] {
     --background-image: url("https://wallpapercave.com/wp/wp3328590.jpg");
     --font-color: white !important;
     --text-primary: white !important;  
-    --background-color: rgb(37, 24, 37);
+    --background-color: rgb(37, 24, 37);   
+    --font-primary: white;
+    --text-secondary: lightblue;   
+    --box-color: rgba(74, 74, 74, 0.5) !important;    
+    --text-secondary: lightblue !important;
+    
+   
   }
+
 
   body {
     background-image: var(--background-image);
@@ -18,6 +26,15 @@
     background-color: var(--background-color) !important;
     padding: var(--background-color) !important;
     color: var(--font-color) !important;
+  }
+
+  .boxt{
+    margin-top: 8;    
+    display: 'flex';
+    flex-direction: 'column';
+    align-Items: 'center';
+    background-color: '#4A4A4A99';       
+    box-shadow: 10px 10px 4px rgba 0, 0, 0, .400
   }
 
   #nav{
