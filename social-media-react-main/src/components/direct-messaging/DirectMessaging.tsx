@@ -11,28 +11,85 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { useContext } from 'react';
-import { UserContext } from '../../context/user.context';
-import {css} from '@emotion/react'
+import { useContext, useEffect, useState } from 'react';
+import { User, UserContext } from '../../context/user.context';
+import {css} from '@emotion/react';
+import { DirectMessageModel } from '../../models/DirectMessageModel';
+import axios from 'axios';
+import { request } from 'http';
+import Navbar from '../navbar/Navbar';
+import { apiGetMgsBetweenUsers, apiSendMsg } from '../../remote/social-media-api/auth.api';
 
 function DirectMessaging () {
 
-    const { user } = useContext(UserContext);
+    const [dm, setDMs] = useState<DirectMessageModel[]>([])
+    const { user, setUser } = useContext(UserContext);
     const theme = createTheme();
+    let msg:DirectMessageModel = {
+        text: "",
+        sender: user
+    }
+    let receiver_id: any; 
 
+    function setReceiver (event: React.ChangeEvent<HTMLInputElement>) {
+        receiver_id = parseInt(event.target.value);
+
+    }
+
+    function setText (event: React.ChangeEvent<HTMLInputElement>) {
+        msg.text = event.target.value;
+    }
+
+    const fetchMsg = async () => {
+        const result = await apiGetMgsBetweenUsers(receiver_id);
+        setDMs(result.payload)
+    }
+
+    const sendDM = async ( event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+
+
+        const response = await apiSendMsg(msg, receiver_id, msg.text)
+        console.log(response);
+    }
+
+    // useEffect(() => {
+    //     fetchMsg()
+    //    }, []);
 
     return (
-        <ThemeProvider theme={theme}>
+        <><><Navbar /></><ThemeProvider theme={theme}>
+            <form onSubmit={sendDM}>
             <Container component="main" maxWidth="xs" css = {css `display: flex; flex-direction: column; justify-content: flex-end; height: 100vh; padding-bottom: 1rem `}>
+
+            <TextField
+                id="text"
+                name="text"
+                label="Type the ID of the user you wish to send a message to."
+                fullWidth
+                variant="standard"
+                onChange={setReceiver}
+                />
+
                 <TextField
                 id="text"
                 name="text"
                 label="Send a message"
                 fullWidth
                 variant="standard"
+                onChange={setText}
                 />
+                <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+            >
+              Send
+              </Button>
             </Container>
-        </ThemeProvider>
+            </form>
+        </ThemeProvider></>
     )
 }
 

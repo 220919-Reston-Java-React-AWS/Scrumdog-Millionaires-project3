@@ -43,11 +43,13 @@ export default function Login() {
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
-          sx={{
+           sx={{           
             marginTop: 8,
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
+            backgroundColor: '#4A4A4A99',       
+            boxShadow: '10px 10px 4px rgba(0, 0, 0, .400)'
           }}
         >
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
@@ -62,7 +64,7 @@ export default function Login() {
               required
               fullWidth
               id="email"
-              label="Email Address"
+              label="Email Address"              
               name="email"
               autoComplete="email"
               autoFocus

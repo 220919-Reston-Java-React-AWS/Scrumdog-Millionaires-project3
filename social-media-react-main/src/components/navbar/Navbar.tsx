@@ -18,6 +18,12 @@ import ForestIcon from '@mui/icons-material/Forest';
 import { Switch } from '@mui/material';
 import DarkMode from '../darkMode/DarkMode';
 
+import BedtimeOffIcon from '@mui/icons-material/BedtimeOff';
+import BedtimeIcon from '@mui/icons-material/Bedtime';
+
+import MessageIcon from '@mui/icons-material/Message';
+
+
 
 export default function Navbar() {
 
@@ -30,10 +36,14 @@ export default function Navbar() {
     const [tipTitleUse, setTipTitleUse] = useState('');
     const [resetPssword, setResetPsswrd] = useState(<></>);
     const [tipTitleUse1, setTipTitleUse1] = useState('');
+    const [directMsg, setDirectMsg] = useState(<></>);
+    const [tipTitleUse2, setTipTitleUse2] = useState('');
     
     
     useEffect(() => {
         if(user) {
+          setDirectMsg(< MessageIcon />);
+          setTipTitleUse2('Direct Messages');
           setResetPsswrd(< LockResetIcon />);
            setTipTitleUse1('Reset Password'); 
            setUserIcon(< AccountBoxIcon />);
@@ -60,13 +70,27 @@ export default function Navbar() {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" color="transparent" style={{ background: '#4E6294' }}>
+      <AppBar id="nav" className='nav' position="static" >
         <Toolbar>
           <ForestIcon/>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}  onClick={() => navigate('/')}>
             TraveLog
           </Typography>
             <div>
+            <DarkMode />
+            <Tooltip disableFocusListener disableTouchListener title={tipTitleUse2}>
+            <IconButton
+                size="large"
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                color="inherit"
+                onClick={() => navigate('/messages')}
+            >
+                {directMsg}
+            </IconButton>
+            </Tooltip>
+
             <Tooltip disableFocusListener disableTouchListener title={tipTitleUse1}>
                           
             <IconButton
@@ -105,12 +129,8 @@ export default function Navbar() {
                 {loggedIn}
             </IconButton>
             </Tooltip>
-            Dark Mode
-            <Switch
-            onClick={DarkMode}    
-            name="toggleDark"
-            color="default"
-          />
+           
+          
 
             </div>
         </Toolbar>

@@ -1,0 +1,21 @@
+Henry :
+Yesterday: almos finished front and backend DMs
+today: planning finish sending message on frontend
+
+
+
+Miguel
+Yesterday: give some styling to the web page
+Today: wait to review
+
+
+Opale
+Yesterday: how to make comment but not to appear as a post
+Today: trying to finish this feature 
+
+
+
+
+Jaden 
+Yesterday: complete the like feature and delete feature
+Today: wait on review to se if he needs any improvement and work on edit a post

@@ -49,12 +49,12 @@ export default function ChangePassword() {
         <CssBaseline />
         <Box
         
-          sx={{ 
-            backgroundColor: '#F3E6D5',          
+          sx={{           
             marginTop: 8,
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
+            backgroundColor: '#4A4A4A99',       
             boxShadow: '10px 10px 4px rgba(0, 0, 0, .400)'
           }}
         >
@@ -63,7 +63,7 @@ export default function ChangePassword() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Change you Password
+            Change Your Password
           </Typography>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
 

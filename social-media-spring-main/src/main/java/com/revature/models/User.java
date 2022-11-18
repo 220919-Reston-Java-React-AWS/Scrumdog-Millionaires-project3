@@ -29,8 +29,8 @@ public class User {
 //    private int likes;
 
 
-    public User (int id, String password){
-        this.id = id;
+    public User (String email, String password){
+        this.email = email;
         this.password = password;
     }
     
