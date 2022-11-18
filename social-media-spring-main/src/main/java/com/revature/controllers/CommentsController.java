@@ -40,7 +40,7 @@ public class CommentsController {
             return ResponseEntity.badRequest().build();
         } else {
             Post post = optional.get();
-            System.out.println(post);
+//            System.out.println(post);
             session.setAttribute("post", optional.get());
 
             return ResponseEntity.ok(this.commentsService.getAllByPostId(post));
