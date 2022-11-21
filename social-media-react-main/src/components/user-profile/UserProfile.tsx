@@ -1,6 +1,6 @@
 
 
-import { AppBar, Box, Container, CssBaseline, Divider, Drawer, Grid, List, ListItem, ListItemButton, ListItemIcon, ListItemText, MenuItem, MenuList, Paper, Toolbar } from '@mui/material';
+import { AppBar, Box, Container, CssBaseline, Divider, Drawer, Grid, Link, List, ListItem, ListItemButton, ListItemIcon, ListItemText, MenuItem, MenuList, Paper, Toolbar } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import { useCallback, useContext, useEffect, useState } from 'react';
@@ -82,25 +82,32 @@ useEffect(() => {
         <Grid
             container
             direction="row"
-            justifyContent="space-between"
+            justifyContent="center"
             alignItems="center"
                 >
-        {/* <MenuList>
-          <MenuItem>Profile</MenuItem>
+
+        <Box sx ={{backgroundColor: '#4A4A4A99',       
+                boxShadow: '10px 10px 4px rgba(0, 0, 0, .400)'}}>
+        <MenuList>
+          <MenuItem  component = {'a'} href ={'/places'}>Places I've Been</MenuItem>
           <MenuItem>My account</MenuItem>
-          <MenuItem>Logout</MenuItem>
-        </MenuList> */}
+         
+        </MenuList>
+        </Box>
             <Container component="main" maxWidth="xs">
         
                 <Box
                 
             sx={{           
                 marginTop: 8,
+                marginRight: 11.5,
                 display: 'flex',
                 flexDirection: 'column',
+                alignSelf: 'center',
                 alignItems: 'center',
                 backgroundColor: '#4A4A4A99',       
                 boxShadow: '10px 10px 4px rgba(0, 0, 0, .400)'
+                
             }}>
             
                     <h2 style={{textAlign: 'center'}}> Welcome {user?.firstName} </h2> 
