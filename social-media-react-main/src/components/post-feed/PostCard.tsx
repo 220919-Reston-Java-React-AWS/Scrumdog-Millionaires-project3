@@ -43,15 +43,32 @@ import { ILikes } from "../../models/LikesModel";
 import { Likes } from "../api/postApi";
 import { apiGetAllPosts } from "../../remote/social-media-api/postFeed.api";
 import { useNavigate } from "react-router-dom";
-import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
+
+import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
+import Comments from "../../models/Comments";
+import { apiGetAllCommentsByPost, apiUpsertComment } from "../../remote/social-media-api/comment.api";
+import CommentCard from "./CommentCard";
+import { setConstantValue } from "typescript";
+import SelectInput from "@mui/material/Select/SelectInput";
 import DeleteIcon from "@mui/icons-material/Delete";
 import {DeletePost} from "../api/postApi";
 
+
 interface postProps {
+ 
   post: Post;
+  // comment: Comments;
   key: number;
-	posts: Post[]; //add
-	setPosts: (updatedPost: Post[]) => void; //add
+  posts: Post[];
+    setPosts: (updatedPost: Post[]) => void; //add
+}
+
+interface commentProps {
+  comment: Comments;
+  post:Post;
+  key: number;
+	// posts: Post[]; //add
+	// setPosts: (updatedPost: Post[]) => void; //add
 }
 
 interface ExpandMoreProps extends IconButtonProps {
@@ -65,9 +82,11 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
   marginLeft: "auto",
 }));
 
-export const PostCard = (props: postProps) => {
-  const { user } = useContext(UserContext);
-  const [expanded, setExpanded] = React.useState(false);
+
+export const PostCard = (props: postProps, cprops: commentProps) => {
+  const { user} = useContext(UserContext);
+  const [expanded, setExpanded ] = React.useState(false);
+
   //@ts-ignore
   const [liked, setLiked] = React.useState(
     props.post.likes.includes(user?.id!) ? true : false
@@ -75,9 +94,14 @@ export const PostCard = (props: postProps) => {
   // const [likesCount, setLikesCount] = React.useState(props.post.likes.length);
 
   const [likesIdArray, setLikesIdArray] = React.useState([...props.post.likes]);
-  	//add
-	const [isError, setIsError] = React.useState<boolean>(false);
 
+
+  const [uComment, setComments] =React.useState<Comments[]>([])
+
+
+// console.log(likesIdArray);
+
+	const [isError, setIsError] = React.useState<boolean>(false);
 
   const navigate = useNavigate();
 
@@ -110,7 +134,7 @@ export const PostCard = (props: postProps) => {
   //   );
   // };
 
-  console.log(props.post.author);
+
 
   const handleLikeButton = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
@@ -131,24 +155,51 @@ export const PostCard = (props: postProps) => {
         likesIdArray.splice(index, 1);
       }
     }
+
   };
 
-  
+
 
   let media = <></>;
   let commentForm = <></>;
 
+
   const handleComment = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    props.post.comments.push(
-      new Post(0, data.get("commentText")?.toString() || "", "", [], user, [])
+    let payloadcom = (
+      new Comments(0, data.get("commentText")?.toString() || "",  user, props.post)
     );
-    let payload = props.post;
-    await apiUpsertPost(payload);
+    // console.log(payloadcom);
+    await apiUpsertComment(payloadcom);
+    // event.target.reset();
+    setValue("");
+     
+    fetchComments();
+
   };
 
-  if (user) {
+
+  const fetchComments = async () => {
+    const result = await apiGetAllCommentsByPost(props.post.id);
+    setComments(result.payload);
+    // console.log(uComment);
+    
+    
+}
+
+useEffect(() => {
+  fetchComments();
+ 
+ }, []);
+
+
+const [value, setValue] = React.useState("");
+function timeout(delay: number) {
+  return new Promise( res => setTimeout(res, delay) );
+}
+
+if (user) {
     commentForm = (
       <Paper
         component="form"
@@ -165,20 +216,29 @@ export const PostCard = (props: postProps) => {
         elevation={1}
         onSubmit={handleComment}
       >
-        <InputBase
-          sx={{ ml: 1, flex: 1 }}
-          id="commentText"
-          name="commentText"
-          placeholder="Make a comment..."
-          inputProps={{ "aria-label": "Make a comment" }}
-        />
-        <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
-        <IconButton type="submit" sx={{ p: "10px" }} aria-label="submit">
-          <AddCircleIcon color="warning" />
-        </IconButton>
-      </Paper>
-    );
-  }
+      <InputBase
+        sx={{ ml: 1, flex: 1 }}
+        id="commentText"
+        name="commentText"
+        placeholder="Make a comment..."
+        inputProps={{ "aria-label": "Make a comment" }}
+        onChange ={(e) => {
+          setValue(e.target.value)
+        }}
+        defaultValue = {value}
+        value = {value}
+        
+        
+      />
+      <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
+      <IconButton type="submit" sx={{ p: "10px" }} aria-label="submit" >
+        <AddCircleIcon color="warning"  />
+      </IconButton>
+
+    </Paper>
+  )};
+
+
 
   if (props.post.imageUrl) {
     media = (
@@ -196,31 +256,30 @@ export const PostCard = (props: postProps) => {
     );
   }
 
-  function handleProfile() {
-    if (user?.id != props.post.author.id) {
-      navigate("/other-user", {
-        state: {
-          id: props.post.author.id,
-          firstName: props.post.author.firstName,
-          lastName: props.post.author.lastName,
-          email: props.post.author.email,
-        },
-      });
-    } else {
-      navigate("/current-profile");
-    }
-  }
+
+
+function handleProfile(){
+if(user?.id !== props.post.author.id){
+  
+     navigate('/other-user', {state:{id:props.post.author.id, firstName:props.post.author.firstName, lastName:props.post.author.lastName, email:props.post.author.email}})
+
+  }else{navigate('/current-profile' )}
+}
+
+
+
 
 	const handleDelete = (id: number) => {
     DeletePost.deletePost(id)
       .then((data) => {
-        let updatedPost = props.posts.filter((post) => post.id !== id);
+        let updatedPost = props.posts.filter((post: { id: number; }) => post.id !== id);
         props.setPosts(updatedPost);
       })
       .then((err) => {
         setIsError(true)
       })
 	};
+
 
 
   return (
@@ -238,7 +297,6 @@ export const PostCard = (props: postProps) => {
       {media}
       <CardContent>
         <Typography variant="body2">
-
 
 
           {props.post.text}
@@ -317,9 +375,12 @@ export const PostCard = (props: postProps) => {
           <Typography paragraph>comments:</Typography>
           <Grid container justifyContent={"center"}>
             <Grid item sx={{ width: "100%" }}>
-              {props.post.comments.map((item) => (
-                <PostCard post={item} key={item.id} posts={props.posts} setPosts={props.setPosts}/>
-              ))}
+
+
+             {uComment.map((item) => (
+              <CommentCard comment = {item} key = {item.id} post = {props.post}/> ))}
+              
+
             </Grid>
           </Grid>
         </CardContent>
@@ -327,3 +388,4 @@ export const PostCard = (props: postProps) => {
     </Box>
   );
 };
+
