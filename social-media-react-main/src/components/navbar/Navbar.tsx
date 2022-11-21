@@ -77,6 +77,7 @@ export default function Navbar() {
             TraveLog
           </Typography>
             <div>
+            <DarkMode />
             <Tooltip disableFocusListener disableTouchListener title={tipTitleUse2}>
             <IconButton
                 size="large"
@@ -128,9 +129,7 @@ export default function Navbar() {
                 {loggedIn}
             </IconButton>
             </Tooltip>
-            <div>
-            <DarkMode />
-            </div>
+           
           
 
             </div>
