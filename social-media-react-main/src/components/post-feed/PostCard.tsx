@@ -329,17 +329,17 @@ if(user?.id !== props.post.author.id){
             >
               {liked ? (
                 <IconButton>
-                  <ThumbUpIcon />
+                  <ThumbUpIcon sx={{ color: orange[800] }}/>
                 </IconButton>
               ) : (
                 <IconButton>
-                  <ThumbUpOffAltIcon />
+                  <ThumbUpOffAltIcon sx={{ color: orange[800] }} />
                 </IconButton>
               )}
             </span>
           </ListItem>
         </List>
-        <List css={css`width: 8%; padding-top:3rem; height:100%; display:flex; justify-content:space-around; align-items: flex-end`}>
+        <List css={css`width: 12%; padding-top:3rem; height:100%; display:flex; justify-content:space-around; align-items: flex-end`}>
           <ListItem>
             { user?.id === props.post.author.id &&
             <span
@@ -349,7 +349,7 @@ if(user?.id !== props.post.author.id){
               onClick={() => handleDelete(props.post.id!)}
             >
               <IconButton>
-                <DeleteIcon />
+                <DeleteIcon sx={{ color: orange[800] }}  />
               </IconButton>
             </span>
             }
@@ -362,7 +362,7 @@ if(user?.id !== props.post.author.id){
               aria-expanded={expanded}
               aria-label="show more"
             >
-              <InsertCommentIcon />
+              <InsertCommentIcon sx={{ color: orange[800] }} />
             </ExpandMore>
             {/* </div>
             </div> */}
