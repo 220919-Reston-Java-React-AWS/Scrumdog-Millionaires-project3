@@ -55,9 +55,12 @@ import {DeletePost} from "../api/postApi";
 
 
 interface postProps {
+ 
   post: Post;
   // comment: Comments;
   key: number;
+  posts: Post[];
+    setPosts: (updatedPost: Post[]) => void; //add
 }
 
 interface commentProps {
@@ -266,16 +269,16 @@ if(user?.id !== props.post.author.id){
 
 
 
-	// const handleDelete = (id: number) => {
-  //   DeletePost.deletePost(id)
-  //     .then((data) => {
-  //       let updatedPost = props.post.filter((post) => post.id !== id);
-  //       props.setPosts(updatedPost);
-  //     })
-  //     .then((err) => {
-  //       setIsError(true)
-  //     })
-	// };
+	const handleDelete = (id: number) => {
+    DeletePost.deletePost(id)
+      .then((data) => {
+        let updatedPost = props.posts.filter((post: { id: number; }) => post.id !== id);
+        props.setPosts(updatedPost);
+      })
+      .then((err) => {
+        setIsError(true)
+      })
+	};
 
 
 
@@ -343,7 +346,7 @@ if(user?.id !== props.post.author.id){
               css={css`
                 cursor: pointer;
               `}
-              // onClick={() => handleDelete(props.post.id!)}
+              onClick={() => handleDelete(props.post.id!)}
             >
               <IconButton>
                 <DeleteIcon />

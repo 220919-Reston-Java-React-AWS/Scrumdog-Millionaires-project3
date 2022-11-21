@@ -8,6 +8,7 @@ export default class Post {
     author: any;
     likes: number[];
 
+
     constructor (id: number, text:string, imageUrl:string, comments: Comments[], author:any, likes:number[]) {
         this.id = id;
         this.text = text;

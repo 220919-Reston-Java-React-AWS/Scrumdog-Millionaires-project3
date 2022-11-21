@@ -1,6 +1,6 @@
 
 
-import { AppBar, Box, Container, CssBaseline, Divider, Drawer, Grid, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Paper, Toolbar } from '@mui/material';
+import { AppBar, Box, Container, CssBaseline, Divider, Drawer, Grid, List, ListItem, ListItemButton, ListItemIcon, ListItemText, MenuItem, MenuList, Paper, Toolbar } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import { useCallback, useContext, useEffect, useState } from 'react';
@@ -78,7 +78,18 @@ useEffect(() => {
         
         // }}
         >
-        <Navbar />
+        <Navbar />       
+        <Grid
+            container
+            direction="row"
+            justifyContent="space-between"
+            alignItems="center"
+                >
+        {/* <MenuList>
+          <MenuItem>Profile</MenuItem>
+          <MenuItem>My account</MenuItem>
+          <MenuItem>Logout</MenuItem>
+        </MenuList> */}
             <Container component="main" maxWidth="xs">
         
                 <Box
@@ -108,11 +119,13 @@ useEffect(() => {
             <Grid container justifyContent={"center"}>
             <Grid item sx={{width: '60%', mb: '20px', }} >
                     {post.map((item) =>(
-                    <PostCard post={item} key={item.id}  />
+                    <PostCard post={item} key={item.id} setPosts={setPosts} posts ={post}/>
                 ))
                 }
                 </Grid> 
                 </Grid>
+                </Grid>
+              
                 
 
         </div >
