@@ -43,15 +43,14 @@ import { ILikes } from "../../models/LikesModel";
 import { Likes } from "../api/postApi";
 import { apiGetAllPosts } from "../../remote/social-media-api/postFeed.api";
 import { useNavigate } from "react-router-dom";
-
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import Comments from "../../models/Comments";
-import { apiGetAllCommentsByPost, apiUpsertComment } from "../../remote/social-media-api/comment.api";
 import CommentCard from "./CommentCard";
 import { setConstantValue } from "typescript";
 import SelectInput from "@mui/material/Select/SelectInput";
 import DeleteIcon from "@mui/icons-material/Delete";
 import {DeletePost} from "../api/postApi";
+import { apiUpsertComment, apiGetAllCommentsByPost } from "../../remote/social-media-api/comment.api";
 
 
 interface postProps {
@@ -98,8 +97,6 @@ export const PostCard = (props: postProps, cprops: commentProps) => {
 
   const [uComment, setComments] =React.useState<Comments[]>([])
 
-
-// console.log(likesIdArray);
 
 	const [isError, setIsError] = React.useState<boolean>(false);
 
