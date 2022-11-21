@@ -1,4 +1,4 @@
-import { Avatar, Card, CardContent, CardHeader, Grid, Typography } from "@mui/material";
+import { Avatar, Box, Card, CardContent, CardHeader, Grid, Typography } from "@mui/material";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../context/user.context";
@@ -37,7 +37,8 @@ export default function CommentCard(cprops: commentProps){
         <div>
 
             
-    <Card sx={{maxWidth:"100%", marginTop: "3%" }}>
+    <Box sx={{maxWidth:"100%", marginTop: "3%",  backgroundColor: '#4A4A4A99',
+          boxShadow: '10px 10px 4px rgba(0, 0, 0, .400)' }}>
       
       <CardHeader
         title={cprops.comment.author.firstName}
@@ -53,11 +54,11 @@ export default function CommentCard(cprops: commentProps){
           }
           />
          <CardContent>
-        <Typography variant="body2" color="text.secondary">
+        <Typography>
           {comText}
         </Typography>
       </CardContent>
-          </Card>
+          </Box>
      
 
             {/* {cprops.comment} */}
