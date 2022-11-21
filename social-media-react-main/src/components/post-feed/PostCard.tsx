@@ -45,13 +45,14 @@ import { apiGetAllPosts } from "../../remote/social-media-api/postFeed.api";
 import { useNavigate } from "react-router-dom";
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 import DeleteIcon from "@mui/icons-material/Delete";
-import {DeletePost} from "../api/postApi";
+import { DeletePost } from "../api/postApi";
+import EditIcon from "@mui/icons-material/Edit";
 
 interface postProps {
   post: Post;
   key: number;
-	posts: Post[]; //add
-	setPosts: (updatedPost: Post[]) => void; //add
+  posts: Post[]; //add
+  setPosts: (updatedPost: Post[]) => void; //add
 }
 
 interface ExpandMoreProps extends IconButtonProps {
@@ -75,40 +76,14 @@ export const PostCard = (props: postProps) => {
   // const [likesCount, setLikesCount] = React.useState(props.post.likes.length);
 
   const [likesIdArray, setLikesIdArray] = React.useState([...props.post.likes]);
-  	//add
-	const [isError, setIsError] = React.useState<boolean>(false);
-
+  //add
+  const [isError, setIsError] = React.useState<boolean>(false);
 
   const navigate = useNavigate();
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
-
-  // const LikeButton: React.FC = () => {
-  //   const [liked, setLiked] = React.useState(false);
-  //   const Icon = liked ? ThumbUpIcon : ThumbUpOffAltIcon;
-
-  //   const handleUnlike = () => {
-  //     setLiked(false);
-  //   };
-
-  //   const handleLike = () => {
-  //     setLiked(true);
-  //   };
-
-  //   const onClick = liked ? handleUnlike : handleLike;
-
-  //   return (
-  //     <Icon
-  //       css={css`
-  //         cursor: pointer;
-  //       `}
-  //       color="success"
-  //       onClick={onClick}
-  //     />
-  //   );
-  // };
 
   console.log(props.post.author);
 
@@ -132,8 +107,6 @@ export const PostCard = (props: postProps) => {
       }
     }
   };
-
-  
 
   let media = <></>;
   let commentForm = <></>;
@@ -208,17 +181,16 @@ export const PostCard = (props: postProps) => {
     }
   }
 
-	const handleDelete = (id: number) => {
+  const handleDelete = (id: number) => {
     DeletePost.deletePost(id)
       .then((data) => {
         let updatedPost = props.posts.filter((post) => post.id !== id);
         props.setPosts(updatedPost);
       })
       .then((err) => {
-        setIsError(true)
-      })
-	};
-
+        setIsError(true);
+      });
+  };
 
   return (
     <Card sx={{ maxWidth: "100%", marginTop: "3%" }}>
@@ -271,23 +243,35 @@ export const PostCard = (props: postProps) => {
             </span>
           </ListItem>
         </List>
-        <List css={css`width: 8%; padding-top:3rem; height:100%; display:flex; justify-content:space-around; align-items: flex-end`}>
+        <List
+          css={css`
+            padding-top: 3rem;
+            height: 100%;
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-end;
+          `}
+        >
           <ListItem>
-            { user?.id === props.post.author.id &&
-            <span
-              css={css`
-                cursor: pointer;
-              `}
-              onClick={() => handleDelete(props.post.id!)}
-            >
-              <IconButton>
-                <DeleteIcon />
-              </IconButton>
-            </span>
-            }
-            {/* <Typography variant="subtitle2">
-                <span></span>
-              </Typography> */}
+            {user?.id === props.post.author.id && (
+              <>
+                <span>
+                  <IconButton>
+                    <EditIcon />
+                  </IconButton>
+                </span>
+                <span
+                  css={css`
+                    cursor: pointer;
+                  `}
+                  onClick={() => handleDelete(props.post.id!)}
+                >
+                  <IconButton>
+                    <DeleteIcon />
+                  </IconButton>
+                </span>
+              </>
+            )}
             <ExpandMore
               expand={expanded}
               onClick={handleExpandClick}
@@ -296,8 +280,6 @@ export const PostCard = (props: postProps) => {
             >
               <InsertCommentIcon />
             </ExpandMore>
-            {/* </div>
-            </div> */}
           </ListItem>
         </List>
       </CardActions>
@@ -308,7 +290,12 @@ export const PostCard = (props: postProps) => {
           <Grid container justifyContent={"center"}>
             <Grid item sx={{ width: "100%" }}>
               {props.post.comments.map((item) => (
-                <PostCard post={item} key={item.id} posts={props.posts} setPosts={props.setPosts}/>
+                <PostCard
+                  post={item}
+                  key={item.id}
+                  posts={props.posts}
+                  setPosts={props.setPosts}
+                />
               ))}
             </Grid>
           </Grid>

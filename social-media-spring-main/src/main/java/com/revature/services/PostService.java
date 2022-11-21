@@ -9,6 +9,7 @@ import java.util.Optional;
 import com.revature.models.Likes;
 import com.revature.models.User;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.revature.models.Post;
@@ -39,6 +40,22 @@ public class PostService {
 		return this.postRepository.save(post);
 	}
 
+
+	public Post updatePost(Post post, int id){
+		Optional<Post> postData = postRepository.findById(id);
+
+		if (postData.isPresent()) {
+			Post _post = postData.get();
+			_post.setText(post.getText());
+			_post.setImageUrl(post.getImageUrl());
+			_post.setLikes(post.getLikes());
+			_post.setComments(post.getComments());
+			_post.setAuthor(post.getAuthor());
+			return new ResponseEntity<>(postRepository.save(_post), HttpStatus.OK).getBody();
+		} else {
+			return new ResponseEntity<Post>(HttpStatus.NOT_FOUND).getBody();
+		}
+	}
 	public ResponseObjectService updatePostByLike(Likes likesId){
 
 		// create response object
