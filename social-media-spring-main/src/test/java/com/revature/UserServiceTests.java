@@ -42,24 +42,24 @@ public class UserServiceTests {
 		
 	// }
 
-    @Test
-	public void testUpdatePassword() {
+//     @Test
+// 	public void testUpdatePassword() {
 
 		
-//		Arrange
-		User user = new User(1, "test12@gmail.com","OldPassword","Test12","User12");
-		String expectedPassword = "NewPassword";
-		LoginRequest newpass = new LoginRequest(user.getEmail(),  expectedPassword);
-		//run this in oldUser
-		Mockito.when(mockUserRepository.save(user)).thenReturn(new User(1, "test12@gmail.com",expectedPassword,"Test12","User12"));
+// //		Arrange
+// 		User user = new User(1, "test12@gmail.com","OldPassword","Test12","User12");
+// 		String expectedPassword = "NewPassword";
+// 		LoginRequest newpass = new LoginRequest(user.getEmail(),  expectedPassword);
+// 		//run this in oldUser
+// 		Mockito.when(mockUserRepository.save(user)).thenReturn(new User(1, "test12@gmail.com",expectedPassword,"Test12","User12"));
 
-		// Act
+// 		// Act
 
-		User actual = userService.updatePassword(newpass);
+// 		User actual = userService.updatePassword(newpass);
 		
 	
-		//Assertion
-        Assertions.assertEquals(expectedPassword, actual.getPassword());
-	}
+// 		//Assertion
+//         Assertions.assertEquals(expectedPassword, actual.getPassword());
+// 	}
 
 }

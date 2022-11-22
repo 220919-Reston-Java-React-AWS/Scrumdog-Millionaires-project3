@@ -10,6 +10,10 @@ spring:
       ddl-auto: none
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     defer-datasource-initialization: true
+<<<<<<< HEAD
+=======
+
+>>>>>>> 2832a172a82b89376643b5234a77e54a8a870d70
   datasource:
     url: jdbc:postgresql://javafs22.cngwg4ynfse3.us-west-1.rds.amazonaws.com:5432/postgres
     driver-class-name: org.postgresql.Driver

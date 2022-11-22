@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /** @jsxImportSource @emotion/react */
 import {
   Avatar,
@@ -13,6 +14,9 @@ import {
 } from "@mui/material";
 import * as React from "react";
 import { useState } from "react";
+=======
+import { Avatar, Box, Card, CardContent, CardHeader, Grid, Typography } from "@mui/material";
+>>>>>>> 2832a172a82b89376643b5234a77e54a8a870d70
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../context/user.context";
@@ -97,6 +101,7 @@ export default function CommentCard(cprops: commentProps) {
       } 
   )}
 
+<<<<<<< HEAD
   return (
     <div>
       <Card sx={{ maxWidth: "100%", marginTop: "3%" }}>
@@ -127,6 +132,48 @@ export default function CommentCard(cprops: commentProps) {
                   }`}
                 />
               </ListItem>
+=======
+    function handleProfile(){
+        if(user?.id !== cprops.comment.author.id){
+          
+             navigate('/other-user', {state:{id:cprops.comment.author.id, firstName:cprops.comment.author.firstName, lastName:cprops.comment.author.lastName, email:cprops.comment.author.email}})
+        
+          }else{navigate('/current-profile' )
+          }
+        }
+
+    
+
+    return (
+        <div>
+
+            
+    <Box sx={{maxWidth:"100%", marginTop: "3%",  backgroundColor: '#4A4A4A99',
+          boxShadow: '10px 10px 4px rgba(0, 0, 0, .400)' }}>
+      
+      <CardHeader
+        title={cprops.comment.author.firstName}
+        avatar={
+  
+            <Avatar sx={{ bgcolor: '#ed6c02' }} aria-label="recipe" >
+  
+                  <PersonOutlineOutlinedIcon onClick={handleProfile} />
+  
+  
+  
+            </Avatar>
+          }
+          />
+         <CardContent>
+        <Typography>
+          {comText}
+        </Typography>
+      </CardContent>
+          </Box>
+     
+
+            {/* {cprops.comment} */}
+>>>>>>> 2832a172a82b89376643b5234a77e54a8a870d70
               
               <ListItem>
                 <span

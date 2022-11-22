@@ -19,47 +19,118 @@ import axios from 'axios';
 import { request } from 'http';
 import Navbar from '../navbar/Navbar';
 import { apiGetMgsBetweenUsers, apiSendMsg } from '../../remote/social-media-api/auth.api';
+import { DirectMessageCard } from './DirectMessageCard';
+import { ResultType } from '@remix-run/router/dist/utils';
 
 function DirectMessaging () {
 
     const [dm, setDMs] = useState<DirectMessageModel[]>([])
     const { user, setUser } = useContext(UserContext);
+    const [recId, setRecId] = useState(0);
+    const [tx, setTx] = useState('');
     const theme = createTheme();
     let msg:DirectMessageModel = {
         text: "",
         sender: user
     }
-    let receiver_id: any; 
+    let receiver_id: any;
+    let msgForm = <></>; 
+    let dmList = <></>;
+    let dmarr = [];
 
     function setReceiver (event: React.ChangeEvent<HTMLInputElement>) {
+        
         receiver_id = parseInt(event.target.value);
+        setRecId(receiver_id);
 
     }
 
     function setText (event: React.ChangeEvent<HTMLInputElement>) {
         msg.text = event.target.value;
+        setTx(msg.text);
     }
 
     const fetchMsg = async () => {
-        const result = await apiGetMgsBetweenUsers(receiver_id);
+        const result = await apiGetMgsBetweenUsers(recId);
+        console.log(result.payload);
+        dmarr = result.payload;
+        // setDMs(["H"]);
+        // setDMs(dm => dm.concat(res));
         setDMs(result.payload)
     }
 
-    const sendDM = async ( event: React.FormEvent<HTMLFormElement>) => {
+    const SendDM = async ( event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-
-
-        const response = await apiSendMsg(msg, receiver_id, msg.text)
+        const response = await apiSendMsg(msg, recId, tx)
         console.log(response);
+        fetchMsg();
+        console.log(recId);
+
     }
 
-    // useEffect(() => {
-    //     fetchMsg()
-    //    }, []);
+    if (user) {
+        msgForm = <form onSubmit={SendDM}>
+        <Container component="main" maxWidth="xs" css = {css `display: flex; flex-direction: column; justify-content: flex-end; padding-bottom: 1rem `}>
+
+        <TextField
+            id="text"
+            name="text"
+            label="Type the ID of the user you wish to send a message to."
+            fullWidth
+            variant="standard"
+            onChange={setReceiver}
+            // onChange={() => setRecId(recId)}
+            />
+
+            <TextField
+            id="text"
+            name="text"
+            label="Send a message"
+            fullWidth
+            variant="standard"
+            onChange={setText}
+            />
+            <Button
+          type="submit"
+          fullWidth
+          variant="contained"
+          sx={{ mt: 3, mb: 2 }}
+        >
+          Send
+          </Button>
+        </Container>
+        </form>
+    }
+    else {
+        msgForm = <h2 style={{textAlign: 'center', marginTop: '3%'}}>
+        You are not logged in!
+    </h2>;
+    }
+
+    useEffect(() => {
+        fetchMsg()
+       }, []);
 
     return (
         <><><Navbar /></><ThemeProvider theme={theme}>
-            <form onSubmit={sendDM}>
+            <h2 style={{textAlign: 'center', marginTop: '3%'}}>
+                This is the beginning of your direct message history with this user.
+            </h2>
+            <Grid container justifyContent={"center"} >
+                <Grid item sx={{width: '60%', mb: '20px'}}>
+                    {dm.map((item) =>(
+                        <DirectMessageCard dm = {item} key = {item.id} dms = {dm} setDMs = {setDMs}/>
+                    ))}
+                </Grid>
+            </Grid>
+            {/* <Grid container justifyContent={"center"}>
+           <Grid item sx={{width: '60%', mb: '20px'}}>
+            {dmList}
+            </Grid>
+            </Grid> */}
+            
+            {msgForm}
+            {/* <form onSubmit={SendDM}>
             <Container component="main" maxWidth="xs" css = {css `display: flex; flex-direction: column; justify-content: flex-end; height: 100vh; padding-bottom: 1rem `}>
 
             <TextField
@@ -88,7 +159,7 @@ function DirectMessaging () {
               Send
               </Button>
             </Container>
-            </form>
+            </form> */}
         </ThemeProvider></>
     )
 }

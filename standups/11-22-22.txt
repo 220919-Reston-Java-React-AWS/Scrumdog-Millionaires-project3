@@ -1,0 +1,24 @@
+Henry :
+Yesterday: manage to get it work
+today: finishing touching in DMs
+challenge: the sender and the recived as the sema person in other profile pager
+
+
+Miguel
+Yesterday: finishing the darkmode desing and worked on the tes
+Today: commenting features
+
+
+Opale
+Yesterday: work on profile design 
+Today: maroff where user has travel
+challenge: changing blue on words
+
+
+
+
+
+Jaden 
+Yesterday: work on likes,, finishing on the fornt enda
+Today: work on the like backend 
+having problemsn in the backend, probably the because of the fetch 
