@@ -6,8 +6,8 @@ import Login from '../components/login/Login';
 import { PostFeed } from '../components/post-feed/PostFeed';
 import Register from '../components/register/Register';
 import OtherUsers from '../components/user-profile/OtherUsers';
+import Places from '../components/user-profile/subpages/Places';
 import UserProfile from '../components/user-profile/UserProfile';
-
 
 export const AppRoutes: React.FC<unknown> = () => (
   <Routes>
@@ -18,5 +18,6 @@ export const AppRoutes: React.FC<unknown> = () => (
     <Route path = "/current-profile" element={<UserProfile />} />
     <Route path = "/other-user" element={<OtherUsers />} />
     <Route path = "/messages" element={<DirectMessaging />} />
+    <Route path = "/places" element = {<Places />} />
   </Routes>
 )

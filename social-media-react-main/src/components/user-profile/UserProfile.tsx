@@ -1,6 +1,6 @@
 
 
-import { AppBar, Box, Container, CssBaseline, Divider, Drawer, Grid, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Paper, Toolbar } from '@mui/material';
+import { AppBar, Box, Container, CssBaseline, Divider, Drawer, Grid, Link, List, ListItem, ListItemButton, ListItemIcon, ListItemText, MenuItem, MenuList, Paper, Toolbar } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import { useCallback, useContext, useEffect, useState } from 'react';
@@ -78,18 +78,36 @@ useEffect(() => {
         
         // }}
         >
-        <Navbar />
+        <Navbar />       
+        <Grid
+            container
+            direction="row"
+            justifyContent="center"
+            alignItems="center"
+                >
+
+        <Box sx ={{backgroundColor: '#4A4A4A99',       
+                boxShadow: '10px 10px 4px rgba(0, 0, 0, .400)'}}>
+        <MenuList>
+          <MenuItem  component = {'a'} href ={'/places'}>Places I've Been</MenuItem>
+          <MenuItem>My account</MenuItem>
+         
+        </MenuList>
+        </Box>
             <Container component="main" maxWidth="xs">
         
                 <Box
                 
             sx={{           
                 marginTop: 8,
+                marginRight: 11.5,
                 display: 'flex',
                 flexDirection: 'column',
+                alignSelf: 'center',
                 alignItems: 'center',
                 backgroundColor: '#4A4A4A99',       
                 boxShadow: '10px 10px 4px rgba(0, 0, 0, .400)'
+                
             }}>
             
                     <h2 style={{textAlign: 'center'}}> Welcome {user?.firstName} </h2> 
@@ -108,11 +126,13 @@ useEffect(() => {
             <Grid container justifyContent={"center"}>
             <Grid item sx={{width: '60%', mb: '20px', }} >
                     {post.map((item) =>(
-                    <PostCard post={item} key={item.id} posts={post} setPosts={setPosts} />
+                    <PostCard post={item} key={item.id} setPosts={setPosts} posts ={post}/>
                 ))
                 }
                 </Grid> 
                 </Grid>
+                </Grid>
+              
                 
 
         </div >

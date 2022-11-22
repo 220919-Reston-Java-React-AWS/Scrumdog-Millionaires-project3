@@ -8,6 +8,7 @@
 
   [data-theme="dark"] {
     --background-image: url("https://wallpapercave.com/wp/wp3328590.jpg");
+    --background-size: 60%;
     --font-color: white !important;
     --text-primary: white !important;  
     --background-color: rgb(37, 24, 37);   
@@ -15,6 +16,8 @@
     --text-secondary: lightblue;   
     --box-color: rgba(74, 74, 74, 0.5) !important;    
     --text-secondary: lightblue !important;
+
+    /* https://wallpapercave.com/wp/wp3328602.jpg */
     
    
   }
@@ -22,6 +25,7 @@
 
   body {
     background-image: var(--background-image);
+    background-size: var(--background-size);
     color: var(--font-color);
     background-color: var(--background-color) !important;
     padding: var(--background-color) !important;
