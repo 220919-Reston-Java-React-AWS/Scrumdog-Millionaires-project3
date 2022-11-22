@@ -41,7 +41,7 @@ public class ProfileController {
         }
     }
 
-//    @Authorized
+    @Authorized
     @PutMapping("/about_me_up{currentuser}")
     public ResponseEntity<User> updateAboutMe( @PathVariable ("currentuser") int id, @RequestBody String aboutMe) {
         Optional<User> optional = userService.findById(id);
@@ -58,7 +58,7 @@ public class ProfileController {
 
     }
 
-    @Authorized
+//    @Authorized
     @GetMapping("/about_me_get{authorid}")
     public ResponseEntity<String> getAboutMeUser(@PathVariable("authorid") int id, HttpSession session) {
         Optional<User> optional = userService.findById(id);

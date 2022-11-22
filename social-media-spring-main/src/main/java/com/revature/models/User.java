@@ -22,7 +22,7 @@ public class User {
     private String firstName;
     private String lastName;
 
-    @Lob
+   @Column(name = "about_me", columnDefinition = "TEXT")
     private String aboutMe;
 //
 //    @Lob

@@ -16,3 +16,16 @@ export const apiGetAllPostsByUser = async (authorid: number): Promise<socialApiR
     // console.log(response.data)
     return { status: response.status, payload: response.data };
 }
+
+export const apiUpdateAboutMe = async (currentuser: number, aboutme: string): Promise <socialApiResponse> =>{
+    const response = await socialClient.put<any>(
+        `${baseURL}/about_me_up${currentuser}`
+    );
+    return {status: response.status, payload: response.data};
+}
+export const apiGetAboutMe = async (currentuser: number): Promise <socialApiResponse> =>{
+    const response = await socialClient.get<any>(
+        `${baseURL}/about_me_get${currentuser}`
+    );
+    return {status: response.status, payload: response.data};
+}

@@ -13,6 +13,7 @@ import { PostCard } from '../post-feed/PostCard';
 import SettingsIcon from '@mui/icons-material/Settings';
 import { css, jsx } from "@emotion/react";
 import { render } from 'react-dom';
+import { useNavigate } from 'react-router-dom';
 
 
 const theme = createTheme(
@@ -42,6 +43,7 @@ const drawerWidth = 240;
 export default function UserProfile(){
 const { user, setUser } = useContext(UserContext);
 const [post, setPosts] = useState<Post[]>([])
+const navigate = useNavigate();
 
 
 const fetchData = async () => {
@@ -73,6 +75,10 @@ useEffect(() => {
    
    const Astyle ={color:'black'}
 
+   function handleAboutMe(){
+    navigate('/about-me',{state:{id: user?.id}} )
+    }
+
 
     return(
         
@@ -94,8 +100,9 @@ useEffect(() => {
                 boxShadow: '10px 10px 4px rgba(0, 0, 0, .400)',
                 color: 'black'}}>
         <MenuList>
-          <MenuItem component = {'a'}  href = {'/places'} sx = {{textDecoration: 'none !important', color:'black !important'}}>Places I've Been</MenuItem>
-          <MenuItem component = {'a'}  href = {'/about-me'} sx = {{textDecoration: 'none !important', color:'black !important'}} > About Me</MenuItem>
+          <MenuItem component = {'a'}  href = {'/places'} sx = {{textDecoration: 'none !important', color:'black !important'}} >Places I've Been</MenuItem>
+          <MenuItem onClick={handleAboutMe} sx = {{textDecoration: 'none !important', color:'black !important'}} > About Me</MenuItem>
+         
 
 
          
