@@ -1,5 +1,5 @@
 
-
+import './subpages/place.css';
 import { AppBar, Box, Container, CssBaseline, Divider, Drawer, Grid, Link, List, ListItem, ListItemButton, ListItemIcon, ListItemText, MenuItem, MenuList, Paper, Toolbar } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
@@ -24,6 +24,8 @@ const theme = createTheme(
 //     }
 // }
 );
+
+
 
 
 const styles = {
@@ -68,6 +70,8 @@ useEffect(() => {
         </h2>;
    }
 
+   
+   const Astyle ={color:'black'}
 
 
     return(
@@ -86,11 +90,14 @@ useEffect(() => {
             alignItems="center"
                 >
 
-        <Box sx ={{backgroundColor: '#4A4A4A99',       
-                boxShadow: '10px 10px 4px rgba(0, 0, 0, .400)'}}>
+        <Box sx ={{backgroundColor: '#4A4A4A',       
+                boxShadow: '10px 10px 4px rgba(0, 0, 0, .400)',
+                color: 'black'}}>
         <MenuList>
-          <MenuItem  component = {'a'} href ={'/places'}>Places I've Been</MenuItem>
-          <MenuItem>My account</MenuItem>
+          <MenuItem component = {'a'}  href = {'/places'} sx = {{textDecoration: 'none !important', color:'black !important'}}>Places I've Been</MenuItem>
+          <MenuItem component = {'a'}  href = {'/about-me'} sx = {{textDecoration: 'none !important', color:'black !important'}} > About Me</MenuItem>
+
+
          
         </MenuList>
         </Box>
@@ -100,7 +107,7 @@ useEffect(() => {
                 
             sx={{           
                 marginTop: 8,
-                marginRight: 11.5,
+                marginRight: 16,
                 display: 'flex',
                 flexDirection: 'column',
                 alignSelf: 'center',
@@ -118,7 +125,6 @@ useEffect(() => {
          
 
                     <h2 style={{textAlign: 'center', color: 'orange', }}> Posts</h2>            
-
 
                 </Box>
             </Container>

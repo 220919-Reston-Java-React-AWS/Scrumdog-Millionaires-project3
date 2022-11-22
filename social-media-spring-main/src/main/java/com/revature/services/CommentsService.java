@@ -21,7 +21,7 @@ public class CommentsService {
     private PostService postService;
 
     public List<Comments> getAllByPostId(Post post){
-        System.out.println(post);
+//        System.out.println(post);
             return this.commentsRepository.findCommentByPost(post);
 
     }

@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.sql.Clob;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,20 +28,48 @@ public class ProfileController {
 
     @Authorized
     @GetMapping("{authorid}")
-    public ResponseEntity<List<Post>> getAllPostsByUser(@PathVariable("authorid") int id,  HttpSession session) {
+    public ResponseEntity<List<Post>> getAllPostsByUser(@PathVariable("authorid") int id, HttpSession session) {
         Optional<User> optional = userService.findById(id);
 
-        if(!optional.isPresent()) {
+        if (!optional.isPresent()) {
             return ResponseEntity.badRequest().build();
-        }else{
+        } else {
             User user = optional.get();
             session.setAttribute("user", optional.get());
 
             return ResponseEntity.ok(this.postService.getAllByAuthor(user));
         }
+    }
 
+//    @Authorized
+    @PutMapping("/about_me_up{currentuser}")
+    public ResponseEntity<User> updateAboutMe( @PathVariable ("currentuser") int id, @RequestBody String aboutMe) {
+        Optional<User> optional = userService.findById(id);
+        if (!optional.isPresent()) {
+            return ResponseEntity.badRequest().build();
+        } else {
+            User user = optional.get();
+            user.setAboutMe(aboutMe);
+            return ResponseEntity.ok(this.userService.save(user));
+        }
 
 
 //        return ResponseEntity.ok(this.postService.getAllByAuthor(id));
+
+    }
+
+    @Authorized
+    @GetMapping("/about_me_get{authorid}")
+    public ResponseEntity<String> getAboutMeUser(@PathVariable("authorid") int id, HttpSession session) {
+        Optional<User> optional = userService.findById(id);
+
+        if (!optional.isPresent()) {
+            return ResponseEntity.badRequest().build();
+        } else {
+            User user = optional.get();
+            session.setAttribute("user", optional.get());
+
+            return ResponseEntity.ok(this.userService.getAboutMe(user));
+        }
     }
 }

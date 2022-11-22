@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.sql.Clob;
 
 @Data
 @Entity
@@ -21,6 +22,12 @@ public class User {
     private String firstName;
     private String lastName;
 
+    @Lob
+    private String aboutMe;
+//
+//    @Lob
+//    private Clob places;
+
 
     // @Column(name= "reset_password_token")
     // private String resetPasswordToken = null;
@@ -33,6 +40,21 @@ public class User {
         this.email = email;
         this.password = password;
     }
-    
+
+    public User(String email, String password, String firstName, String lastName) {
+        this.email = email;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
+
+    public User(int id, String email, String password, String firstName, String lastName) {
+        this.id = id;
+        this.email = email;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
 }
 
