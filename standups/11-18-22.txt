@@ -1,0 +1,19 @@
+Henry :
+Yesterday: completed implementing reciving message on the backend and start on the frontend
+today:finishing frontend DM feature 
+challenges: solving error axios (undefined path parameter)
+
+
+Miguel
+Yesterday: finished dark mode feture
+Today: work on styling page
+
+
+Opale
+Yesterday: finishd the back end of the backend
+Today: create the new comment component
+modifiending the postcard to included comments a comments, needs to create new comments component
+
+
+
+

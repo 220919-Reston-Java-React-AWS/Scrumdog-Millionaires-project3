@@ -1,0 +1,21 @@
+Henry :
+Yesterday: try to fix showing the recieved DMs
+today:work to fix that problem
+
+
+Miguel
+Yesterday: work on the dark mode 
+Today: work on icons to change color and work on the pipeline  
+
+
+Opale
+Yesterday:display comment as comments, but the delete feature get some problems
+Today: figuring out the delete feature fixure
+
+
+
+
+
+Jaden 
+Yesterday: completed the edit for backend
+Today: look at the delete fixure and begginig testing 

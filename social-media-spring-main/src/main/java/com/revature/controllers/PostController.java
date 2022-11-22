@@ -3,11 +3,24 @@ package com.revature.controllers;
 import java.util.List;
 import java.util.Optional;
 
+import com.revature.models.Comments;
 import com.revature.models.Likes;
+
+import com.revature.services.CommentsService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+
 import com.revature.repositories.PostRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import com.revature.services.ResponseObjectService;
 import com.revature.annotations.Authorized;
 import com.revature.models.Post;
@@ -20,14 +33,17 @@ public class PostController {
 
 	private final PostService postService;
 
+
+
     private final PostRepository postRepository;
 
     public PostController(PostService postService, PostRepository postRepository) {
         this.postService = postService;
         this.postRepository = postRepository;
+
     }
     
-    @Authorized
+//    @Authorized
     @GetMapping
     public ResponseEntity<List<Post>> getAllPosts() {
     	return ResponseEntity.ok(this.postService.getAll());
@@ -40,6 +56,8 @@ public class PostController {
     public ResponseEntity<Post> upsertPost(@RequestBody Post post) {
     	return ResponseEntity.ok(this.postService.upsert(post));
     }
+
+
 
     @PostMapping("/likepost")
     public ResponseEntity<ResponseObjectService>likePost(@RequestBody Likes likesId){

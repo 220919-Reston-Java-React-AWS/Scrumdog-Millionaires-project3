@@ -1,6 +1,6 @@
 package com.revature.services;
 
-import com.google.common.primitives.Ints;
+//import com.google.common.primitives.Ints;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -30,6 +30,8 @@ public class PostService {
 		return this.postRepository.findAll();
 	}
 
+	public Optional<Post> findById(int id){ return postRepository.findById(id);}
+
 	public List<Post> getAllByAuthor(User user){
 
 			return this.postRepository.findPostByAuthor(user);
@@ -37,6 +39,8 @@ public class PostService {
 		}
 
 	public Post upsert(Post post) {
+
+//		System.out.println(postRepository);
 		return this.postRepository.save(post);
 	}
 
@@ -64,9 +68,9 @@ public class PostService {
 		Optional<Post> optPost = postRepository.findById(likesId.getPost_id());
 		//create conditional based on whether it does
 		if(optPost.isEmpty()){
-			//create a response if the post doesnt exsist
+			//create a response if the post doesn't exist
 			responseObj.setStatus("Fail");
-			responseObj.setMessage("Connot find post id: " + likesId.getPost_id());
+			responseObj.setMessage("Cannot find post id: " + likesId.getPost_id());
 			responseObj.setPayload(null);
 		} else {
 			// if it does exist, grab post and grab its list of likes

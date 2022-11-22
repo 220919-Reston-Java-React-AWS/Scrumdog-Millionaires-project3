@@ -5,6 +5,7 @@ import com.revature.models.DM;
 import com.revature.models.User;
 import com.revature.services.DMService;
 import com.revature.services.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,43 +15,70 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/message")
-@CrossOrigin(origins = {"http://localhost:4200", "http://localhost:3000"}, allowCredentials = "true")
+@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
 public class DMController {
 
     private final DMService dmService;
 
     private final UserService userService;
 
-    public DMController(DMService dmService, UserService userService){
+    @Autowired
+    private final HttpSession session;
+
+    public DMController(DMService dmService, UserService userService, HttpSession session){
         this.dmService = dmService;
         this.userService = userService;
+        this.session = session;
     }
 
     @Authorized
     @PostMapping("/send/{receiver_id}")
     public ResponseEntity<DM> sendMessage(@RequestBody DM dm, @PathVariable("receiver_id") int id) {
-        Optional<User> optional = userService.findById(id);
+        Optional<User> receiver = userService.findById(id);
+        User sender = (User) session.getAttribute("user");
+        dm.setSender(sender);
 
-        if(optional.isEmpty()){
+
+        if(receiver.isEmpty()){
             return ResponseEntity.badRequest().build();
         }
         else {
+            dm.setReceiver(receiver.get());
+            System.out.println(dm.toString());
             return ResponseEntity.ok(this.dmService.send(dm));
         }
     }
 
     @Authorized
-    @GetMapping("/receive/{sender_id}")
-    public ResponseEntity<List<DM>> getMessagesByUser(@PathVariable int sender_id, HttpSession httpSession) {
-        Optional<User> optional = userService.findById(sender_id);
-        if(optional.isEmpty()){
+    @GetMapping("/received/{sender_id}")
+    public ResponseEntity<List<DM>> getMessagesByUser(@PathVariable int sender_id) {
+        Optional<User> optionalSender = userService.findById(sender_id);
+        User receiver = (User) session.getAttribute("user");
+        if(optionalSender.isEmpty()){
             return ResponseEntity.badRequest().build();
         }
         else {
-            User user = optional.get();
-            httpSession.setAttribute("user", optional.get());
+            User sender = optionalSender.get();
 
-            return ResponseEntity.ok(this.dmService.getAllByUser(user));
+            System.out.println(sender);
+            System.out.println(receiver);
+
+            return ResponseEntity.ok(this.dmService.getAllBetweenUsers(sender, receiver));
         }
     }
+
+//    @Authorized
+//    @GetMapping("/received/{sender_id}")
+//    public ResponseEntity<List<DM>> getMessagesByUser(@PathVariable int sender_id) {
+//        Optional<User> sender = userService.findById(sender_id);
+//        if(sender.isEmpty()){
+//            return ResponseEntity.badRequest().build();
+//        }
+//        else {
+//            User user = sender.get();
+////            session.setAttribute("user", sender.get());
+//
+//            return ResponseEntity.ok(this.dmService.getAllBetweenUsers(user,session));
+//        }
+//    }
 }
