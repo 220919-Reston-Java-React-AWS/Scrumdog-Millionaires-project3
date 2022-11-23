@@ -3,8 +3,12 @@ package com.revature.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 //@Data
 @Getter
@@ -21,10 +25,6 @@ public class Comments {
     private int id;
     private String text;
 
-//    private int post_id;
-//    private int user_id;
-
-
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User author;
@@ -33,6 +33,11 @@ public class Comments {
     @ManyToOne
     @JoinColumn(name = "post_id")
     private Post post;
+
+    @ElementCollection
+    @CollectionTable(name = "likes", joinColumns = @JoinColumn(name = "post_id"))
+    private List<Integer> likes = new ArrayList<>();
+
 
 
     @Override

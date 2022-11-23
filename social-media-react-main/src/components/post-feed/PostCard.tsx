@@ -375,7 +375,7 @@ if(user?.id !== props.post.author.id){
 
 
              {uComment.map((item) => (
-              <CommentCard comment = {item} key = {item.id} post = {props.post}/> ))}
+              <CommentCard comment = {item} setComments={setComments} comments={uComment}  key = {item.id} post = {props.post}/> ))}
               
 
             </Grid>
@@ -385,4 +385,3 @@ if(user?.id !== props.post.author.id){
     </Box>
   );
 };
-
