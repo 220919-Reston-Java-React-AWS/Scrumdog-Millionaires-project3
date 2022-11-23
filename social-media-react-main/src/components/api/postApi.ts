@@ -1,5 +1,6 @@
 import axios, {AxiosResponse} from "axios";
 import {ILikes} from "../../models/LikesModel";
+import Post from "../../models/Post";
 
 const instance = axios.create({
     baseURL: "http://localhost:8080/post",
@@ -22,4 +23,8 @@ export const Likes = {
 
 export const DeletePost = {
 	deletePost: (id:number) : Promise<void> => requests.delete(`/${id}`)
+}
+
+export const updatePost = {
+	updatePost: (post: Post, id:number): Promise<Post> => requests.put(`/edit/${id}`, post)
 }

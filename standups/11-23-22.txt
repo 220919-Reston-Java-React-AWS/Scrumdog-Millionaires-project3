@@ -1,0 +1,22 @@
+Henry :
+Yesterday: contructed a unit test in the service layer on the backend
+today: preparing for interview
+
+
+Miguel
+Yesterday: worked on the deployment of frontend
+Today:  look for deplyment solution and prepared for interview
+
+
+Opale
+Yesterday: worked on the profile pager
+Today: look for deplyment solution
+
+
+Jaden
+Yesterday: completed the delet feature for the comments
+Today: preparing for interview
+
+
+
+

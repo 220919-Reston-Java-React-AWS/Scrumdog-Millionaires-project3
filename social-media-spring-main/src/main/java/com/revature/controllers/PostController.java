@@ -1,6 +1,7 @@
 package com.revature.controllers;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.revature.models.Comments;
 import com.revature.models.Likes;
@@ -66,6 +67,11 @@ public class PostController {
     @DeleteMapping("/{id}")
     void deletePost(@PathVariable int id){
         this.postRepository.deleteById(id);
+    }
+
+    @PutMapping("/edit/{id}")
+    public ResponseEntity<Post> updatePost(@PathVariable("id") int id, @RequestBody Post post) {
+        return ResponseEntity.ok(this.postService.updatePost(post, id));
     }
 
 }

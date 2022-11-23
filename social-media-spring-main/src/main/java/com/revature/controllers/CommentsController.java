@@ -1,8 +1,6 @@
 package com.revature.controllers;
 
-import com.revature.models.Comments;
-import com.revature.models.Post;
-import com.revature.models.User;
+import com.revature.models.*;
 import com.revature.services.CommentsService;
 import com.revature.services.PostService;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Optional;
+import com.revature.repositories.CommentsRepository;
 
 @RestController
 @RequestMapping("/comments")
@@ -20,9 +19,12 @@ public class CommentsController {
     private final CommentsService commentsService;
     private final PostService postService;
 
-    public CommentsController(CommentsService commentsService, PostService postService) {
+    private final CommentsRepository commentsRepository;
+
+    public CommentsController(CommentsService commentsService, PostService postService, CommentsRepository commentsRepository) {
         this.commentsService = commentsService;
         this.postService = postService;
+        this.commentsRepository = commentsRepository;
     }
 
 
@@ -32,7 +34,7 @@ public class CommentsController {
         return ResponseEntity.ok(this.commentsService.upsert(comment));
     }
 
-    @GetMapping("{postid}")
+    @GetMapping("/{postid}")
     public ResponseEntity<List<Comments>> getAllByPost(@PathVariable("postid")int id,  HttpSession session) {
         Optional<Post> optional = postService.findById(id);
 
@@ -46,4 +48,13 @@ public class CommentsController {
             return ResponseEntity.ok(this.commentsService.getAllByPostId(post));
         }
     }
+
+    @DeleteMapping("/{id}")
+    void deleteComment(@PathVariable int id){this.commentsRepository.deleteById(id);}
+
+//    @PostMapping("/likecomment")
+//    public ResponseEntity<ResponseObjectService>likeComment(@RequestBody CommentLikes likesId){
+//        return new ResponseEntity<ResponseObjectService>(commentsService.updateCommentByLike(likesId), HttpStatus.OK);
+//    }
+
 }
