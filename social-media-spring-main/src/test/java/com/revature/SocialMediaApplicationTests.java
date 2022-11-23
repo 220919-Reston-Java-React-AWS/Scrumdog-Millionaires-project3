@@ -60,4 +60,19 @@ class SocialMediaApplicationTests {
 		Assertions.assertEquals(expected,actual);
 	}
 
+	@Test
+	public void testMessagesBetweenUsers() {
+//		Arrange
+		DM newDM1 = new DM(2,"How are you?", user2, user1);
+		DM newDM2 = new DM(3,"I'm fine. How abaout you?", user1, user2);
+		List<DM> expected = new ArrayList<DM>();
+		expected.add(newDM1);
+		expected.add(newDM2);
+		Mockito.when(dmRepository.findBySender(user2)).thenReturn(expected);
+//		Act
+		List<DM> actual = dmService.getAllBetweenUsers(user1, user2);
+//		Assert
+		Assertions.assertEquals(expected,actual);
+	}
+
 }
