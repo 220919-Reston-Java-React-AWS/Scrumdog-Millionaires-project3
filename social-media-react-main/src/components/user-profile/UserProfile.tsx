@@ -76,7 +76,7 @@ useEffect(() => {
    const Astyle ={color:'black'}
 
    function handleAboutMe(){
-    navigate('/about-me',{state:{id: user?.id}} )
+    navigate('/about-me',{state:{id: user?.id, name:user?.firstName}} )
     }
 
 
@@ -101,13 +101,10 @@ useEffect(() => {
                 color: 'black'}}>
         <MenuList>
           <MenuItem component = {'a'}  href = {'/places'} sx = {{textDecoration: 'none !important', color:'black !important'}} >Places I've Been</MenuItem>
-          <MenuItem onClick={handleAboutMe} sx = {{textDecoration: 'none !important', color:'black !important'}} > About Me</MenuItem>
-         
-
-
-         
+          <MenuItem onClick={handleAboutMe} sx = {{textDecoration: 'none !important', color:'black !important'}} > About Me</MenuItem>      
         </MenuList>
         </Box>
+
             <Container component="main" maxWidth="xs">
         
                 <Box
