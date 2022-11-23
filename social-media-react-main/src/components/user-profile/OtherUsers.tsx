@@ -70,7 +70,7 @@ useEffect(() => {
                 boxShadow: '10px 10px 4px rgba(0, 0, 0, .400)',
                 color: 'black'}}>
         <MenuList>
-          <MenuItem component = {'a'}  href = {'/places'} sx = {{textDecoration: 'none !important', color:'black !important'}} >Places I've Been</MenuItem>
+          {/* <MenuItem component = {'a'}  href = {'/places'} sx = {{textDecoration: 'none !important', color:'black !important'}} >Places I've Been</MenuItem> */}
           <MenuItem onClick={handleAboutMe} sx = {{textDecoration: 'none !important', color:'black !important'}} > About Me</MenuItem>      
         </MenuList>
         </Box>
