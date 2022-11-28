@@ -1,6 +1,6 @@
 import UserProfile from "./UserProfile";
 
-import { Box, Container, Grid } from '@mui/material';
+import { Box, Container, Grid, MenuItem, MenuList } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import { useContext, useEffect, useState } from 'react';
@@ -10,7 +10,7 @@ import { apiGetAllPosts } from '../../remote/social-media-api/postFeed.api';
 import { apiGetAllPostsByUser } from '../../remote/social-media-api/profileFeed.api';
 import Navbar from '../navbar/Navbar';
 import { PostCard } from '../post-feed/PostCard';
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 
 const theme = createTheme();
@@ -20,6 +20,7 @@ export default function OtherUser(){
 const { user, setUser } = useContext(UserContext);
 const [post, setPosts] = useState<Post[]>([])
 const {state} = useLocation();
+const navigate = useNavigate();
 
 
 
@@ -43,6 +44,11 @@ useEffect(() => {
         </h2>;
    }
 
+   function handleAboutMe(){
+    navigate('/about-me',{state:{id: state.id, name: state.firstName}} )
+    console.log(state.id)
+    }
+
     return(
         <>
          <div
@@ -52,6 +58,22 @@ useEffect(() => {
         // }}
         >
         <Navbar/>
+
+        <Grid
+            container
+            direction="row"
+            justifyContent="center"
+            alignItems="center"
+                >
+
+        <Box sx ={{backgroundColor: '#4A4A4A',       
+                boxShadow: '10px 10px 4px rgba(0, 0, 0, .400)',
+                color: 'black'}}>
+        <MenuList>
+          {/* <MenuItem component = {'a'}  href = {'/places'} sx = {{textDecoration: 'none !important', color:'black !important'}} >Places I've Been</MenuItem> */}
+          <MenuItem onClick={handleAboutMe} sx = {{textDecoration: 'none !important', color:'black !important'}} > About Me</MenuItem>      
+        </MenuList>
+        </Box>
         <Container component="main" maxWidth="xs">
         
                 <Box
@@ -82,6 +104,7 @@ useEffect(() => {
                 ))
                 }
                 </Grid> 
+                </Grid>
                 </Grid>
                 </div>
         

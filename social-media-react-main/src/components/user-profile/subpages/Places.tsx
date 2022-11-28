@@ -12,7 +12,7 @@ import Navbar from '../../navbar/Navbar';
 
 export default function Places(){
  
-      const [checked, setChecked] = React.useState([1]);
+      const [checked, setChecked] = React.useState([0]);
 
       const continents = ['Antartica','Asia', 'Africa', 'Europe', 'North America', 'Oceania', 'South America']
     

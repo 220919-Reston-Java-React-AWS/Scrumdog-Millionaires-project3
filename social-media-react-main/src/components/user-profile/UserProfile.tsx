@@ -1,5 +1,5 @@
 
-
+import './subpages/place.css';
 import { AppBar, Box, Container, CssBaseline, Divider, Drawer, Grid, Link, List, ListItem, ListItemButton, ListItemIcon, ListItemText, MenuItem, MenuList, Paper, Toolbar } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
@@ -13,6 +13,7 @@ import { PostCard } from '../post-feed/PostCard';
 import SettingsIcon from '@mui/icons-material/Settings';
 import { css, jsx } from "@emotion/react";
 import { render } from 'react-dom';
+import { useNavigate } from 'react-router-dom';
 
 
 const theme = createTheme(
@@ -24,6 +25,8 @@ const theme = createTheme(
 //     }
 // }
 );
+
+
 
 
 const styles = {
@@ -40,6 +43,7 @@ const drawerWidth = 240;
 export default function UserProfile(){
 const { user, setUser } = useContext(UserContext);
 const [post, setPosts] = useState<Post[]>([])
+const navigate = useNavigate();
 
 
 const fetchData = async () => {
@@ -68,6 +72,12 @@ useEffect(() => {
         </h2>;
    }
 
+   
+   const Astyle ={color:'black'}
+
+   function handleAboutMe(){
+    navigate('/about-me',{state:{id: user?.id, name:user?.firstName}} )
+    }
 
 
     return(
@@ -86,21 +96,22 @@ useEffect(() => {
             alignItems="center"
                 >
 
-        <Box sx ={{backgroundColor: '#4A4A4A99',       
-                boxShadow: '10px 10px 4px rgba(0, 0, 0, .400)'}}>
+        <Box sx ={{backgroundColor: '#4A4A4A',       
+                boxShadow: '10px 10px 4px rgba(0, 0, 0, .400)',
+                color: 'black'}}>
         <MenuList>
-          <MenuItem  component = {'a'} href ={'/places'}>Places I've Been</MenuItem>
-          <MenuItem>My account</MenuItem>
-         
+          {/* <MenuItem component = {'a'}  href = {'/places'} sx = {{textDecoration: 'none !important', color:'black !important'}} >Places I've Been</MenuItem> */}
+          <MenuItem onClick={handleAboutMe} sx = {{textDecoration: 'none !important', color:'black !important'}} > About Me</MenuItem>      
         </MenuList>
         </Box>
+
             <Container component="main" maxWidth="xs">
         
                 <Box
                 
             sx={{           
                 marginTop: 8,
-                marginRight: 11.5,
+                marginRight: 16,
                 display: 'flex',
                 flexDirection: 'column',
                 alignSelf: 'center',
@@ -118,7 +129,6 @@ useEffect(() => {
          
 
                     <h2 style={{textAlign: 'center', color: 'orange', }}> Posts</h2>            
-
 
                 </Box>
             </Container>

@@ -44,6 +44,10 @@ public class UserService {
         return userRepository.save(user);
     }
 
+    public String getAboutMe(User user){
+        return user.getAboutMe();
+    }
+
 }
 
 

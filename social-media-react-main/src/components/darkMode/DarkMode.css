@@ -1,7 +1,7 @@
 :root {
     --background-image: url("https://i.pinimg.com/originals/a0/7e/bb/a07ebbe75bed6cba7fbd638dc37278e4.png");
     --font-color: black !important;
-    --link-color: cornflowerblue !important;
+    --link-color: cornflowerblue ;
     --background-color:rgb(10, 30, 95);
     --box-color: rgba(74, 74, 74, 0.5) !important;    
   }
