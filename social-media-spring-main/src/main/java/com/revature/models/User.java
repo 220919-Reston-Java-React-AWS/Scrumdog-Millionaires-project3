@@ -24,16 +24,6 @@ public class User {
 
    @Column(name = "about_me", columnDefinition = "TEXT")
     private String aboutMe;
-//
-//    @Lob
-//    private Clob places;
-
-
-    // @Column(name= "reset_password_token")
-    // private String resetPasswordToken = null;
-
-//    @OneToMany(cascade = CascadeType.ALL)
-//    private int likes;
 
 
     public User (String email, String password){
@@ -41,6 +31,7 @@ public class User {
         this.password = password;
     }
 
+    //These constructors are needed for login and register functions to work
     public User(String email, String password, String firstName, String lastName) {
         this.email = email;
         this.password = password;

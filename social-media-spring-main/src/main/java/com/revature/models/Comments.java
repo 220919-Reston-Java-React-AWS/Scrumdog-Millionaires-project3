@@ -10,7 +10,7 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-//@Data
+//Can't use the @Data annotation here to avoid running into a recursive problem with the toString override
 @Getter
 @Setter
 @EqualsAndHashCode

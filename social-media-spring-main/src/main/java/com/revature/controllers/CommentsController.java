@@ -27,13 +27,12 @@ public class CommentsController {
         this.commentsRepository = commentsRepository;
     }
 
-
-//    @Authorized
     @PostMapping
     public ResponseEntity<Comments> upsertComment(@RequestBody Comments comment){
         return ResponseEntity.ok(this.commentsService.upsert(comment));
     }
 
+    //Get all the comments associated with a specific post
     @GetMapping("/{postid}")
     public ResponseEntity<List<Comments>> getAllByPost(@PathVariable("postid")int id,  HttpSession session) {
         Optional<Post> optional = postService.findById(id);
@@ -42,7 +41,6 @@ public class CommentsController {
             return ResponseEntity.badRequest().build();
         } else {
             Post post = optional.get();
-//            System.out.println(post);
             session.setAttribute("post", optional.get());
 
             return ResponseEntity.ok(this.commentsService.getAllByPostId(post));

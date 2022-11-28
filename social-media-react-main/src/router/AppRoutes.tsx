@@ -19,7 +19,6 @@ export const AppRoutes: React.FC<unknown> = () => (
     <Route path = "/current-profile" element={<UserProfile />} />
     <Route path = "/other-user" element={<OtherUsers />} />
     <Route path = "/messages" element={<DirectMessaging />} />
-    <Route path = "/places" element = {<Places />} />
     <Route path = "/about-me" element = {<AboutMe/>} />
   </Routes>
 )

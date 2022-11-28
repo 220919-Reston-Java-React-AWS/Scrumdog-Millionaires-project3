@@ -33,9 +33,6 @@ public class Post {
 	@CollectionTable(name = "likes", joinColumns = @JoinColumn(name = "post_id"))
 	private List<Integer> likes = new ArrayList<>();
 
-//	@CollectionTable(name = "comments", joinColumns = @JoinColumn(name = "post_id"))
-//	private List<Comments> comment = new ArrayList<>();
-//
     @JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
 	private List<Comments> comments;

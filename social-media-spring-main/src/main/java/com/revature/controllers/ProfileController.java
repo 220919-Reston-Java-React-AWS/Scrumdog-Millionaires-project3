@@ -52,13 +52,8 @@ public class ProfileController {
             user.setAboutMe(aboutMe);
             return ResponseEntity.ok(this.userService.save(user));
         }
-
-
-//        return ResponseEntity.ok(this.postService.getAllByAuthor(id));
-
     }
 
-//    @Authorized
     @GetMapping("/about_me_get{authorid}")
     public ResponseEntity<String> getAboutMeUser(@PathVariable("authorid") int id, HttpSession session) {
         Optional<User> optional = userService.findById(id);

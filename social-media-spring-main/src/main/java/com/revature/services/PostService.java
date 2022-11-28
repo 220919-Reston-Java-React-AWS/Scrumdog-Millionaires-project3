@@ -40,7 +40,6 @@ public class PostService {
 
 	public Post upsert(Post post) {
 
-//		System.out.println(postRepository);
 		return this.postRepository.save(post);
 	}
 
