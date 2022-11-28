@@ -45,7 +45,6 @@ export const apiSendMsg = async (dm: DirectMessageModel, receiver_id: number, te
         {dm: dm, text: text}
     );
     console.log(text);
-    // response.data.text = dm.text;
     return { status: response.status, payload: response.data};
 }
 

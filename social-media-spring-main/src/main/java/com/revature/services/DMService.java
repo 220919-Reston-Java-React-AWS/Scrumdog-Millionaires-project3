@@ -30,14 +30,12 @@ public class DMService {
     }
 
     public List<DM> getAllBetweenUsers(User user1, User user2) {
-//        Filtering out all DMs by a sender to only show DMs sent to a certain user.
+//        Using Stream API to make a list of DMs sent by two users and combining them into one list as well as sorting them by ID.
         List<DM> dmList1 = this.dmRepository.findBySender(user1);
         List<DM> dmList2 = this.dmRepository.findBySender(user2);
         List<DM> dmList = Stream.concat(dmList1.stream(), dmList2.stream()).sorted(Comparator.comparingInt(DM::getId)).collect(Collectors.toList());
 
-        System.out.println(dmList);
-
-        System.out.println(dmList.stream().filter(DM -> DM.getReceiver().equals(user2) || DM.getReceiver().equals(user1)).collect(Collectors.toList()));
+//        Filtering out the list to only show DMs sent between each other.
         return dmList.stream().filter(DM -> DM.getReceiver().equals(user2) || DM.getReceiver().equals(user1)).collect(Collectors.toList());
     }
 }

@@ -35,9 +35,8 @@ function DirectMessaging () {
     }
     let receiver_id: any;
     let msgForm = <></>; 
-    let dmList = <></>;
-    let dmarr = [];
 
+    
     function setReceiver (event: React.ChangeEvent<HTMLInputElement>) {
         
         receiver_id = parseInt(event.target.value);
@@ -53,9 +52,6 @@ function DirectMessaging () {
     const fetchMsg = async () => {
         const result = await apiGetMgsBetweenUsers(recId);
         console.log(result.payload);
-        dmarr = result.payload;
-        // setDMs(["H"]);
-        // setDMs(dm => dm.concat(res));
         setDMs(result.payload)
     }
 
@@ -79,7 +75,6 @@ function DirectMessaging () {
             fullWidth
             variant="standard"
             onChange={setReceiver}
-            // onChange={() => setRecId(recId)}
             />
 
             <TextField
@@ -123,43 +118,9 @@ function DirectMessaging () {
                     ))}
                 </Grid>
             </Grid>
-            {/* <Grid container justifyContent={"center"}>
-           <Grid item sx={{width: '60%', mb: '20px'}}>
-            {dmList}
-            </Grid>
-            </Grid> */}
             
             {msgForm}
-            {/* <form onSubmit={SendDM}>
-            <Container component="main" maxWidth="xs" css = {css `display: flex; flex-direction: column; justify-content: flex-end; height: 100vh; padding-bottom: 1rem `}>
 
-            <TextField
-                id="text"
-                name="text"
-                label="Type the ID of the user you wish to send a message to."
-                fullWidth
-                variant="standard"
-                onChange={setReceiver}
-                />
-
-                <TextField
-                id="text"
-                name="text"
-                label="Send a message"
-                fullWidth
-                variant="standard"
-                onChange={setText}
-                />
-                <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-            >
-              Send
-              </Button>
-            </Container>
-            </form> */}
         </ThemeProvider></>
     )
 }

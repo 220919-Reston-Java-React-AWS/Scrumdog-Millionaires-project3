@@ -34,17 +34,19 @@ public class DMController {
     @Authorized
     @PostMapping("/send/{receiver_id}")
     public ResponseEntity<DM> sendMessage(@RequestBody DM dm, @PathVariable("receiver_id") int id) {
+
         Optional<User> receiver = userService.findById(id);
+//        Setting the sender as the user that is logged in.
         User sender = (User) session.getAttribute("user");
         dm.setSender(sender);
 
-
+//        Checking to see if the other user exists.
         if(receiver.isEmpty()){
             return ResponseEntity.badRequest().build();
         }
         else {
+//        Setting the receiver as the other user.
             dm.setReceiver(receiver.get());
-            System.out.println(dm.toString());
             return ResponseEntity.ok(this.dmService.send(dm));
         }
     }
@@ -52,33 +54,23 @@ public class DMController {
     @Authorized
     @GetMapping("/received/{sender_id}")
     public ResponseEntity<List<DM>> getMessagesByUser(@PathVariable int sender_id) {
+
+//        Setting the receiver as the user that is logged in.
         Optional<User> optionalSender = userService.findById(sender_id);
         User receiver = (User) session.getAttribute("user");
+
+//        Checking to see if the other user exists.
         if(optionalSender.isEmpty()){
             return ResponseEntity.badRequest().build();
         }
         else {
+
+//        Setting the sender as the other user.
             User sender = optionalSender.get();
 
-            System.out.println(sender);
-            System.out.println(receiver);
 
             return ResponseEntity.ok(this.dmService.getAllBetweenUsers(sender, receiver));
         }
     }
 
-//    @Authorized
-//    @GetMapping("/received/{sender_id}")
-//    public ResponseEntity<List<DM>> getMessagesByUser(@PathVariable int sender_id) {
-//        Optional<User> sender = userService.findById(sender_id);
-//        if(sender.isEmpty()){
-//            return ResponseEntity.badRequest().build();
-//        }
-//        else {
-//            User user = sender.get();
-////            session.setAttribute("user", sender.get());
-//
-//            return ResponseEntity.ok(this.dmService.getAllBetweenUsers(user,session));
-//        }
-//    }
 }
