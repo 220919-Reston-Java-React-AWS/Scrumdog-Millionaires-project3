@@ -59,7 +59,7 @@ function DirectMessaging () {
         setDMs(result.payload)
     }
 
-    const SendDM = async ( event: React.FormEvent<HTMLFormElement>) => {
+    const sendDM = async ( event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const response = await apiSendMsg(msg, recId, tx)
         console.log(response);
@@ -69,7 +69,7 @@ function DirectMessaging () {
     }
 
     if (user) {
-        msgForm = <form onSubmit={SendDM}>
+        msgForm = <form onSubmit={sendDM}>
         <Container component="main" maxWidth="xs" css = {css `display: flex; flex-direction: column; justify-content: flex-end; padding-bottom: 1rem `}>
 
         <TextField
