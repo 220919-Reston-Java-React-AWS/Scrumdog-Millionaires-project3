@@ -66,8 +66,7 @@ interface commentProps {
   comment: Comments;
   post:Post;
   key: number;
-	// posts: Post[]; //add
-	// setPosts: (updatedPost: Post[]) => void; //add
+
 }
 
 interface ExpandMoreProps extends IconButtonProps {
@@ -94,9 +93,7 @@ export const PostCard = (props: postProps, cprops: commentProps) => {
 
   const [likesIdArray, setLikesIdArray] = React.useState([...props.post.likes]);
 
-
   const [uComment, setComments] =React.useState<Comments[]>([])
-
 
 	const [isError, setIsError] = React.useState<boolean>(false);
 
@@ -156,7 +153,6 @@ export const PostCard = (props: postProps, cprops: commentProps) => {
   };
 
 
-
   let media = <></>;
   let commentForm = <></>;
 
@@ -167,9 +163,8 @@ export const PostCard = (props: postProps, cprops: commentProps) => {
     let payloadcom = (
       new Comments(0, data.get("commentText")?.toString() || "",  user, props.post)
     );
-    // console.log(payloadcom);
     await apiUpsertComment(payloadcom);
-    // event.target.reset();
+    // Clear comment form once the submit button has been pressed
     setValue("");
      
     fetchComments();
@@ -179,10 +174,7 @@ export const PostCard = (props: postProps, cprops: commentProps) => {
 
   const fetchComments = async () => {
     const result = await apiGetAllCommentsByPost(props.post.id);
-    setComments(result.payload);
-    // console.log(uComment);
-    
-    
+    setComments(result.payload);    
 }
 
 useEffect(() => {
@@ -190,7 +182,7 @@ useEffect(() => {
  
  }, []);
 
-
+// Reset the value on the comment form so it clears upon submission
 const [value, setValue] = React.useState("");
 function timeout(delay: number) {
   return new Promise( res => setTimeout(res, delay) );
@@ -225,7 +217,6 @@ if (user) {
         defaultValue = {value}
         value = {value}
         
-        
       />
       <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
       <IconButton type="submit" sx={{ p: "10px" }} aria-label="submit" >
@@ -234,7 +225,6 @@ if (user) {
 
     </Paper>
   )};
-
 
 
   if (props.post.imageUrl) {
@@ -254,7 +244,6 @@ if (user) {
   }
 
 
-
 function handleProfile(){
 if(user?.id !== props.post.author.id){
   
@@ -262,8 +251,6 @@ if(user?.id !== props.post.author.id){
 
   }else{navigate('/current-profile' )}
 }
-
-
 
 
 	const handleDelete = (id: number) => {
@@ -295,11 +282,7 @@ if(user?.id !== props.post.author.id){
       <CardContent>
         <Typography variant="body2">
 
-
           {props.post.text}
-          
-          
-        
         </Typography>
       </CardContent>
       <CardActions

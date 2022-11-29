@@ -6,9 +6,6 @@ import { UserContext } from "../../../context/user.context";
 import { apiGetAboutMe, apiUpdateAboutMe } from "../../../remote/social-media-api/profileFeed.api";
 import Navbar from "../../navbar/Navbar";
 
-
-
-
 export default function AboutMe(){
 
     const { user, setUser } = useContext(UserContext);
@@ -22,15 +19,13 @@ export default function AboutMe(){
         const result = await apiGetAboutMe(currentuserid)
         setAboutMe(result.payload);
     }
-
+// Used to determine if the update form box is shown or not
     const handleClick = () =>{
         setIsShown(current => !current);
-        // console.log(isShown);
       }
 
       const handleChange = (e: { target: { value: React.SetStateAction<string>; }; }) =>{
         setNewAboutMe(e.target.value);
-        // console.log(newAboutMe);
       }
 
     useEffect(() => {
@@ -40,10 +35,9 @@ export default function AboutMe(){
        const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         setIsShown(current => !current);
-        const data = new FormData(event.currentTarget);
         const string = newAboutMe;
-        // console.log(data)
         const response = await apiUpdateAboutMe(user?.id!, string)
+        fetchData();
         
        }
 
@@ -52,8 +46,6 @@ export default function AboutMe(){
         <> 
 
             <Navbar />
-            
-            
             <Box
                 
             sx={{           
@@ -78,9 +70,6 @@ export default function AboutMe(){
                         marginTop: "3%", 
                         marginLeft: '10px',
                         marginRight: '10px'
-                        // width: "45%",
-                        // alignSelf: 'center',
-                        // justifySelf: 'center'
                         }}>
         
         <CardContent>
@@ -94,7 +83,6 @@ export default function AboutMe(){
         <Box>
       {user?.id == state.id && isShown == false &&
       <div>
-      {/* <p>Want to Change your About me? Click below.</p> */}
       <br/>
 
       <Button  type="submit"
@@ -114,11 +102,9 @@ export default function AboutMe(){
                     flexDirection: 'column',
                     alignSelf: 'center',
                     alignItems: 'center',       
-                    // width: {  md: 800 },
                     
                 }}>
                     <br/>
-                    {/* <br/> */}
                     
                     <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }} >
                     <Box sx = {{
@@ -146,10 +132,7 @@ export default function AboutMe(){
               color="warning" onClick={handleClick}> Go back</Button>
 
                 </Box>
-
-
-
-                 </Box> }
+              </Box> }
       </Box>
                              
              

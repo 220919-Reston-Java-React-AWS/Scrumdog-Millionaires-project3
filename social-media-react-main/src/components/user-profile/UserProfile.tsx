@@ -1,5 +1,4 @@
 
-import './subpages/place.css';
 import { AppBar, Box, Container, CssBaseline, Divider, Drawer, Grid, Link, List, ListItem, ListItemButton, ListItemIcon, ListItemText, MenuItem, MenuList, Paper, Toolbar } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
@@ -16,29 +15,7 @@ import { render } from 'react-dom';
 import { useNavigate } from 'react-router-dom';
 
 
-const theme = createTheme(
-//     {
-//     palette: {
-//         background:{
-//             default: 'tan'
-//         }
-//     }
-// }
-);
-
-
-
-
-const styles = {
-    paperContainer: {
-        backgroundImage: `url(${"https://www.kindpng.com/imgv/TTRxT_map-of-the-world-no-borders-hd-png/"})`,
-        width: "100%",
-        height: '100%'
-    }
-};
 const drawerWidth = 240;
-
-
 
 export default function UserProfile(){
 const { user, setUser } = useContext(UserContext);
@@ -53,7 +30,6 @@ const fetchData = async () => {
 }
 
 
-
 const loadDataOnlyOnce = useCallback(() =>{
     console.log(`Hello there ${user?.id}`)
 }, [user])
@@ -64,7 +40,6 @@ useEffect(() => {
 
    let noPostsText = <></>;
 
-
    if(post.length === 0) {
         noPostsText = 
         <h2 style={{textAlign: 'center', marginTop: '3%', color: 'gray'}}>
@@ -73,21 +48,13 @@ useEffect(() => {
    }
 
    
-   const Astyle ={color:'black'}
-
    function handleAboutMe(){
     navigate('/about-me',{state:{id: user?.id, name:user?.firstName}} )
     }
 
-
     return(
         
-        <div 
-        // style={{backgroundImage:"url('https://www.kindpng.com/picc/m/4-41696_map-of-the-world-no-borders-hd-png.png')",
-        // width:'100%'
-        
-        // }}
-        >
+        <div >
         <Navbar />       
         <Grid
             container
@@ -100,7 +67,6 @@ useEffect(() => {
                 boxShadow: '10px 10px 4px rgba(0, 0, 0, .400)',
                 color: 'black'}}>
         <MenuList>
-          {/* <MenuItem component = {'a'}  href = {'/places'} sx = {{textDecoration: 'none !important', color:'black !important'}} >Places I've Been</MenuItem> */}
           <MenuItem onClick={handleAboutMe} sx = {{textDecoration: 'none !important', color:'black !important'}} > About Me</MenuItem>      
         </MenuList>
         </Box>
@@ -123,11 +89,8 @@ useEffect(() => {
             
                     <h2 style={{textAlign: 'center'}}> Welcome {user?.firstName} </h2> 
                                         
-            
                     <h3 style={{textAlign: 'center'}}> Name: {user?.firstName}  {user?.lastName}</h3> 
                                     
-         
-
                     <h2 style={{textAlign: 'center', color: 'orange', }}> Posts</h2>            
 
                 </Box>
@@ -142,13 +105,8 @@ useEffect(() => {
                 </Grid> 
                 </Grid>
                 </Grid>
-              
-                
-
         </div >
-            
-            
-        )
-    
+               
+        ) 
             
 }

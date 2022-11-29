@@ -10,7 +10,7 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-//@Data
+//Can't use the @Data annotation here to avoid running into a recursive problem with the toString override
 @Getter
 @Setter
 @EqualsAndHashCode
@@ -38,7 +38,12 @@ public class Comments {
     @CollectionTable(name = "likes", joinColumns = @JoinColumn(name = "post_id"))
     private List<Integer> likes = new ArrayList<>();
 
-
+    public Comments(int id, String text, User author, Post post) {
+        this.id = id;
+        this.text = text;
+        this.author = author;
+        this.post = post;
+    }
 
     @Override
     public String toString() {

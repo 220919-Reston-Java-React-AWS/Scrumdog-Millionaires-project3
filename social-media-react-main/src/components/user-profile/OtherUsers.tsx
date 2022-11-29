@@ -13,15 +13,11 @@ import { PostCard } from '../post-feed/PostCard';
 import { useLocation, useNavigate } from "react-router-dom";
 
 
-const theme = createTheme();
-
-
 export default function OtherUser(){
 const { user, setUser } = useContext(UserContext);
 const [post, setPosts] = useState<Post[]>([])
 const {state} = useLocation();
 const navigate = useNavigate();
-
 
 
 const fetchData = async () => {
@@ -52,10 +48,6 @@ useEffect(() => {
     return(
         <>
          <div
-        //   style={{backgroundImage:"url('https://www.kindpng.com/picc/m/4-41696_map-of-the-world-no-borders-hd-png.png')",
-        // width:'100%'
-        
-        // }}
         >
         <Navbar/>
 
@@ -70,7 +62,6 @@ useEffect(() => {
                 boxShadow: '10px 10px 4px rgba(0, 0, 0, .400)',
                 color: 'black'}}>
         <MenuList>
-          {/* <MenuItem component = {'a'}  href = {'/places'} sx = {{textDecoration: 'none !important', color:'black !important'}} >Places I've Been</MenuItem> */}
           <MenuItem onClick={handleAboutMe} sx = {{textDecoration: 'none !important', color:'black !important'}} > About Me</MenuItem>      
         </MenuList>
         </Box>
@@ -87,11 +78,7 @@ useEffect(() => {
                 boxShadow: '10px 10px 4px rgba(0, 0, 0, .400)'
             }}>
   
-                <h2 style={{textAlign: 'center'}}> Welcome to {state.firstName}'s profile</h2> 
-                          
-
-                {/* <h3 style={{textAlign: 'center'}}> Name: {state.firstName}  {state.lastName}</h3>  */}
-                          
+                <h2 style={{textAlign: 'center'}}> Welcome to {state.firstName}'s profile</h2>  
            
                 <h2 style={{textAlign: 'center', color: 'orange', }}> Posts</h2>    
                 </Box>

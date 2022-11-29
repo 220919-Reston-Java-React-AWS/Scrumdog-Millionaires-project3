@@ -8,7 +8,7 @@ import Checkbox from '@mui/material/Checkbox';
 import Avatar from '@mui/material/Avatar';
 import { Box, Grid } from '@mui/material';
 import Navbar from '../../navbar/Navbar';
-
+// This component was not used but the frontend is in place to host a list on contents traveled to. There is no backend support for this feature. 
 
 export default function Places(){
  
