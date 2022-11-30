@@ -11,6 +11,7 @@ import {
   List,
   ListItem,
   ListItemText,
+  Box,
 } from "@mui/material";
 import * as React from "react";
 import { useState } from "react";
@@ -100,7 +101,7 @@ export default function CommentCard(cprops: commentProps) {
 
   return (
     <div>
-      <Card sx={{ maxWidth: "100%", marginTop: "3%" }}>
+      <Box sx={{ maxWidth: "100%", marginTop: "3%" }}>
         <CardHeader
           title={cprops.comment.author.firstName}
           avatar={
@@ -167,7 +168,7 @@ export default function CommentCard(cprops: commentProps) {
             </List>
           </CardActions>
         </CardContent>
-      </Card>
+      </Box>
 
       {/* {cprops.comment} */}
     </div>
