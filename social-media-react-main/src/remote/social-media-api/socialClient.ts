@@ -4,7 +4,7 @@ import axios from 'axios';
 // Very simple, but it also doesn't give us much abstraction
 const socialClient = axios.create({
   withCredentials: true,
-  baseURL: 'http://localhost:8080',
+  baseURL: 'http://travelog-env-1.eba-edcjcgpw.us-east-1.elasticbeanstalk.com/',
   headers: {
     'Content-Type': 'application/json',
     'Access-Control-Allow-Origin': 'http://travelogfe.s3-website-us-east-1.amazonaws.com/login',
