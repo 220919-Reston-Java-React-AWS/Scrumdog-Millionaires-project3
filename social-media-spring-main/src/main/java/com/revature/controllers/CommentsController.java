@@ -13,7 +13,7 @@ import com.revature.repositories.CommentsRepository;
 
 @RestController
 @RequestMapping("/comments")
-@CrossOrigin(origins = {"http://localhost:4200", "http://localhost:3000" , "http://travelogfe.s3-website-us-east-1.amazonaws.com/"}, allowCredentials = "true")
+@CrossOrigin(origins = "http://travelogfe.s3-website-us-east-1.amazonaws.com/", allowCredentials = "true")
 public class CommentsController {
 
     private final CommentsService commentsService;
