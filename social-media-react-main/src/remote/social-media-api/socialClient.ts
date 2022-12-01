@@ -7,7 +7,7 @@ const socialClient = axios.create({
   baseURL: 'http://travelog-env-1.eba-edcjcgpw.us-east-1.elasticbeanstalk.com/8080',
   headers: {
     'Content-Type': 'application/json',
-    'Access-Control-Allow-Origin': 'http://travelogfe.s3-website-us-east-1.amazonaws.com',
+    'Access-Control-Allow-Origin': 'http://travelogfe.s3-website-us-east-1.amazonaws.com'
   },
 });
 
