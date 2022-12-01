@@ -27,7 +27,7 @@ public class ProfileController {
         this.userService = userService;
     }
 
-    @Authorized
+//    @Authorized
     @GetMapping("{authorid}")
     public ResponseEntity<List<Post>> getAllPostsByUser(@PathVariable("authorid") int id, HttpSession session) {
         Optional<User> optional = userService.findById(id);

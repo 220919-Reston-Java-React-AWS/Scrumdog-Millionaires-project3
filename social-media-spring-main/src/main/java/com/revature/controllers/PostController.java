@@ -52,7 +52,7 @@ public class PostController {
 
 
 
-    @Authorized
+//    @Authorized
     @PutMapping
     public ResponseEntity<Post> upsertPost(@RequestBody Post post) {
     	return ResponseEntity.ok(this.postService.upsert(post));

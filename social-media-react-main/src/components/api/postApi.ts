@@ -3,7 +3,7 @@ import {ILikes} from "../../models/LikesModel";
 import Post from "../../models/Post";
 
 const instance = axios.create({
-    baseURL: "http://localhost:8080/post",
+    baseURL: "http://travelog-env-1.eba-edcjcgpw.us-east-1.elasticbeanstalk.com/",
     timeout: 15000,
   });
 
