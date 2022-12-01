@@ -15,7 +15,8 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/message")
-@CrossOrigin(origins =  "http://travelogfe.s3-website-us-east-1.amazonaws.com", allowCredentials = "true")
+@CrossOrigin(origins =  {"http://travelogfe.s3-website-us-east-1.amazonaws.com", "http://localhost:3000"
+}, allowCredentials = "true")
 public class DMController {
 
     private final DMService dmService;
