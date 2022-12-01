@@ -28,7 +28,7 @@ import com.revature.services.PostService;
 
 @RestController
 @RequestMapping("/post")
-@CrossOrigin(origins =  "http://travelogfe.s3-website-us-east-1.amazonaws.com")
+@CrossOrigin(origins =  "http://travelogfe.s3-website-us-east-1.amazonaws.com", allowCredentials = "true")
 public class PostController {
 
 	private final PostService postService;

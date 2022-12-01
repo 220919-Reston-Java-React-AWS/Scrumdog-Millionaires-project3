@@ -15,7 +15,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/profile")
-@CrossOrigin(origins = "http://travelogfe.s3-website-us-east-1.amazonaws.com")
+@CrossOrigin(origins = "http://travelogfe.s3-website-us-east-1.amazonaws.com", allowCredentials = "true")
 public class ProfileController {
 
     private final PostService postService;
