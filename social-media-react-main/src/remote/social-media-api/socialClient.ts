@@ -7,7 +7,7 @@ const socialClient = axios.create({
   baseURL: 'http://localhost:8080',
   headers: {
     'Content-Type': 'application/json',
-    'Access-Control-Allow-Origin': 'http://localhost:3000',
+    'Access-Control-Allow-Origin': 'http://travelogfe.s3-website-us-east-1.amazonaws.com/login',
   },
 });
 
